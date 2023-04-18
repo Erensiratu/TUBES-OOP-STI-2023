@@ -39,7 +39,7 @@ public abstract class Furniture extends Item implements Useable, Purchaseable{
         return width;
     }
 
-    public Point gePoint(){
+    public Point getPoint(){
         return location;
     }
 
