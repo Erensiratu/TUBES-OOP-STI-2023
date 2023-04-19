@@ -29,6 +29,10 @@ public class Sim {
     }
 
     //method
+    public String getName(){
+        return name;
+    }
+    
     public void setAlive(){
         alive = true;
     }
