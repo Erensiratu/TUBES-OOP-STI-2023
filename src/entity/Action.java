@@ -32,7 +32,8 @@ public abstract class Action {
     public void transferMoney(int amount, Sim receiver) {
         System.out.println("Sim is transferring $" + amount + " to " + receiver.getName() + ".");
         this.money -= amount;
-           
+    }
+
     public void dayDream(int duration) {
         if (!idle) {
             System.out.println("Sorry, I'm busy right now.");
@@ -107,6 +108,7 @@ public abstract class Action {
 
         idle = true;
         System.out.println("Done using item!");
+    }
 
     public void buyItem(List<Item> inventory, Item item) {
         inventory.add(item);
