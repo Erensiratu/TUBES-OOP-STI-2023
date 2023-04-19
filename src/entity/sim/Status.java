@@ -1,10 +1,10 @@
 package entity.sim;
 
 public class Status {
-    private int money;
-    private int hunger;
-    private int health;
-    private int mood;
+    private double money;
+    private double hunger;
+    private double health;
+    private double mood;
     
     public Status() {
         money = 100;
@@ -13,42 +13,42 @@ public class Status {
         mood = 80;
     }
 
-    public int getMoney() {
+    public double getMoney() {
         return money;
     }
-    public int getHunger() {
+    public double getHunger() {
         return hunger;
     }
-    public int getHealth() {
+    public double getHealth() {
         return health;
     }
-    public int getMood() {
+    public double getMood() {
         return mood;
     }
     
 
-    public void addMoney(int value){
+    public void addMoney(double value){
         if (money + value > 100){
             money = 100;
         } else {
             money += value;
         }
     }
-    public void addHunger(int value){
+    public void addHunger(double value){
         if (hunger + value > 100){
             hunger = 100;
         } else {
             hunger += value;
         }
     }
-    public void addHealth(int value){
+    public void addHealth(double value){
         if (health + value > 100){
             health = 100;
         } else {
             health += value;
         }
     }
-    public void addMood(int value){
+    public void addMood(double value){
         if (mood + value > 100){
             mood = 100;
         } else {

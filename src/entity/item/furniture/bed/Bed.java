@@ -5,12 +5,21 @@ import entity.sim.Sim;
 import entity.sim.Status;
 
 public abstract class Bed extends Furniture{
+
     public Bed(int quantity, int length, int width, int price){
         super(quantity, length, width, price);
     }
 
     public void sleep(int duration){
         // Implementasi
+        // duration dalam detik
+        if(duration < 180){
+            System.out.println("sleep duration should be more than 3 minutes");
+        } else {
+            Sim sim;
+            sim.addMood(duration*(0.125));
+            sim.addHealth(duration*(0.0833));
+        }
     }
 
     public void use(Sim sim){
