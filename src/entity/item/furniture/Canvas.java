@@ -1,6 +1,6 @@
 package entity.item.furniture;
 
-import entity.Sim;
+import entity.sim.Sim;
 
 public abstract class Canvas extends Furniture{
     public Canvas(int quantity){

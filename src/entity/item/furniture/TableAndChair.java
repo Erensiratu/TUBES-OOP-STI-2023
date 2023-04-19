@@ -1,6 +1,6 @@
 package entity.item.furniture;
 
-import entity.Sim;
+import entity.sim.Sim;
 
 public abstract class TableAndChair extends Furniture{
     public TableAndChair(int quantity){
