@@ -7,7 +7,7 @@ import entity.item.Useable;
 import entity.Point;
 import entity.Sim;
 
-public abstract class Furniture extends Item implements Useable, Purchaseable{
+public class Furniture extends Item implements Useable, Purchaseable{
     private int length;
     private int width;
     private int price;
@@ -42,7 +42,7 @@ public abstract class Furniture extends Item implements Useable, Purchaseable{
     public Point getPoint(){
         return location;
     }
-    
+
     public void setLocation(Point location) {
         this.location = location;
     }
