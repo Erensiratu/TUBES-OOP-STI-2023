@@ -4,7 +4,7 @@ import java.util.*;
 
 import entity.item.furniture.Furniture;
 
-public class Room extends Furniture{
+public class Room {
     private String name;
     private int width;
     private Furniture[][] grid;
