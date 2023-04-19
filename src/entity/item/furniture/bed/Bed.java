@@ -1,7 +1,8 @@
 package entity.item.furniture.bed;
 
 import entity.item.furniture.Furniture;
-import entity.Sim;
+import entity.sim.Sim;
+import entity.sim.Status;
 
 public abstract class Bed extends Furniture{
     public Bed(int quantity, int length, int width, int price){

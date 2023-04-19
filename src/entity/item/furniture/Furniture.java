@@ -5,7 +5,7 @@ import entity.item.Item;
 import entity.item.Purchaseable;
 import entity.item.Useable;
 import entity.Point;
-import entity.Sim;
+import entity.sim.Sim;
 
 public class Furniture extends Item implements Useable, Purchaseable{
     private int length;
