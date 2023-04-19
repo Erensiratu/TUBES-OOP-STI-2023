@@ -1,5 +1,5 @@
 package entity.item;
-import entity.Sim;
+import entity.sim.Sim;
 
 public interface Useable {
     public void use(Sim Sim);
