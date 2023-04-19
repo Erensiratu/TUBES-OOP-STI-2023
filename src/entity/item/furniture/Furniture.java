@@ -42,6 +42,10 @@ public abstract class Furniture extends Item implements Useable, Purchaseable{
     public Point getPoint(){
         return location;
     }
+    
+    public void setLocation(Point location) {
+        this.location = location;
+    }
 
     public abstract String getDescription();
 }
