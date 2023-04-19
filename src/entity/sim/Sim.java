@@ -18,21 +18,23 @@ public class Sim {
     Room currentRoom;
     House currentHouse;
     Item currentItem;
+    Status status;
 
-    public Sim(String name, Room currentRoom, Point currentLocation, House currentHouse){
+    public Sim(String name, Room currentRoom, Point currentLocation, House currentHouse, Status status){
         this.name = name;
         this.currentRoom = currentRoom;
         this.currentLocation = currentLocation;
         alive = false;
         occupation = new Occupation();
         this.currentHouse = currentHouse;
+        this.status = status;
     }
 
     //method
     public String getName(){
         return name;
     }
-    
+
     public void setAlive(){
         alive = true;
     }
@@ -55,5 +57,9 @@ public class Sim {
 
     public List<Item> getInventory(){
         return inventory;
+    }
+
+    public Status getStatus(){
+        return status;
     }
 }

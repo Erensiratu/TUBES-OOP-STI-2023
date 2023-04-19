@@ -17,8 +17,8 @@ public abstract class Bed extends Furniture{
             System.out.println("sleep duration should be more than 3 minutes");
         } else {
             Sim sim;
-            sim.addMood(duration*(0.125));
-            sim.addHealth(duration*(0.0833));
+            sim.getStatus().addMood(duration*(0.125));
+            sim.getStatus().addHealth(duration*(0.0833));
         }
     }
 
