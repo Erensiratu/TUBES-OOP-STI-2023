@@ -2,7 +2,9 @@ package entity;
 
 import java.util.*;
 
-public class Room {
+import entity.item.furniture.Furniture;
+
+public class Room extends Furniture{
     private String name;
     private int width;
     private Furniture[][] grid;
