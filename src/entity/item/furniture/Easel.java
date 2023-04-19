@@ -1,7 +1,5 @@
 package entity.item.furniture;
 
-import entity.sim.Sim;
-
 public abstract class Easel extends Furniture{
     public Easel(int quantity){
         super(quantity, 2, 1, 20);

@@ -62,4 +62,8 @@ public class Sim {
     public Status getStatus(){
         return status;
     }
+
+    public Action getAction(){
+        return action;
+    }
 }

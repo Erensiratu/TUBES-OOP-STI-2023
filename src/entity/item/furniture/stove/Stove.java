@@ -1,7 +1,6 @@
 package entity.item.furniture.stove;
 
 import entity.item.furniture.Furniture;
-import entity.sim.Sim;
 
 public abstract class Stove extends Furniture{
     public Stove(int quantity, int length, int width, int price){
