@@ -1,7 +1,6 @@
 package entity.sim;
 
 import entity.item.Item;
-import entity.Action;
 import entity.Point;
 import entity.Room;
 import entity.House;
@@ -26,9 +25,11 @@ public class Sim {
         this.currentLocation = currentLocation;
         alive = false;
         occupation = new Occupation();
+        action = new Action(this);
         this.currentHouse = currentHouse;
         this.status = status;
     }
+
 
     //method
     public String getName(){

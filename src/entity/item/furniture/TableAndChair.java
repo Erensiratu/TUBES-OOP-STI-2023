@@ -1,11 +1,13 @@
 package entity.item.furniture;
 
+import entity.sim.Sim;
+
 public abstract class TableAndChair extends Furniture{
     public TableAndChair(int quantity){
         super(quantity, 3, 3, 50);
     }
 
-    public void use(int duration){
+    public void use(Sim sim){
         // Implementasi
     }
 

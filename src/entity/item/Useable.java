@@ -1,5 +1,5 @@
 package entity.item;
 
 public interface Useable {
-    public void use(int duration);
+    public void use(Sim sim);
 }

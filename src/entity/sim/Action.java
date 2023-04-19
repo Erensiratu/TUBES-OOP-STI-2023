@@ -1,12 +1,16 @@
-package entity;
+package entity.sim;
 import java.util.List;
 import entity.item.Item;
-import entity.sim.Sim;
 import entity.item.Useable;
 
-public abstract class Action {
+public class Action {
     private boolean idle;
+    private Sim sim;
 
+    public Action(Sim sim){
+        idle = true;
+        this.sim = sim;
+    }
 
     public boolean isIdle() {
         return idle;
@@ -104,7 +108,7 @@ public abstract class Action {
         System.out.println("Using item " + item + "...");
 
         // Use the item
-        item.use(duration);
+        item.use(sim);
 
         idle = true;
         System.out.println("Done using item!");
