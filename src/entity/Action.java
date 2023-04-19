@@ -31,7 +31,7 @@ public abstract class Action {
 
     public void transferMoney(int amount, Sim receiver) {
         System.out.println("Sim is transferring $" + amount + " to " + receiver.getName() + ".");
-        receiver.geStatus().addMoney(-amount);
+        receiver.getStatus().addMoney(-amount);
     }
 
     public void dayDream(int duration) {
