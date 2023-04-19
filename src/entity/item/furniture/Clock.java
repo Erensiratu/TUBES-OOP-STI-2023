@@ -7,7 +7,7 @@ public abstract class Clock extends Furniture{
         super(quantity, 1, 1, 10);
     }
 
-    public void use(Sim sim){
+    public void use(Sim sim, int duration){
         // Implementasi
     }
 

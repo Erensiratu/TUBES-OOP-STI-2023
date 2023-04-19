@@ -7,7 +7,7 @@ public abstract class Canvas extends Furniture{
         super(quantity, 2, 2, 200);
     }
 
-    public void use(Sim sim){
+    public void use(Sim sim, int duration){
         // Implementasi
     }
 

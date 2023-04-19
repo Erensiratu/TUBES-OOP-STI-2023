@@ -7,7 +7,7 @@ public abstract class Toilet extends Furniture{
         super(quantity, 1, 1, 50);
     }
 
-    public void use(Sim sim){
+    public void use(Sim sim, int duration){
         // Implementasi
     }
 

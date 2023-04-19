@@ -22,7 +22,7 @@ public abstract class Bed extends Furniture{
         }
     }
 
-    public void use(Sim sim){
+    public void use(Sim sim, int duration){
         // int duration;
         // this.sleep(duration);
     }

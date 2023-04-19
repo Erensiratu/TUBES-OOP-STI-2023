@@ -2,11 +2,11 @@ package entity;
 import java.util.List;
 import entity.item.Item;
 import entity.sim.Sim;
+import entity.item.Useable;
 
 public abstract class Action {
     private boolean idle;
-    private List<Item> inventory;
-    private int money;
+
 
     public boolean isIdle() {
         return idle;
@@ -31,7 +31,7 @@ public abstract class Action {
 
     public void transferMoney(int amount, Sim receiver) {
         System.out.println("Sim is transferring $" + amount + " to " + receiver.getName() + ".");
-        this.money -= amount;
+        receiver.money -= amount;
     }
 
     public void dayDream(int duration) {
@@ -94,7 +94,7 @@ public abstract class Action {
         System.out.println("Done working!");
     }
 
-    public void useItem(Usable item) {
+    public void useItem(Item item) {
         if (!idle) {
             System.out.println("Sorry, I'm busy right now.");
             return;
@@ -104,7 +104,9 @@ public abstract class Action {
         System.out.println("Using item " + item + "...");
 
         // Use the item
-        item.use();
+        Sim sim;
+        int duration;
+        item.use(sim,duration);
 
         idle = true;
         System.out.println("Done using item!");
