@@ -2,7 +2,6 @@ package entity.item.furniture.bed;
 
 import entity.item.furniture.Furniture;
 import entity.sim.Sim;
-import entity.sim.Status;
 
 public abstract class Bed extends Furniture{
 
@@ -22,7 +21,7 @@ public abstract class Bed extends Furniture{
         }
     }
 
-    public void use(Sim sim, int duration){
+    public void use(int duration){
         // int duration;
         // this.sleep(duration);
     }

@@ -7,7 +7,7 @@ public abstract class Shower extends Furniture{
         super(quantity, 2, 1, 100);
     }
 
-    public void use(Sim sim, int duration){
+    public void use(int duration){
         // Implementasi
     }
 

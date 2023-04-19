@@ -12,7 +12,7 @@ public abstract class Stove extends Furniture{
         // Implementasi
     }*/
 
-    public void use(Sim sim, int duration){
+    public void use(int duration){
         // Cuisine cuisine;
         // this.cook(cuisine);
     }

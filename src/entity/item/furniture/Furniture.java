@@ -21,7 +21,7 @@ public abstract class Furniture extends Item implements Useable, Purchaseable{
         this.location = null;
     }
 
-    public abstract void use(Sim sim, int duration);
+    public abstract void use(int duration);
 
     public int getPrice(){
         return price;

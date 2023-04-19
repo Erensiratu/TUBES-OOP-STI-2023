@@ -7,7 +7,7 @@ public abstract class Easel extends Furniture{
         super(quantity, 2, 1, 20);
     }
 
-    public void use(Sim sim, int duration){
+    public void use(int duration){
         // Implementasi
     }
 

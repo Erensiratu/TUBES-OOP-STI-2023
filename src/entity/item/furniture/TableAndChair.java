@@ -7,7 +7,7 @@ public abstract class TableAndChair extends Furniture{
         super(quantity, 3, 3, 50);
     }
 
-    public void use(Sim sim, int duration){
+    public void use(int duration){
         // Implementasi
     }
 

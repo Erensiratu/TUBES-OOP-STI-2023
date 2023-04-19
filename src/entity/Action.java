@@ -94,7 +94,7 @@ public abstract class Action {
         System.out.println("Done working!");
     }
 
-    public void useItem(Item item) {
+    public void useItem(Useable item, int duration) {
         if (!idle) {
             System.out.println("Sorry, I'm busy right now.");
             return;
@@ -104,9 +104,7 @@ public abstract class Action {
         System.out.println("Using item " + item + "...");
 
         // Use the item
-        Sim sim;
-        int duration;
-        item.use(sim,duration);
+        item.use(duration);
 
         idle = true;
         System.out.println("Done using item!");
