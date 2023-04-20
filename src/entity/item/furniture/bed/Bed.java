@@ -13,15 +13,40 @@ public abstract class Bed extends Furniture{
     }
 
     public void sleep(Sim sim){
-        // Implementasi
-        int duration = scanner.nextInt();
-        duration *= 1000;
-        // duration dalam detik
+        // Meminta waktu tidur (dalam detik)
+        final int duration = scanner.nextInt();
+
+        // Mengecek apakah waktu tidur valid
         if(duration < 180){
-            System.out.println("sleep duration should be more than 3 minutes");
+            System.out.println("Waktu tidur sim setidaknya 3 menit (180 detik)");
         } else {
-            sim.getStatus().addMood(duration*(0.125));
-            sim.getStatus().addHealth(duration*(0.0833));
+            // Implementasi sudah tidur harian
+            // WIP
+            // Thread tidur
+            Thread sleepThread = new Thread(() -> {
+                sim.getAction().setIdle(false);
+
+                System.out.println(sim.getName() + " sedang tidur selama " + duration + " detik");
+                
+                try {
+                    Thread.sleep(duration * 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                // Menambahkan efek tidur pada status sim
+                // Efek pada status baru ada setelah sim tidur selama 4 menit (240 detik)
+                int fullSleep = duration / 240;
+                sim.getStatus().addMood(fullSleep * 30);
+                sim.getStatus().addHealth(fullSleep * 20);
+
+                sim.getAction().setIdle(true);
+
+                System.out.println(sim.getName() + " telah bangun");
+            });
+
+            // Memulai thread
+            sleepThread.start();
         }
     }
 

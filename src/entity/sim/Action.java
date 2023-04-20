@@ -16,7 +16,7 @@ public class Action {
         return idle;
     }
 
-    public void settle(boolean idle) {
+    public void setIdle(boolean idle) {
         this.idle = idle;
     }
 
@@ -35,7 +35,7 @@ public class Action {
 
     public void transferMoney(int amount, Sim receiver) {
         System.out.println("Sim is transferring $" + amount + " to " + receiver.getName() + ".");
-        receiver.getStatus().addMoney(-amount);
+        receiver.getStatus().addMoney(amount);
     }
 
     public void dayDream(int duration) {
@@ -98,11 +98,13 @@ public class Action {
         System.out.println("Done working!");
     }
 
-    public void useItem(Useable item, int duration) {
+    public void useItem(int duration) {
         if (!idle) {
             System.out.println("Sorry, I'm busy right now.");
             return;
         }
+
+        Useable item = (Useable) sim.getItem();
 
         idle = false;
         System.out.println("Using item " + item + "...");

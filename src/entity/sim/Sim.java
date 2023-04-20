@@ -44,16 +44,24 @@ public class Sim {
         return alive;
     }
 
-    public void moveLocation(Point newLocation){
+    public void setLocation(Point newLocation){
         currentLocation = newLocation;
     }
 
-    public void moveRoom(Room newRoom){
+    public void setRoom(Room newRoom){
         currentRoom = newRoom;
     }
 
-    public void moveHouse(House newHouse){
+    public void setHouse(House newHouse){
         currentHouse = newHouse;
+    }
+
+    public void setItem(Item newItem){
+        this.currentItem = newItem;
+    }
+
+    public Item getItem(){
+        return currentItem;
     }
 
     public List<Item> getInventory(){

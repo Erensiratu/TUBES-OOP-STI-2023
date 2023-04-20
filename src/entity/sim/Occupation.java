@@ -41,4 +41,19 @@ public class Occupation {
     public void addTimesWorked(int duration){
         timesWorked += duration;
     }
+
+    public void work(Sim sim, int duration){
+        Thread workThread = new Thread(() -> {
+            sim.getAction().setIdle(false);
+            System.out.println("Worker thread started");
+            try {
+                Thread.sleep(20000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            sim.getAction().setIdle(true);
+            System.out.println("Worker thread finished");
+        });
+        workThread.start();
+    }
 }
