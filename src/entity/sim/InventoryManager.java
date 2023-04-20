@@ -3,7 +3,6 @@ package entity.sim;
 import java.util.ArrayList;
 
 import entity.item.Item;
-import entity.item.food.ingredient.Ingredient;
 
 public class InventoryManager {
     ArrayList<Item> inventory = new ArrayList<>();
@@ -44,7 +43,7 @@ public class InventoryManager {
         }
     }
 
-    public void removeFromInventory(ArrayList<Item> arrayList){
+    public void removeList(ArrayList<Item> arrayList){
         for (Item item : arrayList){
             removeItem(item, 1);
         }

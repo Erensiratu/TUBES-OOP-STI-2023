@@ -28,11 +28,7 @@ public class Status {
     
 
     public void addMoney(double value){
-        if (money + value > 100){
-            money = 100;
-        } else {
-            money += value;
-        }
+        money += value;
     }
     public void addHunger(double value){
         if (hunger + value > 100){
@@ -53,6 +49,35 @@ public class Status {
             mood = 100;
         } else {
             mood += value;
+        }
+    }
+
+    public void decreaseMoney(double value){
+        if (money - value < 0){
+            money = 0;
+        } else {
+            money -= value;
+        }
+    }
+    public void decreaseHunger(double value){
+        if (hunger - value < 0){
+            hunger = 0;
+        } else {
+            hunger -= value;
+        }
+    }
+    public void decreaseHealth(double value){
+        if (health - value < 0){
+            health = 0;
+        } else {
+            health -= value;
+        }
+    }
+    public void decreaseMood(double value){
+        if (mood - value < 0){
+            mood = 0;
+        } else {
+            mood -= value;
         }
     }
 }
