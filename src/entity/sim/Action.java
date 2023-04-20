@@ -1,5 +1,4 @@
 package entity.sim;
-import java.util.List;
 import entity.item.Item;
 import entity.item.Useable;
 

@@ -1,16 +1,19 @@
 package entity.item.food.cuisine;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import entity.item.food.ingredient.*;
-import entity.item.food.ingredient.Ingredient;
 
 public class Bistik extends Cuisine{
-    static Ingredient[] recipe = {new Kentang(1), new Sapi(1)};
+    static {
+        ArrayList<Ingredient> temp = new ArrayList<>();
+        temp.add(new Kentang(1));
+        temp.add(new Sapi(1));
+        setRecipe(temp);
+    }
 
     public Bistik(int quantity) {
-        super(quantity, (ArrayList<Ingredient>) Arrays.asList(recipe), 16);
+        super(quantity, 22);
     }
 
     @Override

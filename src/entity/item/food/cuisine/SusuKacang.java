@@ -1,16 +1,20 @@
 package entity.item.food.cuisine;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import entity.item.food.ingredient.*;
 import entity.item.food.ingredient.Ingredient;
 
 public class SusuKacang extends Cuisine{
-    static Ingredient[] recipe = {new Susu(1), new Kacang(1)};
-
+    static {
+        ArrayList<Ingredient> temp = new ArrayList<>();
+        temp.add(new Susu(1));
+        temp.add(new Kacang(1));
+        setRecipe(temp);
+    }
+    
     public SusuKacang(int quantity) {
-        super(quantity, (ArrayList<Ingredient>) Arrays.asList(recipe), 16);
+        super(quantity, 5);
     }
 
     @Override
