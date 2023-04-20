@@ -1,4 +1,5 @@
 package entity.item.food;
+
 import entity.item.Item;
 
 public abstract class Food extends Item{

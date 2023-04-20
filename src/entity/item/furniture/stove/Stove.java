@@ -1,8 +1,10 @@
 package entity.item.furniture.stove;
 
+import java.util.ArrayList;
 import java.util.Scanner;
-
+import entity.item.Item;
 import entity.item.food.cuisine.*;
+import entity.item.food.ingredient.Ingredient;
 import entity.item.furniture.Furniture;
 import entity.sim.Sim;
 
@@ -42,8 +44,14 @@ public abstract class Stove extends Furniture{
             temp = new TumisSayur(1); 
         }
         
-        if(!sim.getInventory().checkContains(temp.getRecipe())){
-            System.out.println("Bahan makanan tidak cukup untuk membuat Bisitk");
+        ArrayList<Item> tempList = new ArrayList<>();
+
+        for (Ingredient ingredient : temp.getRecipe()) {
+            tempList.add(ingredient);
+        }
+
+        if(!sim.getInventory().checkContains(tempList)){
+            System.out.println("Bahan makanan tidak cukup untuk membuat " + temp.getName());
             return;
         } 
         Thread cookThread = new Thread(() -> {
@@ -58,11 +66,10 @@ public abstract class Stove extends Furniture{
             System.out.println(sim.getName() + " selesai memasak " + temp.getName());
             sim.getStatus().addMood(10);
             sim.getInventory().addItem(temp);
+            sim.getInventory().removeFromInventory(tempList);
         });
         cookThread.start();
     }
-
-        // this.cook(cuisine);
 
     @Override
     public String getDescription(){
