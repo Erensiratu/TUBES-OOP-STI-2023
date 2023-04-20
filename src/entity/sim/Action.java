@@ -82,19 +82,7 @@ public class Action {
             System.out.println("Sorry, I'm busy right now.");
             return;
         }
-
-        idle = false;
-        System.out.println("Working for " + duration + " hours...");
-
-        // Simulate working for the given duration
-        try {
-            Thread.sleep(duration * 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        idle = true;
-        System.out.println("Done working!");
+        sim.getOcupation().doWork();
     }
 
     public void useItem(int duration) {

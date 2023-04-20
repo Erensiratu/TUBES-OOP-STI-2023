@@ -8,7 +8,29 @@ public abstract class Toilet extends Furniture{
     }
 
     public void use(Sim sim){
-        // Implementasi
+        Thread toiletThread = new Thread(() -> {
+            sim.getAction().setIdle(false);
+
+            System.out.println(sim.getName() + " sedang menggunakan toilet");
+                
+            try {
+                Thread.sleep(10 * 1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            // Menambahkan efek mandi pada status sim
+            sim.getStatus().decreaseHunger(20);
+            sim.getStatus().addMood(10);
+
+            sim.getAction().setIdle(true);
+
+            System.out.println(sim.getName() + " telah selesai menggunakan toilet");
+        });
+
+        // Memulai thread
+        toiletThread.start();
+
     }
 
     @Override

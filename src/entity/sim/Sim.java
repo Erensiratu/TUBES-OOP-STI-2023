@@ -64,6 +64,10 @@ public class Sim {
         return currentItem;
     }
 
+    public Occupation getOcupation(){
+        return occupation;
+    }
+
     public InventoryManager getInventory(){
         return inventory;
     }

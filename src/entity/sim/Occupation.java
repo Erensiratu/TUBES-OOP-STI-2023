@@ -8,7 +8,7 @@ import entity.sim.profession.Profession;
 
 public class Occupation {
     Sim sim;
-    Profession currentOccupation;
+    Profession profession;
     int timesWorked;
     boolean excessTime;
 
@@ -16,18 +16,18 @@ public class Occupation {
 
     public Occupation(Sim sim){
         this.sim = sim;
-        setOccupation(getRandomProfession());
+        setProfession(getRandomProfession());
         timesWorked = 0;
     }
 
-    public Profession getOccupation() {
-        return currentOccupation;
+    public Profession getProfession() {
+        return profession;
     }
 
-    public void setOccupation(Profession newOccupation){
-        if ((timesWorked > 720) && (sim.getStatus().getMoney() < newOccupation.getSalary()/2)){
-            sim.getStatus().decreaseMoney(newOccupation.getSalary()/2);
-            currentOccupation = newOccupation;           
+    public void setProfession(Profession newProfession){
+        if ((timesWorked > 720) && (sim.getStatus().getMoney() < newProfession.getSalary()/2)){
+            sim.getStatus().decreaseMoney(newProfession.getSalary()/2);
+            profession = newProfession;           
         } else{
             System.out.println(sim.getName() + " belum dapat mengganti pekerjaannya saat ini");
         }
@@ -53,7 +53,7 @@ public class Occupation {
         timesWorked += duration;
     }
 
-    public void work(){
+    public void doWork(){
         System.out.println("Masukkan durasi kerja dalam detik\n Durasi kerja: ");
         int x = scanner.nextInt();
 
@@ -85,7 +85,7 @@ public class Occupation {
                 }
             }
 
-            sim.getStatus().addMoney(currentOccupation.getSalary()*((totalDuration)/240));
+            sim.getStatus().addMoney(profession.getSalary()*((totalDuration)/240));
             
             sim.getAction().setIdle(true);
             

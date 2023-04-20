@@ -7,6 +7,10 @@ import entity.item.Item;
 public class InventoryManager {
     ArrayList<Item> inventory = new ArrayList<>();
 
+    public ArrayList<Item> getList() {
+        return inventory;
+    }
+
     public void addItem(Item newItem){
         boolean exists = false;
         for (Item item : inventory) {

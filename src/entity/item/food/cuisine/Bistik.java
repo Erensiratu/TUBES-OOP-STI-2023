@@ -1,8 +1,5 @@
 package entity.item.food.cuisine;
 
-import java.util.ArrayList;
-
-import entity.item.Item;
 import entity.item.food.ingredient.*;
 
 public class Bistik extends Cuisine{
