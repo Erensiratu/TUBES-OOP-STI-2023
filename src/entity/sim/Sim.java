@@ -11,7 +11,7 @@ public class Sim {
     String name;
     boolean alive;
     Occupation occupation;
-    List<Item> inventory;
+    InventoryManager inventory;
     Action action;
     Point currentLocation;
     Room currentRoom;
@@ -26,6 +26,7 @@ public class Sim {
         alive = false;
         occupation = new Occupation();
         action = new Action(this);
+        inventory = new InventoryManager();
         this.currentHouse = currentHouse;
         this.status = status;
     }
@@ -64,7 +65,7 @@ public class Sim {
         return currentItem;
     }
 
-    public List<Item> getInventory(){
+    public InventoryManager getInventory(){
         return inventory;
     }
 

@@ -20,4 +20,6 @@ public abstract class Cuisine extends Food{
     public float getCookingTime(){
         return (float) (1.5 * getFullness());
     }
+
+    //public boolean
 }

@@ -30,7 +30,7 @@ public class Action {
 
     public void giftItem(Item gift, Sim receiver) {
         System.out.println("Sim is gifting " + gift.getName() + " to " + receiver.getName() + ".");
-        receiver.getInventory().add(gift);
+        receiver.getInventory().addItem(gift);
     }
 
     public void transferMoney(int amount, Sim receiver) {
@@ -116,8 +116,8 @@ public class Action {
         System.out.println("Done using item!");
     }
 
-    public void buyItem(List<Item> inventory, Item item) {
-        inventory.add(item);
+    public void buyItem(Item item) {
+        sim.getInventory().addItem(item);
         System.out.println("Sim has bought " + item.getName() + ".");
     }
 }
