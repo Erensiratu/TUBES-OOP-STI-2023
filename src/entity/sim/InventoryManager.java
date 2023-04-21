@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import entity.item.Item;
-import entity.item.food.Food;
 import entity.item.furniture.Furniture;
 
 public class InventoryManager {
