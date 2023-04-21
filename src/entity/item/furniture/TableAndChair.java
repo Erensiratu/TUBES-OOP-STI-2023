@@ -6,7 +6,7 @@ import entity.item.Item;
 import entity.item.food.Food;
 import entity.sim.Sim;
 
-public abstract class TableAndChair extends Furniture{
+public class TableAndChair extends Furniture{
     Scanner scanner = new Scanner(System.in);
 
     public TableAndChair(int quantity){

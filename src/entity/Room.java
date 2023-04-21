@@ -29,6 +29,41 @@ public class Room {
         return this.locationRoom;
     }
 
+    // Method yang satu ini hanya digunakan saat inisiasi objek dari kelas House
+    public void addObject(Furniture object, Point location) throws RoomException {
+        int objectWidth, objectLength;
+        if (object.getRotation()) {
+            objectWidth = object.getLength();
+            objectLength = object.getWidth();
+        } else {
+            objectWidth = object.getWidth();
+            objectLength = object.getLength();
+        }
+
+        if (location.getX() + objectWidth > roomWidth || location.getY() + objectLength > roomWidth) {
+            throw new RoomException("object is out of bounds");
+        }
+
+        for (int i = location.getX(); i < location.getX() + objectWidth; i++) {
+            for (int j = location.getY(); j < location.getY() + objectLength; j++) {
+                if (grid[i][j] != null) {
+                    throw new RoomException("Collision detected");
+                }
+            }
+        }
+
+        // No collision
+        for (int i = location.getX(); i < location.getX() + objectWidth; i++) {
+            for (int j = location.getY(); j < location.getY() + objectLength; j++) {
+                grid[i][j] = object;
+            }
+        }
+
+        object.setLocation(location);
+
+        objects.add(object);
+    }
+
     private void addObject(Furniture object) throws RoomException {
         int x,y;
         System.out.printf("\nMasukkan x: ");

@@ -4,7 +4,7 @@ import java.util.Random;
 
 import entity.sim.Sim;
 
-public abstract class Canvas extends Furniture{
+public class Canvas extends Furniture{
     public Canvas(int quantity){
         super(quantity, 2, 1, 200);
     }
