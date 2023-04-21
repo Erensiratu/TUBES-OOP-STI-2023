@@ -12,6 +12,7 @@ public abstract class Furniture extends Item implements Useable, Purchaseable{
     private int width;
     private int price;
     private Point location;
+    private boolean rotation;
 
     public Furniture(int quantity, int length, int width, int price){
         super(quantity);
@@ -19,6 +20,7 @@ public abstract class Furniture extends Item implements Useable, Purchaseable{
         this.width = width;
         this.price = price;
         this.location = null;
+        this.rotation = false;
     }
 
     public abstract void use(Sim sim);
@@ -45,6 +47,14 @@ public abstract class Furniture extends Item implements Useable, Purchaseable{
 
     public void setLocation(Point location) {
         this.location = location;
+    }
+
+    public boolean getRotation(){
+        return rotation;
+    }
+
+    public void setRotation(boolean rotate){
+        rotation = rotate;
     }
 
     public abstract String getDescription();

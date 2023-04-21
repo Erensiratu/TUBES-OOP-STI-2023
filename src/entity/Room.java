@@ -5,16 +5,15 @@ import java.util.*;
 import entity.item.furniture.Furniture;
 
 public class Room {
+    private int roomWidth = 6;
     private String name;
-    private int width;
     private Furniture[][] grid;
     private Point locationRoom;
-    private List<Furniture> objects;
+    private ArrayList<Furniture> objects;
     
-    public Room(String name, int width, Point locationRoom) {
+    public Room(String name, Point locationRoom) {
         this.name = name;
-        this.width = width;
-        this.grid = new Furniture[width][width];
+        this.grid = new Furniture[roomWidth][roomWidth];
         this.locationRoom = locationRoom;
         this.objects = new ArrayList<>();
     }
@@ -26,19 +25,41 @@ public class Room {
     public Point getLocation() {
         return this.locationRoom;
     }
-    
-    public void addObject(Furniture item, Point location) {
-        if (location.x >= 0 && location.x < width && location.y >= 0 && location.y < width) {
-            if (grid[location.x][location.y] == null) {
-                grid[location.x][location.y] = item;
-                item.setLocation(location);
-                objects.add(item);
-            } else {
-                System.out.println("Cannot add furniture, location already occupied.");
-            }
+
+    public void addObject(Furniture object, Point location) throws RoomException {
+        int objectWidth, objectLength;
+        if (object.getRotation()) {
+            // object is rotated
+            objectWidth = object.getLength();
+            objectLength = object.getWidth();
         } else {
-            System.out.println("Cannot add furniture, location is out of bounds.");
+            // object is not rotated
+            objectWidth = object.getWidth();
+            objectLength = object.getLength();
         }
+
+        if (location.getX() + objectWidth > roomWidth || location.getY() + objectLength > roomWidth) {
+            throw new RoomException("object is out of bounds");
+        }
+
+        for (int i = location.getX(); i < location.getX() + objectWidth; i++) {
+            for (int j = location.getY(); j < location.getY() + objectLength; j++) {
+                if (grid[i][j] != null) {
+                    throw new RoomException("Collision detected");
+                }
+            }
+        }
+
+        // No collision, add the object to the grid
+        for (int i = location.getX(); i < location.getX() + objectWidth; i++) {
+            for (int j = location.getY(); j < location.getY() + objectLength; j++) {
+                grid[i][j] = object;
+            }
+        }
+
+        object.setLocation(location);
+
+        objects.add(object);
     }
     
     public void editObject(Furniture item) {
