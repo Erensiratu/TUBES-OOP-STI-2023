@@ -40,11 +40,9 @@ public class Room {
 
         int objectWidth, objectLength;
         if (object.getRotation()) {
-            // object is rotated
             objectWidth = object.getLength();
             objectLength = object.getWidth();
         } else {
-            // object is not rotated
             objectWidth = object.getWidth();
             objectLength = object.getLength();
         }
@@ -78,11 +76,9 @@ public class Room {
         int objectWidth, objectLength;
     
         if (object.getRotation()) {
-            // object is rotated
             objectWidth = object.getLength();
             objectLength = object.getWidth();
         } else {
-            // object is not rotated
             objectWidth = object.getWidth();
             objectLength = object.getLength();
         }
@@ -97,30 +93,26 @@ public class Room {
     }
 
     public void editRoom(Sim sim) {
-        // Mencetak kondisi kamar sebelum diubah
         printRoom();
-        // Menampilkan pilihan aksi yang bisa dilakukan
         System.out.printf("\nPilih aksi:\n1. Letakkan Objek\n2. Pindahkan Objek\n3. Ambil Objek\nNomor aksi:");
-        // Mengambil input dari pengguna
         int x = scanner.nextInt();
-        // Melakukan validasi input agar hanya terdapat opsi 1-3
         while ((x < 1) || (x > 3)) {
             System.out.printf("\n\nSilakan ulangi input: ");
             x = scanner.nextInt();
         }
     
-        // Menggunakan switch case untuk memilih aksi yang sesuai dengan input pengguna
+        // Memilih aksi
         switch (x) {
             case 1:
-                // Memanggil metode addObjectAction() untuk menambahkan objek
+                // Menambahkan objek
                 addObjectAction(sim);
                 break;
             case 2:
-                // Memanggil metode moveObjectAction() untuk memindahkan objek
+                // Memindahkan objek
                 moveObjectAction(sim);
                 break;
             case 3:
-                // Memanggil metode removeObjectAction() untuk menghapus objek
+                // Menghapus objek
                 removeObjectAction(sim);
                 break;
         }

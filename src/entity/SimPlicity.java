@@ -1,6 +1,5 @@
 package entity;
 
-import java.util.*;
 
 public class SimPlicity {
     public static void main(String[] args) throws Exception {
