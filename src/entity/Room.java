@@ -2,6 +2,7 @@ package entity;
 
 import java.util.*;
 
+import entity.item.Item;
 import entity.item.furniture.Furniture;
 import entity.sim.Sim;
 
@@ -28,7 +29,7 @@ public class Room {
         return this.locationRoom;
     }
 
-    public void addObject(Furniture object) throws RoomException {
+    private void addObject(Furniture object) throws RoomException {
         int x,y;
         System.out.printf("\nMasukkan x: ");
         x = scanner.nextInt();
@@ -72,7 +73,7 @@ public class Room {
         objects.add(object);
     }
 
-    public void removeObject(Furniture object) {
+    private void removeObject(Furniture object) {
         Point location = object.getPoint();
         int objectWidth, objectLength;
     
@@ -96,6 +97,7 @@ public class Room {
     }
 
     public void editRoom(Sim sim){
+        printRoom();
         System.out.printf("\nPilih aksi:\n1. Letakkan Objek\n2. Pindahkan Objek\n3. Ambil Objek\nNomor aksi:");
         int x = scanner.nextInt();
         while ((x < 1)||(x > 3)){
@@ -103,22 +105,152 @@ public class Room {
             x = scanner.nextInt();
         }
 
+        Furniture currentFurniture = null;
+
         if (x == 1){
-            Furniture furniture = sim.getInventory().chooseFurniture();
-            if (furniture != null){
-                printRoom();
+            currentFurniture = sim.getInventory().chooseFurniture();
+            if (currentFurniture != null){
                 try {
-                    this.addObject(furniture);
+                    this.addObject(currentFurniture);
                 } catch (RoomException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    sim.getInventory().addItem((Item) currentFurniture);
+                    System.out.println("Penempatan furnitur gagal, furnitur telah diletakkan kembali ke inventory sim");
+                    System.out.println(e.getMessage());
                 }
             }
+        } else if (x == 2){
+            if (objects.size() != 0){
+                int idx = -1;
+                int count = 0;
+                String furnitureName = null;
+
+                while (count == 0){
+                    System.out.printf("\nMasukkan nama furnitur: ");
+                    furnitureName = scanner.nextLine();
+                    for (Furniture furniture : objects){
+                        if (furniture.getName().equals(furnitureName)){
+                            idx = objects.indexOf(furniture);
+                            count++;
+                        }
+                    }
+                    if (count ==0 ){
+                        System.out.println("\nNama furnitur tidak valid");
+                    }
+                }
+
+                if (count == 1){
+                    currentFurniture = objects.get(idx);
+                    removeObject(objects.get(idx));
+                } else {
+                    System.out.println("Terdapat " + count + " " + furnitureName + " di ruangan ini");
+                    count = 1;
+                    for (Furniture furniture : objects){
+                        if (furniture.getName().equals(furnitureName)){
+                            System.out.println(furniture.getName() + " " + count + ": " + furniture.getPoint().displayPoint());
+                        }
+                    }
+                    
+                    int i, j;
+                    boolean found = false;
+                    
+
+
+                    while (!found){
+                        System.out.println("\nMasukkan koordinat furnitur yang ingin dipindahkan");
+                        System.out.printf("\nX: ");
+                        i = scanner.nextInt();
+                        System.out.printf("\nY: ");
+                        j = scanner.nextInt();
+                        for (Furniture furniture : objects){
+                            if (furniture.getPoint().equals(i, j)){
+                                found = true;
+                                currentFurniture = furniture;
+                                removeObject(furniture);
+                                break;
+                            }
+                        }
+                        if (!found){
+                            System.out.println("\nKoordinat tidak valid");
+                        }
+                    }
+                }
+
+                try {
+                    this.addObject(currentFurniture);
+                } catch (RoomException e) {
+                    sim.getInventory().addItem((Item) currentFurniture);
+                    System.out.println("Penempatan furnitur gagal, furnitur telah diletakkan kembali ke inventory sim");
+                    System.out.println(e.getMessage());
+                }
+            } else{
+                System.out.println("\nRuang ini tidak mempunyai furnitur");
+            }
+            
+        } else{
+            if (objects.size() != 0){
+                int idx = -1;
+                int count = 0;
+                String furnitureName = null;
+
+                while (count == 0){
+                    System.out.printf("\nMasukkan nama furnitur: ");
+                    furnitureName = scanner.nextLine();
+                    for (Furniture furniture : objects){
+                        if (furniture.getName().equals(furnitureName)){
+                            idx = objects.indexOf(furniture);
+                            count++;
+                        }
+                    }
+                    if (count ==0 ){
+                        System.out.println("\nNama furnitur tidak valid");
+                    }
+                }
+
+                if (count == 1){
+                    currentFurniture = objects.get(idx);
+                    removeObject(objects.get(idx));
+                } else {
+                    System.out.println("Terdapat " + count + " " + furnitureName + " di ruangan ini");
+                    count = 1;
+                    for (Furniture furniture : objects){
+                        if (furniture.getName().equals(furnitureName)){
+                            System.out.println(furniture.getName() + " " + count + ": " + furniture.getPoint().displayPoint());
+                        }
+                    }
+                    
+                    int i, j;
+                    boolean found = false;
+
+                    while (!found){
+                        System.out.println("\nMasukkan koordinat furnitur yang ingin dimasukkan ke inventory");
+                        System.out.printf("\nX: ");
+                        i = scanner.nextInt();
+                        System.out.printf("\nY: ");
+                        j = scanner.nextInt();
+                        for (Furniture furniture : objects){
+                            if (furniture.getPoint().equals(i, j)){
+                                found = true;
+                                currentFurniture = furniture;
+                                removeObject(furniture);
+                                break;
+                            }
+                        }
+                        if (!found){
+                            System.out.println("\nKoordinat tidak valid");
+                        }
+                    }
+                }
+                sim.getInventory().addItem((Item) currentFurniture);
+                System.out.println("Furnitur telah diletakkan kembali ke inventory sim");
+            } else {
+                System.out.println("\nRuang ini tidak mempunyai furnitur");
+            }
+
         }
     }
 
     public void printRoom() {
-        System.out.print("\nTampilan ruangan:\n");
+        System.out.println("\nTampilan ruangan:");
         for (int i = 0; i < roomWidth; i++) {
             System.out.print(" " + i);
         }
@@ -133,6 +265,19 @@ public class Room {
                 }
             }
             System.out.printf("\n\n");
+        }
+
+        System.out.println("\nDaftar furnitur");
+
+        int count = 1;
+
+        for (Furniture furniture : objects){
+            System.out.printf("%d. %s", count, furniture.getName());
+            count++;
+        }
+
+        if (count == 1){
+            System.out.println("\nidak ada furnitur");
         }
     }
 }
