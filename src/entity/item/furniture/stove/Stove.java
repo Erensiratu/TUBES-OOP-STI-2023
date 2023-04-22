@@ -24,11 +24,11 @@ public abstract class Stove extends Furniture{
 
         Cuisine temp;
 
-        System.out.println("\nMasukkan nomor: ");
+        System.out.println("\nNomor masakan: ");
         int x = scanner.nextInt();
         
         while (!((x >= 1) && (x <= 5))){
-            System.out.println("\nMasukan tidak valid\nMasukkan nomor: ");
+            System.out.println("\nMasukan tidak valid\nNomor masakan: ");
             x = scanner.nextInt();
         }
 
@@ -66,7 +66,7 @@ public abstract class Stove extends Furniture{
             System.out.println(sim.getName() + " selesai memasak " + temp.getName());
             sim.getStatus().addMood(10);
             sim.getInventory().addItem(temp);
-            sim.getInventory().removeFromInventory(tempList);
+            sim.getInventory().removeList(tempList);
         });
         cookThread.start();
     }

@@ -5,7 +5,6 @@ import entity.Point;
 import entity.Room;
 import entity.House;
 
-import java.util.*;
 
 public class Sim {
     String name;
@@ -24,7 +23,7 @@ public class Sim {
         this.currentRoom = currentRoom;
         this.currentLocation = currentLocation;
         alive = false;
-        occupation = new Occupation();
+        occupation = new Occupation(this);
         action = new Action(this);
         inventory = new InventoryManager();
         this.currentHouse = currentHouse;
@@ -63,6 +62,10 @@ public class Sim {
 
     public Item getItem(){
         return currentItem;
+    }
+
+    public Occupation getOcupation(){
+        return occupation;
     }
 
     public InventoryManager getInventory(){

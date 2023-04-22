@@ -1,10 +1,6 @@
 package entity.item.food.cuisine;
 
-import java.util.ArrayList;
-
-import entity.item.Item;
 import entity.item.food.ingredient.*;
-import entity.item.food.ingredient.Ingredient;
 
 public class SusuKacang extends Cuisine{
     static {

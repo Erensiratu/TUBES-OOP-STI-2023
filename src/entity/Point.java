@@ -24,4 +24,16 @@ public class Point {
     public void setY(int newY){
         y = newY;
     }
+
+    public boolean equals(Point comparedPoint){
+        return ((x == comparedPoint.getX()) && (y == comparedPoint.getY()));
+    }
+
+    public boolean equals(int x, int y){
+        return ((this.x == x) && (this.y == y));
+    }
+
+    public String displayPoint(){
+        return String.format("X: %d, Y: %d", getX(), getY());
+    }
 }
