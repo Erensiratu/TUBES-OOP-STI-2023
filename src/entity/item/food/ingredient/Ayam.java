@@ -1,7 +1,5 @@
 package entity.item.food.ingredient;
 
-import entity.item.Item;
-
 public class Ayam extends Ingredient{
     public Ayam(int quantity) {
         super(quantity, 10, 8);
