@@ -7,6 +7,10 @@ public class Toilet extends Furniture{
         super(quantity, 1, 1, 50);
     }
 
+    public static Toilet getInstance(int quantity){
+        return new Toilet(quantity);
+    }
+
     public void use(Sim sim){
         Thread toiletThread = new Thread(() -> {
             sim.getAction().setIdle(false);

@@ -9,4 +9,8 @@ public class Kacang extends Ingredient{
     public String getName() {
         return "Kacang";
     }
+
+    public static Kacang getInstance(int quantity){
+        return new Kacang(quantity);
+    }
 }

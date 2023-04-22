@@ -16,4 +16,8 @@ public class SusuKacang extends Cuisine{
     public String getName() {
         return "Susu Kacang";
     }
+
+    public static SusuKacang getInstance(int quantity){
+        return new SusuKacang(quantity);
+    }
 }

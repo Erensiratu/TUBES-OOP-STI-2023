@@ -1,6 +1,6 @@
 package entity.item;
 
-public abstract class Item{
+public abstract class Item implements Cloneable{
     int quantity;
 
     // Kuantitas
@@ -22,4 +22,12 @@ public abstract class Item{
     }
 
     public abstract String getName();
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Item clonedObject = (Item) super.clone();
+        // Create a new object for the mutable field
+        clonedObject.myField = new Integer(myField);
+        return clonedObject;
+    }
 }

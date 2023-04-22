@@ -7,6 +7,10 @@ public class Shower extends Furniture{
         super(quantity, 2, 1, 100);
     }
 
+    public static Shower getInstance(int quantity){
+        return new Shower(quantity);
+    }
+
     public void use(Sim sim){
         Thread showerThread = new Thread(() -> {
             sim.getAction().setIdle(false);

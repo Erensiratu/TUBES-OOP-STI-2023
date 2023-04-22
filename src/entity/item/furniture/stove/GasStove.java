@@ -9,4 +9,8 @@ public class GasStove extends Stove{
     public String getName(){
         return "Kompor Gas";
     }
+
+    public static GasStove getInstance(int quantity){
+        return new GasStove(quantity);
+    }
 }

@@ -9,4 +9,8 @@ public class QueenBed extends Bed{
     public String getName(){
         return "Kasur Queen Size";
     }
+
+    public static Queenbed getInstance(int quantity){
+        return new Queenbed(quantity);
+    }
 }

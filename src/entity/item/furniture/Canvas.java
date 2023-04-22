@@ -9,6 +9,10 @@ public class Canvas extends Furniture{
         super(quantity, 2, 1, 200);
     }
 
+    public static Canvas getInstance(int quantity){
+        return new Canvas(quantity);
+    }
+
     public void use(Sim sim){
         Thread paintThread = new Thread(() -> {
             sim.getAction().setIdle(false);

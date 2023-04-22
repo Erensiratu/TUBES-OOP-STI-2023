@@ -16,4 +16,8 @@ public class TumisSayur extends Cuisine{
     public String getName() {
         return "Tumis Sayur";
     }
+
+    public static TumisSayur getInstance(int quantity){
+        return new TumisSayur(quantity);
+    }
 }

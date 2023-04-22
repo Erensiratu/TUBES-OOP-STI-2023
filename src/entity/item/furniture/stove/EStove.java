@@ -9,4 +9,8 @@ public class EStove extends Stove{
     public String getName(){
         return "Kompor Elektrik";
     }
+
+    public static EStove getInstance(int quantity){
+        return new EStove(quantity);
+    }
 }

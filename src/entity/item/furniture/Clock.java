@@ -7,6 +7,10 @@ public class Clock extends Furniture{
         super(quantity, 1, 1, 10);
     }
 
+    public static Clock getInstance(int quantity){
+        return new Clock(quantity);
+    }
+
     public void use(Sim sim){
         // Implementasi
     }
