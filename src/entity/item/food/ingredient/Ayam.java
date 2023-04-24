@@ -9,4 +9,8 @@ public class Ayam extends Ingredient{
     public String getName() {
         return "Ayam";
     }
+
+    public static Ayam getInstance(int quantity){
+        return new Ayam(quantity);
+    }
 }

@@ -16,4 +16,8 @@ public class Bistik extends Cuisine{
     public String getName() {
         return "Bistik";
     }
+
+    public static Bistik getInstance(int quantity){
+        return new Bistik(quantity);
+    }
 }

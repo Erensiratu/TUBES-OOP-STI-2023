@@ -9,4 +9,8 @@ public class Wortel extends Ingredient{
     public String getName() {
         return "Wortel";
     }
+
+    public static Wortel getInstance(int quantity){
+        return new Wortel(quantity);
+    }
 }

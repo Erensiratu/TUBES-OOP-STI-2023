@@ -7,7 +7,7 @@ import entity.item.Useable;
 import entity.Point;
 import entity.sim.Sim;
 
-public abstract class Furniture extends Item implements Useable, Purchaseable{
+public abstract class Furniture extends Item implements Useable, Purchaseable, Cloneable{
     private int length;
     private int width;
     private int price;

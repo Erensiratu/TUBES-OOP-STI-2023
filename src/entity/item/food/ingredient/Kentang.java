@@ -9,4 +9,8 @@ public class Kentang extends Ingredient{
     public String getName() {
         return "Kentang";
     }
+
+    public static Kentang getInstance(int quantity){
+        return new Kentang(quantity);
+    }
 }

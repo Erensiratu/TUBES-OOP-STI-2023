@@ -13,6 +13,10 @@ public class TableAndChair extends Furniture{
         super(quantity, 3, 3, 50);
     }
 
+    public static TableAndChair getInstance(int quantity){
+        return new TableAndChair(quantity);
+    }
+
     public void use(Sim sim){
         System.out.print("Daftar makanan yang ada di inventory " + sim.getName());
     

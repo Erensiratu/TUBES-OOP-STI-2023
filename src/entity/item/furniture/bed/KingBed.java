@@ -9,4 +9,8 @@ public class KingBed extends Bed{
     public String getName(){
         return "Kasur King Size";
     }
+
+    public static KingBed getInstance(int quantity){
+        return new KingBed(quantity);
+    }
 }

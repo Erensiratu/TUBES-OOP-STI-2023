@@ -9,4 +9,8 @@ public class Bayam extends Ingredient{
     public String getName() {
         return "Bayam";
     }
+
+    public static Bayam getInstance(int quantity){
+        return new Bayam(quantity);
+    }
 }

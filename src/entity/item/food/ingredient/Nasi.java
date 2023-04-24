@@ -9,4 +9,8 @@ public class Nasi extends Ingredient{
     public String getName() {
         return "Nasi";
     }
+
+    public static Nasi getInstance(int quantity){
+        return new Nasi(quantity);
+    }
 }

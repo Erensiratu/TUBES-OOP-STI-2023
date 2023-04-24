@@ -16,5 +16,9 @@ public class NasiAyam extends Cuisine{
     public String getName() {
         return "Nasi Ayam";
     }
+
+    public static NasiAyam getInstance(int quantity){
+        return new NasiAyam(quantity);
+    }
     
 }

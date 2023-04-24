@@ -9,4 +9,8 @@ public class SingleBed extends Bed{
     public String getName(){
         return "Kasur Single";
     }
+    
+    public static SingleBed getInstance(int quantity){
+        return new SingleBed(quantity);
+    }
 }

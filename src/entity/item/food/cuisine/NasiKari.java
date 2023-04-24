@@ -18,4 +18,8 @@ public class NasiKari extends Cuisine{
     public String getName() {
         return "Nasi Kari";
     }
+
+    public static NasiKari getInstance(int quantity){
+        return new NasiKari(quantity);
+    }
 }
