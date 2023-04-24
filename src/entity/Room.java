@@ -311,7 +311,7 @@ public class Room {
                     System.out.print("[-]");
                 }
             }
-            System.out.printf("\n\n");
+            System.out.printf("\n");
         }
 
         System.out.println("\nDaftar furnitur");
