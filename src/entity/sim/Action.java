@@ -26,16 +26,16 @@ public class Action {
         this.idle = idle;
     }
 
-<<<<<<< HEAD
     public void exercise() {
 
-        final int finalDuration = 0;
+        int duration = scanner.nextInt();
+        scanner.nextLine();
         Thread buyThread = new Thread(() -> {
     
             System.out.println(sim.getName() + " sedang berolahraga");
                 
             try {
-                Thread.sleep(finalDuration * 1000);
+                Thread.sleep(duration * 1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -45,17 +45,15 @@ public class Action {
 
         // Memulai thread
         buyThread.start();
-=======
+    }
     public void startActivity() {
         System.out.println("Sim akan mulai melakukan aktivitas.");
     }
 
-    public void exercise(int duration) {
-        System.out.println("Sim berolahraga selama " + duration/60 + " menit.");
->>>>>>> 82922990dd280d41c49f5f660fa7afa57975b401
-    }
+
 
     public void giftItem(Item gift, Sim receiver) {
+        
         System.out.println("Sim memberikan " + gift.getName() + " kepada " + receiver.getName() + ".");
         receiver.getInventory().addItem(gift);
     }
@@ -65,13 +63,23 @@ public class Action {
         receiver.getStatus().addMoney(amount);
     }
 
-    public void dayDream(int duration) {
+    public void dayDream() {
         if (!idle) {
             System.out.println("Maaf, Sim sedang sibuk.");
             return;
         }
 
         idle = false;
+        System.out.println("Masukkan durasi berkhayal: ");
+        int duration = scanner.nextInt();
+        scanner.nextLine();
+        while (duration <= 0){
+            System.out.println("Input durasi tidak valid.");
+            System.out.println("Masukkan durasi berkhayal: ");
+            duration = scanner.nextInt();
+            scanner.nextLine();
+        }
+        
         System.out.println("Berkhayal selama " + duration/60 + " menit...");
 
         // Simulate daydreaming for the given duration
@@ -86,12 +94,14 @@ public class Action {
     }
 
     public void converse(Sim otherSim) {
+        // TODO USER INPUT DI SINI
         if (!idle) {
             System.out.println("Maaf, Sim sedang sibuk.");
             return;
         }
 
         idle = false;
+        otherSim.getAction().setIdle(false);
         System.out.println("Berkomunikasi dengan " + otherSim + "...");
 
         // Simulate a conversation
@@ -102,10 +112,11 @@ public class Action {
         }
 
         idle = true;
+        otherSim.getAction().setIdle(true);
         System.out.println("Selesai berkomunikasi!");
     }
 
-    public void work(int duration) {
+    public void work() {
         if (!idle) {
             System.out.println("Maaf, Sim sedang sibuk.");
             return;
@@ -113,7 +124,7 @@ public class Action {
         sim.getOcupation().doWork();
     }
 
-    public void useItem(int duration) {
+    public void useItem() { 
         if (!idle) {
             System.out.println("Maaf, Sim sedang sibuk.");
             return;
