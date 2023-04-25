@@ -1,26 +1,12 @@
 package entity.sim;
-<<<<<<< HEAD
-import java.util.ArrayList;
 
-import javax.print.attribute.standard.QueuedJobCount;
-=======
 import java.util.Scanner;
->>>>>>> c83d4c0640615babb62bed276c8473b733dde965
 
 import entity.item.Item;
 import entity.item.Purchaseable;
 import entity.item.Useable;
-<<<<<<< HEAD
-import entity.item.furniture.*;
-import entity.item.furniture.bed.KingBed;
-import entity.item.furniture.bed.QueenBed;
-import entity.item.furniture.bed.SingleBed;
-import entity.item.furniture.stove.EStove;
-import entity.item.furniture.stove.GasStove;
-=======
 import entity.item.food.ingredient.IngredientFactory;
 import entity.item.furniture.FurnitureFactory;
->>>>>>> c83d4c0640615babb62bed276c8473b733dde965
 
 public class Action {
     private boolean idle;
