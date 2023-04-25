@@ -13,8 +13,4 @@ public class Susu extends Ingredient{
     public String getName() {
         return "Susu";
     }
-
-    public static Susu getInstance(int quantity){
-        return new Susu(quantity);
-    }
 }
