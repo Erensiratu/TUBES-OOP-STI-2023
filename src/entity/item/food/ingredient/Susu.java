@@ -5,6 +5,10 @@ public class Susu extends Ingredient{
         super(quantity, 2, 1);
     }
 
+    public static Susu getInstance(int quantity){
+        return new Susu(quantity);
+    }
+
     @Override
     public String getName() {
         return "Susu";

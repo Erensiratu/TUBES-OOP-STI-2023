@@ -5,6 +5,10 @@ public class Cook extends Profession {
         super(30);
     }
 
+    public static Cook getInstance(){
+        return new Cook();
+    }
+
     @Override
     public String getName() {
         return "Koki";

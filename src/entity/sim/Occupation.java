@@ -16,7 +16,7 @@ public class Occupation {
 
     public Occupation(Sim sim){
         this.sim = sim;
-        setProfession(getRandomProfession());
+        profession = getRandomProfession();
         timesWorked = 0;
     }
 
@@ -24,7 +24,7 @@ public class Occupation {
         return profession;
     }
 
-    public void setProfession(Profession newProfession){
+    public void changeProfession(Profession newProfession){
         if ((timesWorked > 720) && (sim.getStatus().getMoney() < newProfession.getSalary()/2)){
             sim.getStatus().decreaseMoney(newProfession.getSalary()/2);
             profession = newProfession;           
@@ -37,15 +37,15 @@ public class Occupation {
         int x = (new Random().nextInt(5) + 1);
         switch(x) {
             case 1:
-                return new Clown();
+                return Clown.getInstance();
             case 2:
-                return new Cook();
+                return Cook.getInstance();
             case 3:
-                return new Police();
+                return Doctor.getInstance();
             case 4:
-                return new Programmer();
+                return Police.getInstance();
             default:
-                return new Doctor();
+                return Programmer.getInstance();
         }
     }
 
@@ -54,15 +54,19 @@ public class Occupation {
     }
 
     public void doWork(){
-        System.out.println("Masukkan durasi kerja dalam detik\n Durasi kerja: ");
-        int x = scanner.nextInt();
+        
+        int input = -1;
 
-        while ((x % 120 != 0) || (x <= 0)){
-            System.out.println("Durasi kerja harus dalam kelipatan 120\n Durasi kerja");
-            x = scanner.nextInt();
+        while ((input % 120 != 0) || (input <= 0)){
+            System.out.println("\nMasukkan durasi kerja dalam detik\n Durasi kerja: ");
+            input = scanner.nextInt();
+
+            if ((input % 120 != 0) || (input <= 0)){
+                System.out.println("Durasi kerja harus dalam kelipatan 120 dan lebih dari 0");
+            }
         }
 
-        final int duration = x;
+        final int duration = input;
         
         Thread workThread = new Thread(() -> {
             sim.getAction().setIdle(false);

@@ -13,48 +13,48 @@ public abstract class Bed extends Furniture{
     }
 
     @Override
-    public void use(Sim sim){
+    public void use(Sim sim) {
         // Meminta waktu tidur (dalam detik)
-        System.out.println("Masukkan waktu tidur untuk sim:\n Waktu tidur: ");
-        int x = scanner.nextInt();
+        int input = -1;
+        while (input < 180) {
+            System.out.printf("Masukkan waktu tidur untuk sim\n Waktu tidur (dalam detik): ");
+            input = scanner.nextInt();
 
-        while (x < 180){
-            System.out.println("\nWaktu tidur sim setidaknya 3 menit (180 detik)");
-            System.out.println("Masukkan waktu tidur untuk sim:\n Waktu tidur: ");
-            x = scanner.nextInt();
+            if (input < 180){
+                System.out.println("\n\nWaktu tidak boleh kurang dari 180 detik");
+            }
         }
-
-        final int duration = x;
-
+    
         // Implementasi sudah tidur harian
         // WIP
+
         // Thread tidur
+        final int sleepTime = input;
         Thread sleepThread = new Thread(() -> {
             sim.getAction().setIdle(false);
-
-            System.out.println(sim.getName() + " sedang tidur selama " + duration + " detik");
-                
+    
+            System.out.println(sim.getName() + " sedang tidur selama " + sleepTime + " detik");
+    
             try {
-                Thread.sleep(duration * 1000);
+                Thread.sleep(sleepTime * 1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
+    
             // Menambahkan efek tidur pada status sim
             // Efek pada status baru ada setelah sim tidur selama 4 menit (240 detik)
-            int fullSleep = duration / 240;
+            int fullSleep = sleepTime / 240;
             sim.getStatus().addMood(fullSleep * 30);
             sim.getStatus().addHealth(fullSleep * 20);
-
+    
             sim.getAction().setIdle(true);
-
+    
             System.out.println(sim.getName() + " telah bangun");
         });
 
         // Memulai thread
         sleepThread.start();
-
-    }
+    };
 
     @Override
     public String getDescription(){

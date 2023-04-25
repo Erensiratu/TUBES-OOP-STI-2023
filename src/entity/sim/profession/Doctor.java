@@ -5,6 +5,10 @@ public class Doctor extends Profession {
         super(50);
     }
 
+    public static Doctor getInstance(){
+        return new Doctor();
+    }
+
     @Override
     public String getName() {
         return "Dokter";

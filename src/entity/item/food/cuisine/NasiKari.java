@@ -4,22 +4,22 @@ import entity.item.food.ingredient.*;
 
 public class NasiKari extends Cuisine{
     static {
-        recipe.add(new Nasi(1));
-        recipe.add(new Ayam(1));
-        recipe.add(new Wortel(1));
-        recipe.add(new Sapi(1));
+        recipe.add(Nasi.getInstance(1));
+        recipe.add(Ayam.getInstance(1));
+        recipe.add(Wortel.getInstance(1));
+        recipe.add(Sapi.getInstance(1));
     }
 
     public NasiKari(int quantity) {
         super(quantity, 30);
     }
 
+    public static NasiKari getInstance(int quantity){
+        return new NasiKari(quantity);
+    }
+
     @Override
     public String getName() {
         return "Nasi Kari";
-    }
-
-    public static NasiKari getInstance(int quantity){
-        return new NasiKari(quantity);
     }
 }

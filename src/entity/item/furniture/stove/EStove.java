@@ -5,12 +5,12 @@ public class EStove extends Stove{
         super(quantity, 1, 1, 200);
     }
 
+    public static EStove getInstance(int quantity){
+        return new EStove(quantity);
+    }
+
     @Override
     public String getName(){
         return "Kompor Elektrik";
-    }
-
-    public static EStove getInstance(int quantity){
-        return new EStove(quantity);
     }
 }

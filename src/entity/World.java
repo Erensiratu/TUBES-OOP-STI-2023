@@ -1,5 +1,3 @@
-package entity;
-
 import java.util.ArrayList;
 
 import org.w3c.dom.ls.LSInput;
@@ -13,6 +11,26 @@ public class World {
     private ArrayList<Sim> listSim;
     private Timer clock;
 
+<<<<<<< HEAD
+    private static World instance = new World();
+    private ArrayList<House> listHouse ;
+    private ArrayList<Sim> listSim;
+    private Timer clock;
+
+    private World(){}
+    private static World instance ;
+
+    private World(){
+        Timer.init();
+        clock = Timer.getInstance();
+        listHouse = new ArrayList<House>();
+        listSim = new ArrayList<Sim>();
+    }
+    private World(Timer clock, ArrayList<House> listHouse, private ArrayList<Sim> listSim){
+        this.clock = clock;
+        this.listHouse = listHouse;
+        this.listSim = listSim;
+=======
     private static World instance ;
 
     private World(){
@@ -27,16 +45,26 @@ public class World {
         this.listSim = listSim;
         Timer.init( listSim ,day,time);
         clock = Timer.getInstance();
+>>>>>>> 82922990dd280d41c49f5f660fa7afa57975b401
     }
     public static World getInstance(){
         return instance;
     }
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 82922990dd280d41c49f5f660fa7afa57975b401
     public synchronized static void init(){
         if (instance == null){
             instance = new World();
         }
     }
+<<<<<<< HEAD
+    public synchronized static void init(Timer clock, ArrayList<House> listHouse, private ArrayList<Sim> listSim){
+=======
     public synchronized static void init(Timer clock, ArrayList<House> listHouse, ArrayList<Sim> listSim){
+>>>>>>> 82922990dd280d41c49f5f660fa7afa57975b401
         if (instance == null){
             instance = new World(clock,listHouse,listSim);
         }
@@ -53,7 +81,14 @@ public class World {
     public ArrayList<Sim> getListSim(){
         return listSim;
     }
+<<<<<<< HEAD
+    public int getTime(){
+        return clock.getTime();
+    }
+}
+=======
     public Timer getClock(){
         return clock;
     }
 }
+>>>>>>> 82922990dd280d41c49f5f660fa7afa57975b401

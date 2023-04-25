@@ -7,12 +7,13 @@ import entity.item.Useable;
 import entity.Point;
 import entity.sim.Sim;
 
-public abstract class Furniture extends Item implements Useable, Purchaseable, Cloneable{
+public abstract class Furniture extends Item implements Useable, Purchaseable{
     private int length;
     private int width;
     private int price;
     private Point location;
-    private boolean rotation;
+    private boolean rotated;
+    private boolean vacant;
 
     public Furniture(int quantity, int length, int width, int price){
         super(quantity);
@@ -20,7 +21,8 @@ public abstract class Furniture extends Item implements Useable, Purchaseable, C
         this.width = width;
         this.price = price;
         this.location = null;
-        this.rotation = false;
+        this.rotated = false;
+        this.vacant = true;
     }
 
     public abstract void use(Sim sim);
@@ -49,13 +51,23 @@ public abstract class Furniture extends Item implements Useable, Purchaseable, C
         this.location = location;
     }
 
-    public boolean getRotation(){
-        return rotation;
+    public boolean isRotated(){
+        return rotated;
     }
 
-    public void setRotation(boolean rotate){
-        rotation = rotate;
+    public boolean isVacant(){
+        return vacant;
+    }
+
+    public void setRotation(boolean rotation){
+        this.rotated = rotation;
+    }
+
+    public void setVacancy(boolean vacant){
+        this.vacant = vacant;
     }
 
     public abstract String getDescription();
+
+
 }

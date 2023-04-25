@@ -1,5 +1,17 @@
 package entity.item.food.ingredient;
 
+/*
+ * Kelas untuk membuat instance dari kelas Ingredient
+ * Kontributor: 
+ * 1. Haidar - 18221134
+ * 
+ * Atribut:
+ * 
+ * Method:
+ * + [static] [function] createIngredient(String name, int quantity) -> Ingredient
+ * 
+ */
+
 public class IngredientFactory {
     public static Ingredient createIngredient(String name, int quantity) {
         switch (name.toLowerCase()) {

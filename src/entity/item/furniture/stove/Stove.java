@@ -16,57 +16,41 @@ public abstract class Stove extends Furniture{
     }
 
     public void use(Sim sim){
-        System.out.println("Pilih nomor masakan yang ingin dibuat:");
-        String[] masakan = {"Bistik", "Nasi Ayam", "Nasi Kari", "Susu Kacang", "Tumis Sayur"};
-        for (int i = 0; i < masakan.length; i++){
-            System.out.println((i+1) + ". " + masakan[i]);
-        }
+        System.out.println("Daftar masakan:\n1. Bistik\n2. Nasi Ayam\n3. Nasi Kari\n4. Susu Kacang\n5. Tumis Sayur");
 
-        Cuisine temp;
-
-        System.out.println("\nNomor masakan: ");
-        int x = scanner.nextInt();
+        Cuisine cuisine = null;
         
-        while (!((x >= 1) && (x <= 5))){
-            System.out.println("\nMasukan tidak valid\nNomor masakan: ");
-            x = scanner.nextInt();
+        while (cuisine == null){
+            System.out.printf("\nNama masakan: ");
+            String input = scanner.nextLine();
+            cuisine = CuisineFactory.createCuisine(input, 1);
+            if (cuisine == null){
+                System.out.println("\n\nNama masaka tidak valid");
+            }
         }
+    
+        ArrayList<Item> ingredients = new ArrayList<>();
+        ingredients.addAll(cuisine.getRecipe());
 
-        if (x == 1){
-            temp = new Bistik(1);
-        } else if (x == 2){
-            temp = new NasiAyam(1); 
-        } else if (x == 3){
-            temp = new NasiKari(1); 
-        } else if (x == 4){
-            temp = new SusuKacang(1); 
-        } else{
-            temp = new TumisSayur(1); 
-        }
-        
-        ArrayList<Item> tempList = new ArrayList<>();
-
-        for (Ingredient ingredient : temp.getRecipe()) {
-            tempList.add(ingredient);
-        }
-
-        if(!sim.getInventory().checkContains(tempList)){
-            System.out.println("Bahan makanan tidak cukup untuk membuat " + temp.getName());
+        if(!sim.getInventory().getList().containsAll(ingredients)){
+            System.out.println("Bahan makanan di inventory tidak cukup untuk membuat " + cuisine.getName());
             return;
         } 
+
+        final Cuisine finalCuisine = cuisine;
         Thread cookThread = new Thread(() -> {
             sim.getAction().setIdle(false);
-            System.out.println(sim.getName() + " sedang memasak " + temp.getName());
+            System.out.println(sim.getName() + " sedang memasak " + finalCuisine.getName());
             try {
-                Thread.sleep((int) temp.getCookingTime()*1000);
+                Thread.sleep((int) finalCuisine.getCookingTime()*1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             sim.getAction().setIdle(true);
-            System.out.println(sim.getName() + " selesai memasak " + temp.getName());
+            System.out.println(sim.getName() + " selesai memasak " + finalCuisine.getName());
             sim.getStatus().addMood(10);
-            sim.getInventory().addItem(temp);
-            sim.getInventory().removeList(tempList);
+            sim.getInventory().addItem(finalCuisine);
+            sim.getInventory().getList().removeAll(ingredients);
         });
         cookThread.start();
     }

@@ -26,12 +26,33 @@ public class Action {
         this.idle = idle;
     }
 
+<<<<<<< HEAD
+    public void exercise() {
+
+        final int finalDuration = 0;
+        Thread buyThread = new Thread(() -> {
+    
+            System.out.println(sim.getName() + " sedang berolahraga");
+                
+            try {
+                Thread.sleep(finalDuration * 1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println(sim.getName() + " telah selesai berolahraga");
+        });
+
+        // Memulai thread
+        buyThread.start();
+=======
     public void startActivity() {
         System.out.println("Sim akan mulai melakukan aktivitas.");
     }
 
     public void exercise(int duration) {
         System.out.println("Sim berolahraga selama " + duration/60 + " menit.");
+>>>>>>> 82922990dd280d41c49f5f660fa7afa57975b401
     }
 
     public void giftItem(Item gift, Sim receiver) {
@@ -112,15 +133,20 @@ public class Action {
 
     public void buyFurniture(){
         Purchaseable item = null;
-        int input = -1;
+        
         int quantity = -1;
         String itemName = null;
         System.out.println("Silakan pilih kategori belanja:\n1 untuk Furnitur\n2 untuk Bahan Makanan\n3 untuk Batal\n");
         
+        int input = -1;
         while ((input < 1) || (input > 3)){
-            System.out.printf("Masukkan nomor: ");
+            System.out.printf("\nMasukkan nomor: ");
             input = scanner.nextInt();
             System.out.println();
+
+            if((input < 1) || (input > 3)){
+                System.out.println("Tolong masukkan input yang valid");
+            }
         }
     
         switch (input){
@@ -130,7 +156,7 @@ public class Action {
                     System.out.printf("Masukkan nama furnitur: ");
                     itemName = scanner.nextLine();
                 }
-                item = FurnitureFactory.createFurniture(itemName, 0);
+                item = (Purchaseable) FurnitureFactory.createFurniture(itemName, 0);
                 break;
             case 2:
                 System.out.println("Daftar Bahan Makanan:\n1. Ayam\n2. Bayam\n3. Kacang\n4. Kentang\n5. Nasi\n6. Sapi\n7. Susu\n8. Wortel\n");
@@ -138,7 +164,7 @@ public class Action {
                     System.out.printf("Masukkan nama bahan makanan: ");
                     itemName = scanner.nextLine();
                 }
-                item = IngredientFactory.createIngredient(itemName, 0);
+                item = (Purchaseable) IngredientFactory.createIngredient(itemName, 0);
                 break;
             case 3:
                 return;

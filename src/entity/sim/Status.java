@@ -5,12 +5,14 @@ public class Status {
     private double hunger;
     private double health;
     private double mood;
+    private boolean alive;
     
     public Status() {
         money = 100;
         hunger = 80;
         health = 80;
         mood = 80;
+        alive = true;
     }
 
     public double getMoney() {
@@ -25,7 +27,13 @@ public class Status {
     public double getMood() {
         return mood;
     }
+    public boolean isAlive() {
+        return alive;
+    }
     
+    public void kill(){
+        alive = false;
+    }
 
     public void addMoney(double value){
         money += value;
@@ -62,6 +70,7 @@ public class Status {
     public void decreaseHunger(double value){
         if (hunger - value < 0){
             hunger = 0;
+            kill();
         } else {
             hunger -= value;
         }
@@ -69,6 +78,7 @@ public class Status {
     public void decreaseHealth(double value){
         if (health - value < 0){
             health = 0;
+            kill();
         } else {
             health -= value;
         }
@@ -76,6 +86,7 @@ public class Status {
     public void decreaseMood(double value){
         if (mood - value < 0){
             mood = 0;
+            kill();
         } else {
             mood -= value;
         }

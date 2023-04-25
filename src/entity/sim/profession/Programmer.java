@@ -5,6 +5,10 @@ public class Programmer extends Profession {
         super(45);
     }
 
+    public static Programmer getInstance(){
+        return new Programmer();
+    }
+
     @Override
     public String getName() {
         return "Programmer";

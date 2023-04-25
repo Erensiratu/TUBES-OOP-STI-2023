@@ -5,12 +5,12 @@ public class KingBed extends Bed{
         super(quantity, 5, 2, 150);
     }
 
+    public static KingBed getInstance(int quantity){
+        return new KingBed(quantity);
+    }
+    
     @Override
     public String getName(){
         return "Kasur King Size";
-    }
-
-    public static KingBed getInstance(int quantity){
-        return new KingBed(quantity);
     }
 }

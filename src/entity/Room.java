@@ -7,7 +7,7 @@ import entity.item.furniture.Furniture;
 import entity.sim.Sim;
 
 public class Room {
-    private int roomWidth = 6;
+    final int WIDTH = 6;
     private String name;
     private Furniture[][] grid;
     private Point locationRoom;
@@ -16,7 +16,7 @@ public class Room {
     
     public Room(String name, Point locationRoom) {
         this.name = name;
-        this.grid = new Furniture[roomWidth][roomWidth];
+        this.grid = new Furniture[WIDTH][WIDTH];
         this.locationRoom = locationRoom;
         this.objects = new ArrayList<>();
     }
@@ -32,7 +32,7 @@ public class Room {
     // Method yang satu ini hanya digunakan saat inisiasi objek dari kelas House
     public void addObject(Furniture object, Point location) throws RoomException {
         int objectWidth, objectLength;
-        if (object.getRotation()) {
+        if (object.isRotated()) {
             objectWidth = object.getLength();
             objectLength = object.getWidth();
         } else {
@@ -40,7 +40,7 @@ public class Room {
             objectLength = object.getLength();
         }
 
-        if (location.getX() + objectWidth > roomWidth || location.getY() + objectLength > roomWidth) {
+        if (location.getX() + objectWidth > WIDTH || location.getY() + objectLength > WIDTH) {
             throw new RoomException("object is out of bounds");
         }
 
@@ -74,7 +74,7 @@ public class Room {
         Point location = new Point(x, y);
 
         int objectWidth, objectLength;
-        if (object.getRotation()) {
+        if (object.isRotated()) {
             objectWidth = object.getLength();
             objectLength = object.getWidth();
         } else {
@@ -82,7 +82,7 @@ public class Room {
             objectLength = object.getLength();
         }
 
-        if (location.getX() + objectWidth > roomWidth || location.getY() + objectLength > roomWidth) {
+        if (location.getX() + objectWidth > WIDTH || location.getY() + objectLength > WIDTH) {
             throw new RoomException("object is out of bounds");
         }
 
@@ -110,7 +110,7 @@ public class Room {
         Point location = object.getPoint();
         int objectWidth, objectLength;
     
-        if (object.getRotation()) {
+        if (object.isRotated()) {
             objectWidth = object.getLength();
             objectLength = object.getWidth();
         } else {
@@ -298,13 +298,13 @@ public class Room {
 
     public void printRoom() {
         System.out.println("\nTampilan ruangan:");
-        for (int i = 0; i < roomWidth; i++) {
+        for (int i = 0; i < WIDTH; i++) {
             System.out.print(" " + i);
         }
         System.out.println();
-        for (int i = 0; i < roomWidth; i++) {
+        for (int i = 0; i < WIDTH; i++) {
             System.out.print(i + " ");
-            for (int j = 0; j < roomWidth; j++) {
+            for (int j = 0; j < WIDTH; j++) {
                 if (grid[i][j] == null) {
                     System.out.print("[ ]");
                 } else {

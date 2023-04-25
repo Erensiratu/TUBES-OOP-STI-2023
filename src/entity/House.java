@@ -51,8 +51,6 @@ public class House {
         int y = room.getLocation().getY();
         
         while (!valid){
-            
-
             System.out.println("Pilih sebelah mana dari " + room.getName() + " yang ingin dibangun ruangan baru:\n1. Kanan\n2. Kiri\n3. Atas\n4. Bawah\n\nMasukkan 5 untuk membatalkan operasi");
             
             System.out.printf("Masukkan nomor: ");

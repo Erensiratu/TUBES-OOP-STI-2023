@@ -5,12 +5,12 @@ public class Ayam extends Ingredient{
         super(quantity, 10, 8);
     }
 
+    public static Ayam getInstance(int quantity){
+        return new Ayam(quantity);
+    }
+
     @Override
     public String getName() {
         return "Ayam";
-    }
-
-    public static Ayam getInstance(int quantity){
-        return new Ayam(quantity);
     }
 }

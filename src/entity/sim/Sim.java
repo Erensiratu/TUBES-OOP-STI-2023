@@ -3,6 +3,7 @@ package entity.sim;
 import entity.item.Item;
 import entity.Point;
 import entity.Room;
+import entity.World;
 import entity.House;
 
 
@@ -13,6 +14,7 @@ public class Sim {
     InventoryManager inventory;
     Action action;
     Point currentLocation;
+    World currentWorld;
     Room currentRoom;
     House currentHouse;
     Item currentItem;
