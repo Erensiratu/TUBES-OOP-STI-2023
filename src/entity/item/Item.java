@@ -23,11 +23,11 @@ public abstract class Item implements Cloneable{
 
     public abstract String getName();
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        Item clonedObject = (Item) super.clone();
-        // Create a new object for the mutable field
-        clonedObject.myField = new Integer(myField);
-        return clonedObject;
-    }
+    // @Override
+    // public Object clone() throws CloneNotSupportedException {
+    //     Item clonedObject = (Item) super.clone();
+    //     // Create a new object for the mutable field
+    //     clonedObject.myField = new Integer(myField);
+    //     return clonedObject;
+    // }
 }

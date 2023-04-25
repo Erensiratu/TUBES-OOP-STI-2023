@@ -27,31 +27,31 @@ public class Action {
     }
 
     public void startActivity() {
-        System.out.println("Sim is starting an activity.");
+        System.out.println("Sim akan mulai melakukan aktivitas.");
     }
 
     public void exercise(int duration) {
-        System.out.println("Sim is exercising for " + duration + " minutes.");
+        System.out.println("Sim berolahraga selama " + duration/60 + " menit.");
     }
 
     public void giftItem(Item gift, Sim receiver) {
-        System.out.println("Sim is gifting " + gift.getName() + " to " + receiver.getName() + ".");
+        System.out.println("Sim memberikan " + gift.getName() + " kepada " + receiver.getName() + ".");
         receiver.getInventory().addItem(gift);
     }
 
     public void transferMoney(int amount, Sim receiver) {
-        System.out.println("Sim is transferring $" + amount + " to " + receiver.getName() + ".");
+        System.out.println("Sim men-transfer $" + amount + " to " + receiver.getName() + ".");
         receiver.getStatus().addMoney(amount);
     }
 
     public void dayDream(int duration) {
         if (!idle) {
-            System.out.println("Sorry, I'm busy right now.");
+            System.out.println("Maaf, Sim sedang sibuk.");
             return;
         }
 
         idle = false;
-        System.out.println("Daydreaming for " + duration + " hours...");
+        System.out.println("Berkhayal selama " + duration/60 + " menit...");
 
         // Simulate daydreaming for the given duration
         try {
@@ -61,17 +61,17 @@ public class Action {
         }
 
         idle = true;
-        System.out.println("Done daydreaming!");
+        System.out.println("Selesai berkhayal!");
     }
 
     public void converse(Sim otherSim) {
         if (!idle) {
-            System.out.println("Sorry, I'm busy right now.");
+            System.out.println("Maaf, Sim sedang sibuk.");
             return;
         }
 
         idle = false;
-        System.out.println("Conversing with " + otherSim + "...");
+        System.out.println("Berkomunikasi dengan " + otherSim + "...");
 
         // Simulate a conversation
         try {
@@ -81,12 +81,12 @@ public class Action {
         }
 
         idle = true;
-        System.out.println("Done conversing!");
+        System.out.println("Selesai berkomunikasi!");
     }
 
     public void work(int duration) {
         if (!idle) {
-            System.out.println("Sorry, I'm busy right now.");
+            System.out.println("Maaf, Sim sedang sibuk.");
             return;
         }
         sim.getOcupation().doWork();
@@ -94,20 +94,20 @@ public class Action {
 
     public void useItem(int duration) {
         if (!idle) {
-            System.out.println("Sorry, I'm busy right now.");
+            System.out.println("Maaf, Sim sedang sibuk.");
             return;
         }
 
         Useable item = (Useable) sim.getItem();
 
         idle = false;
-        System.out.println("Using item " + item + "...");
+        System.out.println("Menggunakan " + item + "...");
 
         // Use the item
         item.use(sim);
 
         idle = true;
-        System.out.println("Done using item!");
+        System.out.println("Selesai menggunakan!");
     }
 
     public void buyFurniture(){
