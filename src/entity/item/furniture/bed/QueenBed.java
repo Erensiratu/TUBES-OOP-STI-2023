@@ -10,7 +10,7 @@ public class QueenBed extends Bed{
         return "Kasur Queen Size";
     }
 
-    public static Queenbed getInstance(int quantity){
-        return new Queenbed(quantity);
+    public static QueenBed getInstance(int quantity){
+        return new QueenBed(quantity);
     }
 }
