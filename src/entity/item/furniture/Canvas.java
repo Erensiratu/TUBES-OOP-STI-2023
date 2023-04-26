@@ -14,7 +14,14 @@ public class Canvas extends Furniture{
     }
 
     public void use(Sim sim){
+        if (!getVacancy()){
+            System.out.println("\n\nBenda sedang digunakan oleh sim lain");
+            return;
+        }
+        
         Thread paintThread = new Thread(() -> {
+            setVacancy(false);
+            
             sim.getAction().setIdle(false);
 
             System.out.println(sim.getName() + " sedang melukis sebuah lukisan");
@@ -34,6 +41,8 @@ public class Canvas extends Furniture{
             sim.getAction().setIdle(true);
 
             System.out.println(sim.getName() + " telah selesai melukis dang mendapatkan uang sebanyak " + revenue);
+
+            setVacancy(true);
         });
 
         // Memulai thread

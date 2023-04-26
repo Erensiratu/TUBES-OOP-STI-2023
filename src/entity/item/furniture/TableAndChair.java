@@ -18,6 +18,11 @@ public class TableAndChair extends Furniture{
     }
 
     public void use(Sim sim){
+        if (!getVacancy()){
+            System.out.println("\n\nBenda sedang digunakan oleh sim lain");
+            return;
+        }
+        
         System.out.print("Daftar makanan yang ada di inventory " + sim.getName());
     
         int count = 1;
@@ -49,6 +54,8 @@ public class TableAndChair extends Furniture{
         final int fullness = currentFood.getFullness();
      
         Thread eatThread = new Thread(() -> {
+            setVacancy(false);
+            
             sim.getAction().setIdle(false);
     
             System.out.println(sim.getName() + " sedang makan " + foodName);
@@ -65,6 +72,8 @@ public class TableAndChair extends Furniture{
             sim.getAction().setIdle(true);
     
             System.out.println(sim.getName() + " telah selesai makan");
+
+            setVacancy(true);
         });
     
         // Memulai thread

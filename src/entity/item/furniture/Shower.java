@@ -12,7 +12,14 @@ public class Shower extends Furniture{
     }
 
     public void use(Sim sim){
+        if (!getVacancy()){
+            System.out.println("\n\nBenda sedang digunakan oleh sim lain");
+            return;
+        }
+        
         Thread showerThread = new Thread(() -> {
+            setVacancy(false);
+            
             sim.getAction().setIdle(false);
 
             System.out.println(sim.getName() + " sedang mandi");
@@ -30,6 +37,8 @@ public class Shower extends Furniture{
             sim.getAction().setIdle(true);
 
             System.out.println(sim.getName() + " telah selesai mandi");
+
+            setVacancy(true);
         });
 
         // Memulai thread

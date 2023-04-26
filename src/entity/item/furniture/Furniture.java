@@ -39,6 +39,10 @@ public abstract class Furniture extends Item implements Useable, Purchaseable{
         return length;
     }
 
+    public boolean getVacancy(){
+        return vacant;
+    }
+
     public int getWidth(){
         return width;
     }

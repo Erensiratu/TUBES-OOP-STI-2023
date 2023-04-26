@@ -16,6 +16,11 @@ public abstract class Stove extends Furniture{
     }
 
     public void use(Sim sim){
+        if (!getVacancy()){
+            System.out.println("\n\nBenda sedang digunakan oleh sim lain");
+            return;
+        }
+
         System.out.println("Daftar masakan:\n1. Bistik\n2. Nasi Ayam\n3. Nasi Kari\n4. Susu Kacang\n5. Tumis Sayur");
 
         Cuisine cuisine = null;
@@ -39,18 +44,25 @@ public abstract class Stove extends Furniture{
 
         final Cuisine finalCuisine = cuisine;
         Thread cookThread = new Thread(() -> {
+            setVacancy(false);
+            
             sim.getAction().setIdle(false);
+
             System.out.println(sim.getName() + " sedang memasak " + finalCuisine.getName());
+
             try {
                 Thread.sleep((int) finalCuisine.getCookingTime()*1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            
             sim.getAction().setIdle(true);
             System.out.println(sim.getName() + " selesai memasak " + finalCuisine.getName());
             sim.getStatus().addMood(10);
             sim.getInventory().addItem(finalCuisine);
             sim.getInventory().getList().removeAll(ingredients);
+
+            setVacancy(true);
         });
         cookThread.start();
     }

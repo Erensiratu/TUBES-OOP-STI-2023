@@ -14,6 +14,10 @@ public abstract class Bed extends Furniture{
 
     @Override
     public void use(Sim sim) {
+        if (!getVacancy()){
+            System.out.println("\n\nBenda sedang digunakan oleh sim lain");
+            return;
+        }
         // Meminta waktu tidur (dalam detik)
         int input = -1;
         while (input < 180) {
