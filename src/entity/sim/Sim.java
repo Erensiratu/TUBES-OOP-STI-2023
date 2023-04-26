@@ -13,26 +13,27 @@ public class Sim {
     InventoryManager inventory;
     Action action;
     Point currentLocation;
-    World currentWorld;
     Room currentRoom;
     House currentHouse;
+    World currentWorld;
     Item currentItem;
     Status status;
 
-    public Sim(String name, House currentHouse, Room currentRoom, Point currentLocation){
+    public Sim(String name, World currentWorld, House currentHouse, Room currentRoom, Point currentLocation){
         this.name = name;
+        this.currentWorld = currentWorld;
         this.currentHouse = currentHouse;
         this.currentRoom = currentRoom;
         this.currentLocation = currentLocation;
         occupation = new Occupation(this);
         action = new Action(this);
-        inventory = new InventoryManager();
+        inventory = new InventoryManager(this);
         status = new Status();
         currentHouse.setOwner(this);
     }
 
-    public static Sim getInstance(String name, House currentHouse, Room currentRoom, Point currentLocation){
-        return new Sim(name, currentHouse, currentRoom, currentLocation);
+    public static Sim getInstance(String name, World currentWorld, House currentHouse, Room currentRoom, Point currentLocation){
+        return new Sim(name, currentWorld, currentHouse, currentRoom, currentLocation);
     }
 
 
@@ -47,6 +48,10 @@ public class Sim {
 
     public Room getRoom(){
         return currentRoom;
+    }
+
+    public World getWorld(){
+        return currentWorld;
     }
     
     public House getHouse(){

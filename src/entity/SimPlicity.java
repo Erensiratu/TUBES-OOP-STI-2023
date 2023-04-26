@@ -84,7 +84,7 @@ public class SimPlicity {
         }
         
         House tempHouse = House.getInstance(point);
-        Sim tempSim = Sim.getInstance(simName, tempHouse, tempHouse.getPrimaryRoom(), Point.getInstance(0, 0));
+        Sim tempSim = Sim.getInstance(simName, currentWorld, tempHouse, tempHouse.getPrimaryRoom(), Point.getInstance(0, 0));
         tempSim.setItem(tempSim.getRoom().getObject(Point.getInstance(0, 0)));
 
         currentWorld.addHouse(tempHouse);
@@ -246,10 +246,7 @@ public class SimPlicity {
     }
 
     public void viewInventory(){
-        System.out.println("Isi inventory sim " + currentSim.getName());
-        for (Item item : currentSim.getInventory().getList()){
-            System.out.println("> " + item.getName() + " : " + item.getQuantity() + " buah");
-        }
+        currentSim.getInventory().displayInventory();
     }
 
     public void editRoom(){
@@ -275,11 +272,6 @@ public class SimPlicity {
             while (!valid) {
                 System.out.print("Masukkan nama ruangan yang dijadikan acuan: ");
                 String roomName = scanner.nextLine().trim();
-
-                if (roomName.toLowerCase(null).equals(currentSim.getRoom().getName().toLowerCase())){
-                    System.out.println(currentSim.getName() + " sudah berada di " + currentSim.getRoom().getName());
-                    continue;
-                }
                     
                 for (Room room : currentSim.getHouse().getRoomList()) {
                     if (room.getName().toLowerCase().equals(roomName.toLowerCase())) {
