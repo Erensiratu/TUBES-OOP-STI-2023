@@ -51,6 +51,18 @@ public class SimPlicity {
             if (simName.isEmpty()){
                 System.out.println("\n\nSilakan masukkan nama yang benar\n");
             }
+            found = false;
+            for (Sim sim : currentWorld.getListSim()){
+                if (sim.getName().toLowerCase().equals(simName.toLowerCase())) {
+                    System.out.println(sim.getName() + " telah diambil, silahkan pilih nama yang lain\n");
+                    currentSim = sim;
+                    found = true;
+                    break;
+                }
+            }
+            if (found){
+                simName = "";
+            }
         }
 
         Point point = null;
@@ -120,7 +132,7 @@ public class SimPlicity {
     }
 
     public void action(){
-
+        currentSim.getAction().startActivity();
     }
 
     public void viewCurrentLocation(){
