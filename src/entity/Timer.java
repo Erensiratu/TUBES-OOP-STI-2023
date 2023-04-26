@@ -48,7 +48,7 @@ public class Timer {
         }
         if (!allIdle){
             time = time + System.currentTimeMillis() - start;
-            day = (time/720000);
+            day = (int) (time/720000);
         }
     }
     public long getTime(){

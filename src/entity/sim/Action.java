@@ -1,11 +1,13 @@
 package entity.sim;
-
 import java.util.Scanner;
-
 import entity.item.Item;
 import entity.item.Purchaseable;
 import entity.item.Useable;
+import entity.item.food.cuisine.Cuisine;
+import entity.item.food.cuisine.CuisineFactory;
+import entity.item.food.ingredient.Ingredient;
 import entity.item.food.ingredient.IngredientFactory;
+import entity.item.furniture.Furniture;
 import entity.item.furniture.FurnitureFactory;
 
 public class Action {
@@ -82,39 +84,196 @@ public class Action {
     }
     
 
+    public void giftItem() {
+        if (!idle) {
+            System.out.println("Maaf, Sim sedang sibuk.");
+            return;
+        }
 
+        if (sim.getInventory().getList().size() == 0){
+            System.out.println(sim.getName() + " tidak mempunyai barang di inventory-nya");
+            return;
+        }
 
-    public void giftItem(Item gift, Sim receiver) {
+        if (sim.getWorld().getListSim().size() == 1){
+            System.out.println("Tidak ada sim lain di world ini");
+            return;
+        }
+
+        Sim receiver = null;
+        Item gift = null;
+        String receiverName = "";
+        String itemName = "";
+        int quantity = 0;
+        boolean found = false;
         
-        System.out.println("Sim memberikan " + gift.getName() + " kepada " + receiver.getName() + ".");
-        receiver.getInventory().addItem(gift);
+        System.out.println("Daftar sim lain di world ini: ");
+        for (Sim otherSim : sim.getWorld().getListSim()){
+            if (!otherSim.getName().equals(sim.getName())){
+                System.out.println("> " + otherSim.getName());
+            }
+        }
+        
+        while (!found){
+            System.out.print("Masukkan nama penerima: ");
+            receiverName = scanner.nextLine().trim();
+
+            if (receiverName.toLowerCase().equals(sim.getName().toLowerCase())){
+                System.out.println("\n\nTidak dapat memberikan hadiah ke diri sendiri");
+                continue;
+            }
+
+            for (Sim otherSim : sim.getWorld().getListSim()){
+                if (otherSim.getName().toLowerCase().equals(receiverName.toLowerCase())){
+                    receiver = otherSim;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found){
+                System.out.println("\n\nTidak ada sim dengan nama " + receiverName);
+            }
+
+            if (receiverName.isEmpty()){
+                System.out.println("\n\nMasukkan nama sim yang valid" );
+            }
+        }
+
+        if (!(sim.getHouse().getName().equals(receiver.getHouse().getName())) && (sim.getHouse().getName().equals(receiver.getHouse().getName()))){
+            System.out.println(sim.getName() + " sedang tidak berada di tempat yang sama dengan " + receiver.getName());  
+            return;
+        }
+
+        sim.getInventory().displayInventory();
+
+        found = false;
+        while (!found){
+            System.out.print("\n\n\nMasukkan nama item yang ingin dihadiahkan: ");
+            itemName = scanner.nextLine().trim();
+
+            for (Item item : sim.getInventory().getList()){
+                if (item.getName().toLowerCase().equals(itemName.toLowerCase())){
+                    if (item.getQuantity() == 1){
+                        quantity = 1;
+                    }
+                    while (quantity <= 0 || quantity > item.getQuantity()){
+                        System.out.print("\n\n\nMasukkan jumlah" + item.getName() + " yang ingin dihadiahkan: ");
+                        quantity = scanner.nextInt();
+
+                        if (quantity <= 0){
+                            System.out.println("\n\n Jumlah harus lebih dari 0");
+                            continue;
+                        }
+
+                        if (quantity > item.getQuantity()){
+                            System.out.println("\n\n" + item.getName() + " hanya tersedia " + item.getQuantity() + " buah");
+                            continue;
+                        }
+                    }
+                    gift = item;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found){
+                System.out.println("\n\nTidak ada itam dengan nama " + itemName);
+            }
+
+            if (receiverName.isEmpty()){
+                System.out.println("\n\nMasukkan nama item yang valid" );
+            }
+        }
+        
+        if (gift instanceof Furniture){
+            receiver.getInventory().addItem((Item) FurnitureFactory.createFurniture(itemName, quantity));
+        } else if (gift instanceof Ingredient){
+            receiver.getInventory().addItem((Item) IngredientFactory.createIngredient(itemName, quantity));
+        } else if (gift instanceof Cuisine){
+            receiver.getInventory().addItem((Item) CuisineFactory.createCuisine(itemName, quantity));
+        }
+
+        sim.getInventory().removeItem(gift, quantity);
+
+        System.out.println(sim.getName() + " menghadiahkan " + gift.getName() + " ke " + receiver.getName() + " sebanyak " + quantity + " buah");     
     }
 
     public void transferMoney() {
-        Sim receiver;
-        System.out.println("Masukkan nama sim penerima : ");
-        String userInputsString = scanner.nextLine();
-        int amount;
-        receiver = sim.searchSim(userInputsString);
-        if (receiver != null){
-            boolean valid = false;
-            while (!valid){
-                System.out.println("Masukkan nominal uang yang akan dikirimkan : ");
-                amount = scanner.nextInt();
-                if (amount <= 0){
-                    System.out.println("Masukkan angka yang valid");
-                } else if (amount > sim.getStatus().getMoney()){
-                    System.out.println("Angka yang dimasukkan lebih besar dari saldo!");
-                } else {
-                    valid = true;
+        if (!idle) {
+            System.out.println("Maaf, Sim sedang sibuk.");
+            return;
+        }
+
+        if (sim.getStatus().getMoney() == 0){
+            System.out.println(sim.getName() + " tidak mempunyai uang");
+            return;
+        }
+
+        if (sim.getWorld().getListSim().size() == 1){
+            System.out.println("Tidak ada sim lain di world ini");
+            return;
+        }
+
+        Sim receiver = null;
+        String receiverName = "";
+        int quantity = 0;
+        boolean found = false;
+        
+        System.out.println("Daftar sim lain di world ini: ");
+        for (Sim otherSim : sim.getWorld().getListSim()){
+            if (!otherSim.getName().equals(sim.getName())){
+                System.out.println("> " + otherSim.getName());
+            }
+        }
+        
+        while (!found){
+            System.out.print("Masukkan nama penerima: ");
+            receiverName = scanner.nextLine().trim();
+
+            if (receiverName.toLowerCase().equals(sim.getName().toLowerCase())){
+                System.out.println("\n\nTidak dapat memberikan uang ke diri sendiri");
+                continue;
+            }
+
+            for (Sim otherSim : sim.getWorld().getListSim()){
+                if (otherSim.getName().toLowerCase().equals(receiverName.toLowerCase())){
+                    receiver = otherSim;
+                    found = true;
+                    break;
                 }
             }
-            System.out.println("Sim men-transfer $" + amount + " to " + receiver.getName() + ".");
-            receiver.getStatus().addMoney(amount);
-            sim.getStatus().addMoney(amount);
-        } else {
-            System.out.println("Tidak ada sim dengan nama " + userInputsString);
+
+            if (!found){
+                System.out.println("\n\nTidak ada sim dengan nama " + receiverName);
+            }
+
+            if (receiverName.isEmpty()){
+                System.out.println("\n\nMasukkan nama sim yang valid" );
+            }
         }
+
+        System.out.println("\n\nJumlah uang milik " + sim.getName() + " : " + sim.getStatus().getMoney());
+
+        while (quantity <= 0 || quantity > sim.getStatus().getMoney()){
+            System.out.print("\n\n\nMasukkan jumlah uang yang ingin dikirim: ");
+            quantity = scanner.nextInt();
+
+            if (quantity <= 0){
+                System.out.println("\n\nMasukkan jumlah yang valid");
+                continue;
+            }
+
+            if (quantity > sim.getStatus().getMoney()){
+                System.out.println("\n\n" + sim.getName() + " tidak mempunyai uang sebanyak " + quantity);
+                continue;
+            }
+        }
+        
+        receiver.getStatus().addMoney(quantity);
+        sim.getStatus().decreaseMoney(quantity);
+
+        System.out.println(sim.getName() + " mengirim uang sebanyak " + quantity + " ke " + receiver.getName());     
     }
 
     public void dayDream() {
@@ -136,7 +295,6 @@ public class Action {
         
         System.out.println("Berkhayal selama " + duration/60 + " menit...");
 
-        // Simulate daydreaming for the given duration
         try {
             Thread.sleep(duration * 1000);
         } catch (InterruptedException e) {
@@ -148,7 +306,6 @@ public class Action {
     }
 
     public void converse(Sim otherSim) {
-        // TODO USER INPUT DI SINI
         if (!idle) {
             System.out.println("Maaf, Sim sedang sibuk.");
             return;

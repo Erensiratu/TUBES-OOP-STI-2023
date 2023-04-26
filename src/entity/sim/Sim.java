@@ -93,21 +93,13 @@ public class Sim {
     public Action getAction(){
         return action;
     }
-    public Sim searchSim(String SimName){
-        boolean found = false;
-        Sim searchedSim;
+
+    public Sim searchSim(String simName){
         for (Sim sim : currentWorld.getListSim()){
             if (sim.getName().toLowerCase().equals(simName.toLowerCase())) {
-                searchedSim = sim;
-                found = true;
-                break;
+                return sim;
             }
         }
-        if (found){
-            return searchedSim;
-        }
-        else {
-            return null;
-        }
+        return null;
     }
 }
