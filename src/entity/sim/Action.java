@@ -47,8 +47,40 @@ public class Action {
         buyThread.start();
     }
     public void startActivity() {
-        System.out.println("Sim akan mulai melakukan aktivitas.");
+        System.out.println("Sim akan mulai melakukan aktivitas.\n Silahkan pilih aktivitasnya");
+        boolean valid = false;
+        while (!valid){
+            String userInputsString = scanner.nextLine();
+            valid = true;
+            if (userInputsString.toLowerCase().equals("exercise")){
+                exercise();
+            }
+            else if (userInputsString.toLowerCase().equals("useitem")){
+                if (sim.getItem() instanceof Useable){
+                    useItem();
+                } else {
+                    System.out.println("Benda yang dipilih bukan merupakan benda yang bisa digunakan");
+                }
+                
+            }  
+            else if (userInputsString.toLowerCase().equals("transfer")){
+                transferMoney();
+            }
+            else if (userInputsString.toLowerCase().equals("daydream")){
+                dayDream();
+            }
+            else if (userInputsString.toLowerCase().equals("work")){
+                work();
+            }
+            else if (userInputsString.toLowerCase().equals("buyfurniture")){
+                buyFurniture();
+            } else {
+                valid = false;
+                System.out.println(userInputsString+" bukan merupakan aktivitas yang bisa dijalankan");
+            }
+        }
     }
+    
 
 
 
@@ -58,9 +90,31 @@ public class Action {
         receiver.getInventory().addItem(gift);
     }
 
-    public void transferMoney(int amount, Sim receiver) {
-        System.out.println("Sim men-transfer $" + amount + " to " + receiver.getName() + ".");
-        receiver.getStatus().addMoney(amount);
+    public void transferMoney() {
+        Sim receiver;
+        System.out.println("Masukkan nama sim penerima : ");
+        String userInputsString = scanner.nextLine();
+        int amount;
+        receiver = sim.searchSim(userInputsString);
+        if (receiver != null){
+            boolean valid = false;
+            while (!valid){
+                System.out.println("Masukkan nominal uang yang akan dikirimkan : ");
+                amount = scanner.nextInt();
+                if (amount <= 0){
+                    System.out.println("Masukkan angka yang valid");
+                } else if (amount > sim.getStatus().getMoney()){
+                    System.out.println("Angka yang dimasukkan lebih besar dari saldo!");
+                } else {
+                    valid = true;
+                }
+            }
+            System.out.println("Sim men-transfer $" + amount + " to " + receiver.getName() + ".");
+            receiver.getStatus().addMoney(amount);
+            sim.getStatus().addMoney(amount);
+        } else {
+            System.out.println("Tidak ada sim dengan nama " + userInputsString);
+        }
     }
 
     public void dayDream() {
