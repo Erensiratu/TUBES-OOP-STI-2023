@@ -134,7 +134,7 @@ public class SimPlicity {
     public void viewCurrentLocation(){
         System.out.println("Lokasi sim di ruangan:\nX: " + currentSim.getLocation().getX() + "\nY: " + currentSim.getLocation().getY());
         if (currentSim.getItem() == null){
-            System.out.println("Sim sedang berada di objek manapun");
+            System.out.println("Sim tidak sedang berada di objek manapun");
         } else {
             System.out.println("Sim sedang berada di objek " + currentSim.getItem().getName());
         }
@@ -287,6 +287,19 @@ public class SimPlicity {
             }
         }
     }
+    
+    public void moveHouse(){
+        if (!currentSim.getAction().isIdle()){
+            System.out.println("Sim sedang sibuk");
+            return;
+        }
+        if (currentWorld.getListHouse().size() == 1){
+            System.out.println("Sim sedang sibuk");
+            return;
+        }
+        // TODO
+    }
+
     public static void main(String[] args) throws Exception {
         /*ArrayList<Item> items = new ArrayList<>();
         items.add(new Bistik());
