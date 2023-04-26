@@ -15,8 +15,8 @@ public class StatusModifier{
         this.mood = mood;
     }
 
-    public void clone(){
-        return new StatusModifier(this);
+    public StatusModifier clone(){
+        return new StatusModifier(name, mood, health, hunger, money);
     }
 
     public double getMoney(){

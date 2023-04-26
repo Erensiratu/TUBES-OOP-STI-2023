@@ -29,19 +29,19 @@ public class Status {
     public double getHunger() {
         double outputHunger = hunger;
         for (StatusModifier i : modifiers){
-            outputHUnger += i.getHunger();
+            outputHunger += i.getHunger();
         }
         return outputHunger;
     }
     public double getHealth() {
-        double outputHealth = health
+        double outputHealth = health;
         for (StatusModifier i : modifiers){
             outputHealth += i.getHealth();
         }
         return outputHealth;
     }
     public double getMood() {
-        double outputMood = mood
+        double outputMood = mood;
         for (StatusModifier i : modifiers){
             outputMood += i.getMood();
         }
