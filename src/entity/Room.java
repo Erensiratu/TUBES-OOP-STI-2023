@@ -141,7 +141,7 @@ public class Room {
         System.out.printf("\nPilih aksi:\n1. Letakkan Objek\n2. Pindahkan Objek\n3. Ambil Objek\nNomor aksi:");
         int x = scanner.nextInt();
         while ((x < 1) || (x > 3)) {
-            System.out.printf("\n\nSilakan ulangi input: ");
+            System.out.printf("\n\nSilahkan ulangi input: ");
             x = scanner.nextInt();
         }
     
@@ -262,7 +262,7 @@ public class Room {
                     count++;
                 }
             }
-            if (count ==0 ){
+            if (count == 0 ){
                 System.out.println("\nNama furnitur tidak valid");
             }
         }
@@ -335,5 +335,9 @@ public class Room {
         if (count == 1){
             System.out.println("\nidak ada furnitur");
         }
+    }
+
+    public ArrayList<Furniture> getObjectList(){
+        return objects;
     }
 }

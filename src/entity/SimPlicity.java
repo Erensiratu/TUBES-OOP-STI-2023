@@ -2,7 +2,9 @@ package entity;
 import java.util.*;
 import entity.sim.Sim;
 import entity.Timer;
+import entity.item.Item;
 import entity.item.Useable;
+import entity.item.furniture.Furniture;
 import entity.House;
 import entity.Room;
 
@@ -153,7 +155,7 @@ public class SimPlicity {
 
         while (!valid) {
             System.out.print("Masukkan nama ruangan: ");
-            String roomName = scanner.nextLine();
+            String roomName = scanner.nextLine().trim();
 
             if (roomName.toLowerCase(null).equals(currentSim.getRoom().getName().toLowerCase())){
                 System.out.println(currentSim.getName() + " sudah berada di " + currentSim.getRoom().getName());
@@ -179,19 +181,119 @@ public class SimPlicity {
     }
 
     public void goToObject(){
+        currentSim.getRoom().printRoom();
 
+        if (currentSim.getRoom().getObjectList().size() == 0){
+            System.out.println("\nTidak ada furnitur di ruangan ini");
+            return;
+        }
+
+        ArrayList<Furniture> objects = currentSim.getRoom().getObjectList();
+        Furniture newFurniture = null;
+        int idx = -1;
+        int count = 0;
+        String furnitureName = null;
+
+        while (count == 0){
+            System.out.printf("\nMasukkan nama furnitur: ");
+            furnitureName = scanner.nextLine().trim();
+            for (Furniture furniture : objects){
+                if (furniture.getName().toLowerCase().equals(furnitureName.toLowerCase())){
+                    idx = objects.indexOf(furniture);
+                    count++;
+                }
+            }
+            if (count == 0 ){
+                System.out.println("\nNama furnitur tidak valid");
+            }
+        }
+
+        if (count == 1){
+            newFurniture = objects.get(idx);
+        } else {
+            System.out.println("Terdapat " + count + " " + furnitureName + " di ruangan ini");
+            count = 1;
+            for (Furniture furniture : objects){
+                if (furniture.getName().equals(furnitureName)){
+                    System.out.println(furniture.getName() + " " + count + ": " + furniture.getPoint().displayPoint());
+                }
+            }
+                
+            int x, y;
+            boolean found = false;
+
+            while (!found){
+                System.out.println("\nMasukkan koordinat furnitur yang ingin dikunjungi");
+                System.out.printf("\nX: ");
+                x = scanner.nextInt();
+                System.out.printf("\nY: ");
+                y = scanner.nextInt();
+                for (Furniture furniture : objects){    
+                    if (furniture.getPoint().equals(x, y)){
+                        found = true;
+                        newFurniture = furniture;
+                        break;
+                    }
+                }
+                if (!found){
+                    System.out.println("\nKoordinat tidak valid");
+                }
+            }
+        }
+
+        currentSim.setItem(newFurniture);
+        currentSim.setLocation(newFurniture.getPoint());
     }
 
     public void viewInventory(){
-
+        System.out.println("Isi inventory sim " + currentSim.getName());
+        for (Item item : currentSim.getInventory().getList()){
+            System.out.println("> " + item.getName() + " : " + item.getQuantity() + " buah");
+        }
     }
 
     public void editRoom(){
-
+        if (!currentSim.getHouse().getOwner().getName().equals(currentSim.getName())){
+            System.out.println(currentSim.getName() + " sedang tidak berada di rumahnya");
+            return;
+        }
+        currentSim.getRoom().editRoom(currentSim);
     }
 
     public void upgradeHouse(){
-    
+        if (!currentSim.getHouse().getOwner().getName().equals(currentSim.getName())){
+            System.out.println(currentSim.getName() + " sedang tidak berada di rumahnya");
+            return;
+        }
+        
+        if (currentSim.getHouse().getRoomList().size() == 1){
+            currentSim.getHouse().addRoom(currentSim.getHouse().getPrimaryRoom());
+        } else{
+            currentSim.getHouse().displayRoom();
+            boolean valid = false;  
+
+            while (!valid) {
+                System.out.print("Masukkan nama ruangan yang dijadikan acuan: ");
+                String roomName = scanner.nextLine().trim();
+
+                if (roomName.toLowerCase(null).equals(currentSim.getRoom().getName().toLowerCase())){
+                    System.out.println(currentSim.getName() + " sudah berada di " + currentSim.getRoom().getName());
+                    continue;
+                }
+                    
+                for (Room room : currentSim.getHouse().getRoomList()) {
+                    if (room.getName().toLowerCase().equals(roomName.toLowerCase())) {
+                        currentSim.getHouse().addRoom(room);
+                        valid = true;
+                        break;
+                    }
+                }
+                    
+                if (!valid) {
+                    System.out.println("\n\nNama ruangan tidak valid, silahkan ulangi masukkan\n");
+                }
+            }
+        }
     }
     public static void main(String[] args) throws Exception {
         /*ArrayList<Item> items = new ArrayList<>();
