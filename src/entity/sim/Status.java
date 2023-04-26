@@ -1,31 +1,51 @@
 package entity.sim;
 
+import java.util.ArrayList;
+
 public class Status {
     private double money;
     private double hunger;
     private double health;
     private double mood;
     private boolean alive;
-    
+    private ArrayList<StatusModifier> modifiers;
     public Status() {
         money = 100;
         hunger = 80;
         health = 80;
         mood = 80;
+        modifiers = new ArrayList<StatusModifier>();
         alive = true;
     }
 
     public double getMoney() {
-        return money;
+        double outputMoney = money;
+        for (StatusModifier i : modifiers){
+            outputMoney += i.getMoney();
+        }
+
+        return outputMoney;
     }
     public double getHunger() {
-        return hunger;
+        double outputHunger = hunger;
+        for (StatusModifier i : modifiers){
+            outputHUnger += i.getHunger();
+        }
+        return outputHunger;
     }
     public double getHealth() {
-        return health;
+        double outputHealth = health
+        for (StatusModifier i : modifiers){
+            outputHealth += i.getHealth();
+        }
+        return outputHealth;
     }
     public double getMood() {
-        return mood;
+        double outputMood = mood
+        for (StatusModifier i : modifiers){
+            outputMood += i.getMood();
+        }
+        return outputMood;
     }
     public boolean isAlive() {
         return alive;
@@ -91,6 +111,20 @@ public class Status {
             mood -= value;
         }
     }
+    public void removeModifier(String name){
+        int idx = 0;
+        while (idx < modifiers.size()){
+            if (modifiers.get(idx).getName().equals(name)){
+                modifiers.remove(idx);
+            } else {
+                idx++;
+            }
+        }
+    }
+    public void addModifier(StatusModifier mod){
+        modifiers.add(mod);
+    }
+
 
     public void displayStatus() {
         System.out.println("Status Sim:");
