@@ -305,15 +305,50 @@ public class Action {
         System.out.println("Selesai berkhayal!");
     }
 
-    public void converse(Sim otherSim) {
+    public void converse() {
         if (!idle) {
             System.out.println("Maaf, Sim sedang sibuk.");
             return;
         }
+        if (sim.getWorld().getListSim().size() == 1){
+            System.out.println("Tidak ada sim lain di world ini");
+            return;
+        }
+        Sim otherSim = null;
+        String otherSimName = "";
+        boolean found = false;
+        while (!found){
+            System.out.print("Masukkan nama sim: ");
+            otherSimName = scanner.nextLine().trim();
+
+            if (otherSimName.toLowerCase().equals(sim.getName().toLowerCase())){
+                System.out.println("\n\nTidak dapat berbicara ke diri sendiri");
+                continue;
+            }
+
+            for (Sim i : sim.getWorld().getListSim()){
+                if (i.getName().toLowerCase().equals(otherSimName.toLowerCase())){
+                    otherSim = i;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found){
+                System.out.println("\n\nTidak ada sim dengan nama " + otherSimName);
+            }
+
+            if (otherSimName.isEmpty()){
+                System.out.println("\n\nMasukkan nama sim yang valid" );
+            }
+        }
+        if (!(sim.getHouse().getName().equals(otherSim.getHouse().getName())) && (sim.getHouse().getName().equals(otherSim.getHouse().getName()))){
+            System.out.println(sim.getName() + " sedang tidak berada di tempat yang sama dengan " + otherSim.getName());  
+            return;
 
         idle = false;
         otherSim.getAction().setIdle(false);
-        System.out.println("Berkomunikasi dengan " + otherSim + "...");
+        System.out.println("Berkomunikasi dengan " + otherSimName + "...");
 
         // Simulate a conversation
         try {
