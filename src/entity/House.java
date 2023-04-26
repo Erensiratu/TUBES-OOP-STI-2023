@@ -126,6 +126,10 @@ public class House {
         }
     }
 
+    public Room getPrimaryRoom(){
+        return primaryRoom;
+    }
+
     public Room getRoom() {
         Room retRoom = null;
         boolean valid = false;

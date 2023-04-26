@@ -24,6 +24,7 @@ public class SimPlicity {
     public void startGame(){
         currentWorld.getClock().setTime();
         addSim();
+        currentSim = currentWorld.getListSim().get(0);
     }
     
     public void save(){
@@ -48,7 +49,7 @@ public class SimPlicity {
             System.out.printf("Masukkan nama sim: ");
             simName = scanner.nextLine().trim();
             if (simName.isEmpty()){
-                System.out.printl("\n\nSilakan masukkan nama yang benar\n");
+                System.out.println("\n\nSilakan masukkan nama yang benar\n");
             }
         }
 
@@ -73,14 +74,44 @@ public class SimPlicity {
                 }
             }
         }
+        
+        House tempHouse = House.getInstance(point);
+        Sim tempSim = Sim.getInstance(simName, tempHouse, tempHouse.getPrimaryRoom(), Point.getInstance(0, 0));
 
-        currentWorld.addHouse(House.getInstance(point));
-
-        currentWorld.addSim(Sim.getInstance(simName, ));
+        currentWorld.addHouse(tempHouse);
+        currentWorld.addSim(tempSim);
     }
 
     public void changeSim(){
-        //buat sim
+        if (currentWorld.getListSim().size() > 1){
+            String simName = "";
+            boolean found = false;
+            while (!found || simName.isEmpty() || simName.toLowerCase(null).equals(currentSim.getName().toLowerCase())){
+                System.out.print("\n\nMasukkan nama sim: ");
+                simName = scanner.nextLine().trim();
+                if (simName.isEmpty()) {
+                    System.out.println("Masukkan nama sim yang valid");
+                    continue;
+                }
+                if (simName.toLowerCase(null).equals(currentSim.getName().toLowerCase())){
+                    System.out.println(simName + " sedang dimainkan\n");
+                    continue;
+                }
+                for (Sim sim : currentWorld.getListSim()) {
+                    if (sim.getName().toLowerCase().equals(simName.toLowerCase())) {
+                        System.out.println(sim.getName() + " menjadi sim yang dimainkan\n");
+                        currentSim = sim;
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found){
+                    System.out.println("Tidak ada sim dengan nama " + simName);
+                }
+            }
+        } else {
+            System.out.println("Tidak ada sim lain di dunia ini");
+        }
     }
 
     public void viewSimInfo(){

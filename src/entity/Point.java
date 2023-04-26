@@ -9,6 +9,9 @@ public class Point {
         this.y = y;
     }
 
+    public static Point getInstance(int x, int y){
+        return new Point(x, y);
+}
     public int getX(){
         return x;
     }

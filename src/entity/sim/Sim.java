@@ -9,7 +9,6 @@ import entity.House;
 
 public class Sim {
     String name;
-    boolean alive;
     Occupation occupation;
     InventoryManager inventory;
     Action action;
@@ -20,34 +19,26 @@ public class Sim {
     Item currentItem;
     Status status;
 
-    public Sim(String name, Room currentRoom, Point currentLocation, House currentHouse, Status status){
+    public Sim(String name, House currentHouse, Room currentRoom, Point currentLocation){
         this.name = name;
+        this.currentHouse = currentHouse;
         this.currentRoom = currentRoom;
         this.currentLocation = currentLocation;
-        alive = false;
         occupation = new Occupation(this);
         action = new Action(this);
         inventory = new InventoryManager();
-        this.currentHouse = currentHouse;
-        this.status = status;
+        status = new Status();
+        currentHouse.setOwner(this);
     }
 
-    public static Sim getInstance(String name, Room currentRoom, Point currentLocation, House currentHouse, Status status){
-        return new Sim(name, currentRoom, currentLocation, currentHouse, status);
+    public static Sim getInstance(String name, House currentHouse, Room currentRoom, Point currentLocation){
+        return new Sim(name, currentHouse, currentRoom, currentLocation);
     }
 
 
     //method
     public String getName(){
         return name;
-    }
-
-    public void setAlive(){
-        alive = true;
-    }
-
-    public boolean isAlive(){
-        return alive;
     }
 
     public void setLocation(Point newLocation){
