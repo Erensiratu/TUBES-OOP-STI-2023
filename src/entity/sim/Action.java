@@ -367,6 +367,11 @@ public class Action {
             System.out.println("Maaf, Sim sedang sibuk.");
             return;
         }
+        if (sim.getHadWorkedToday()){
+            System.out.println("Maaf, Sim telah bekerja hari ini");
+            return;
+        }
+        sim.setHadWorkedToday(true)
         sim.getOcupation().doWork();
     }
 

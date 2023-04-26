@@ -18,6 +18,10 @@ public class Sim {
     World currentWorld;
     Item currentItem;
     Status status;
+    long timeSinceLastSupper;
+    long timeSinceLastSleep;
+    boolean hadShit;
+    boolean hadWorkedToday;
 
     public Sim(String name, World currentWorld, House currentHouse, Room currentRoom, Point currentLocation){
         this.name = name;
@@ -30,6 +34,11 @@ public class Sim {
         inventory = new InventoryManager(this);
         status = new Status();
         currentHouse.setOwner(this);
+        timeSinceLastSleep = currentWorld.getClock().getTime();
+        timeSinceLastSupper = currentWorld.getClock().getTime();
+        hadWorkedToday = false;
+        hadShit = false;
+
     }
 
     public static Sim getInstance(String name, World currentWorld, House currentHouse, Room currentRoom, Point currentLocation){
@@ -92,6 +101,31 @@ public class Sim {
 
     public Action getAction(){
         return action;
+    }
+
+    public long getTimeSinceLastSupper(){
+        return timeSinceLastSupper;
+    }
+    public void setTimeSinceLastSupper(long timeSinceLastSupper){
+        return this.timeSinceLastSupper = timeSinceLastSupper;
+    }
+    public long getTimeSinceLastSleep(){
+        return timeSinceLastSleep;
+    }
+    public long setTimeSinceLastSleep(long timeSinceLastSleep){
+        return this.timeSinceLastSleep = timeSinceLastSleep;
+    }
+    public boolean getHadShit(){
+        return hadShit;
+    }
+    public void setHadShit(boolean hadShit){
+        return this.hadShit = hadShit;
+    }
+    public boolean getHadWorkedToday(){
+        return hadWorkedToday;
+    }
+    public void setHadWorkedToday(boolean hadWorkedToday){
+        return this.hadWorkedToday = hadWorkedToday;
     }
 
     public Sim searchSim(String simName){
