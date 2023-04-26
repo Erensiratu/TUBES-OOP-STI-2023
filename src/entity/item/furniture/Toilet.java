@@ -39,6 +39,8 @@ public class Toilet extends Furniture{
             System.out.println(sim.getName() + " telah selesai menggunakan toilet");
 
             setVacancy(true);
+
+            sim.setHadShit(true);
         });
 
         // Memulai thread
