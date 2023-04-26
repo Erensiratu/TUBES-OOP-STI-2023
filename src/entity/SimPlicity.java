@@ -2,83 +2,6 @@ package entity;
 import java.util.*;
 
 import entity.sim.Sim;
-<<<<<<< HEAD
-
-public class SimPlicity {
-    private Sim currentSim;
-    private World currentWorld;
-
-    private static SimPlicity instance = new SimPlicity();
-
-    private SimPlicity(){}
-
-    public static SimPlicity getInstance(){
-        return instance;
-    }
-
-    public void startGame(){
-        //buat sim
-    }
-    
-    public void save(){
-        //buat sim
-    }
-
-    public void load(){
-        //buat sim
-    }
-
-    public void help(){
-        //buat sim
-    }
-
-    public void exit(){
-        //buat sim
-    }
-
-    public void addSim(){
-        //buat sim
-    }
-
-    public void changeSim(){
-        //buat sim
-    }
-
-    public void viewSimInfo(){
-        //buat sim
-    }
-
-    public void action(){
-
-    }
-
-    public void viewCurrentLocation(){
-
-    }
-
-    public void moveRoom(){
-
-    }
-
-    public void listObject(){
-
-    }
-
-    public void goToObject(){
-
-    }
-
-    public void viewInventory(){
-
-    }
-
-    public void editRoom(){
-
-    }
-
-    public void upgradeHouse(){
-
-=======
 import entity.Timer;
 import entity.item.Useable;
 import entity.House;
@@ -169,6 +92,5 @@ public class SimPlicity {
                 }
             }
         }
->>>>>>> 82922990dd280d41c49f5f660fa7afa57975b401
     }
 }
