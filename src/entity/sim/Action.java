@@ -345,7 +345,7 @@ public class Action {
         if (!(sim.getHouse().getName().equals(otherSim.getHouse().getName())) && (sim.getHouse().getName().equals(otherSim.getHouse().getName()))){
             System.out.println(sim.getName() + " sedang tidak berada di tempat yang sama dengan " + otherSim.getName());  
             return;
-
+        }
         idle = false;
         otherSim.getAction().setIdle(false);
         System.out.println("Berkomunikasi dengan " + otherSimName + "...");
