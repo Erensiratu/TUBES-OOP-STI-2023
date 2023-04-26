@@ -1,12 +1,7 @@
 package entity;
 import java.util.*;
 import entity.sim.Sim;
-import entity.Timer;
-import entity.item.Item;
-import entity.item.Useable;
 import entity.item.furniture.Furniture;
-import entity.House;
-import entity.Room;
 
 public class SimPlicity {
     private Sim currentSim;
@@ -45,7 +40,7 @@ public class SimPlicity {
         System.exit(0);
     }
 
-    public void addSim(){
+    public void addSim(){ // 1
         String simName = "";
         while (simName.isEmpty()) {
             System.out.printf("Masukkan nama sim: ");
@@ -91,7 +86,7 @@ public class SimPlicity {
         currentWorld.addSim(tempSim);
     }
 
-    public void changeSim(){
+    public void changeSim(){ // 2
         if (currentWorld.getListSim().size() > 1){
             String simName = "";
             boolean found = false;
@@ -123,15 +118,15 @@ public class SimPlicity {
         }
     }
 
-    public void viewSimInfo(){
+    public void viewSimInfo(){ // 3
         currentSim.getStatus().displayStatus();
     }
 
-    public void action(){
+    public void action(){ // 4
         currentSim.getAction().startActivity();
     }
 
-    public void viewCurrentLocation(){
+    public void viewCurrentLocation(){ // 5
         System.out.println("Lokasi sim di ruangan:\nX: " + currentSim.getLocation().getX() + "\nY: " + currentSim.getLocation().getY());
         if (currentSim.getItem() == null){
             System.out.println("Sim tidak sedang berada di objek manapun");
@@ -140,7 +135,7 @@ public class SimPlicity {
         }
     }
 
-    public void moveRoom(){
+    public void moveRoom(){ // 6
         if (!currentSim.getAction().isIdle()){
             System.out.println("Sim sedang sibuk");
             return;
@@ -176,11 +171,11 @@ public class SimPlicity {
         }
     }
 
-    public void listObject(){
+    public void listObject(){ // 7
         currentSim.getRoom().printRoom();
     }
 
-    public void goToObject(){
+    public void goToObject(){ // 8
         currentSim.getRoom().printRoom();
 
         if (currentSim.getRoom().getObjectList().size() == 0){
@@ -245,11 +240,11 @@ public class SimPlicity {
         currentSim.setLocation(newFurniture.getPoint());
     }
 
-    public void viewInventory(){
+    public void viewInventory(){ // 9
         currentSim.getInventory().displayInventory();
     }
 
-    public void editRoom(){
+    public void editRoom(){ // 10
         if (!currentSim.getHouse().getOwner().getName().equals(currentSim.getName())){
             System.out.println(currentSim.getName() + " sedang tidak berada di rumahnya");
             return;
@@ -257,7 +252,7 @@ public class SimPlicity {
         currentSim.getRoom().editRoom(currentSim);
     }
 
-    public void upgradeHouse(){
+    public void upgradeHouse(){ // 11
         if (!currentSim.getHouse().getOwner().getName().equals(currentSim.getName())){
             System.out.println(currentSim.getName() + " sedang tidak berada di rumahnya");
             return;
@@ -288,7 +283,7 @@ public class SimPlicity {
         }
     }
     
-    public void moveHouse(){
+    public void moveHouse(){ // 12
         if (!currentSim.getAction().isIdle()){
             System.out.println("Sim sedang sibuk");
             return;
@@ -300,7 +295,67 @@ public class SimPlicity {
         // TODO
     }
 
+    public void displayMenu(){
+        System.out.println("Menu\n1. Add Sim\n2. Change Sim\n3. View Sim Info\n4. Actions\n5. View Current Location\n6. Move Room\n7. Object List\n8. Go To Object\n9. View Inventory\n10. Edit Room\n11. Upgrade House\n12. Move House\n13. Help\n14. Exit");
+    }
+
     public static void main(String[] args) throws Exception {
+        SimPlicity game = SimPlicity.getInstance();
+
+        try (Scanner initialInput = new Scanner(System.in)) {
+            System.out.print("Selamat datang di Sim-Plicity! :3\nMasukkan [START] untuk memulai game Sim-Plicity\nMasukkan input lain untuk keluar dari program\n> ");
+            String strInput = initialInput.nextLine().trim();
+
+            if (!strInput.toLowerCase().equals("start")){
+                game.exit();
+            } else{
+                game.startGame();
+            }
+        }
+
+        try (Scanner input = new Scanner(System.in)) {
+            while (true){
+                game.displayMenu();
+                System.out.print("Masukkan angka dari 1-14: ");
+                int intInput = input.nextInt();
+                switch (intInput){
+                    case 1:
+                        game.addSim();
+                    case 2:
+                        game.changeSim();
+                    case 3:
+                        game.viewSimInfo();
+                    case 4:
+                        game.action();
+                    case 5:
+                        game.viewCurrentLocation();
+                    case 6:
+                        game.moveRoom();
+                    case 7:
+                        game.listObject();
+                    case 8:
+                        game.goToObject();
+                    case 9:
+                        game.viewInventory();
+                    case 10:
+                        game.editRoom();
+                    case 11:
+                        game.upgradeHouse();
+                    case 12:
+                        game.moveHouse();
+                    case 13:
+                        game.help();
+                    case 14:
+                        game.exit();
+                    default:
+                        System.out.println("\n\nMasukkan angka yang valid, yaitu 1-14\n");
+                }
+            }
+        }
+        
+
+
+
         /*ArrayList<Item> items = new ArrayList<>();
         items.add(new Bistik());
         items.add(new TumisSayur());
