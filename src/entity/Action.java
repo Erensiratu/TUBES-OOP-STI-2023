@@ -98,8 +98,6 @@ public class Action {
     }
     
 
-
-
     public void giftItem() {
         if (!idle) {
             System.out.println("Maaf, Sim sedang sibuk.");
@@ -108,10 +106,12 @@ public class Action {
 
         if (sim.getInventory().getList().size() == 0){
             System.out.println(sim.getName() + " tidak mempunyai barang di inventory-nya");
+            return;
         }
 
         if (sim.getWorld().getListSim().size() == 1){
             System.out.println("Tidak ada sim lain di world ini");
+            return;
         }
 
         Sim receiver;
@@ -152,6 +152,11 @@ public class Action {
             if (receiverName.isEmpty()){
                 System.out.println("\n\nMasukkan nama sim yang valid" );
             }
+        }
+
+        if (!(sim.getHouse().getName().equals(receiver.getHouse().getName())) && (sim.getHouse().getName().equals(receiver.getHouse().getName()))){
+            System.out.println(sim.getName() + " sedang tidak berada di tempat yang sama dengan " + receiver.getName());  
+            return;
         }
 
         sim.getInventory().displayInventory();
@@ -216,10 +221,12 @@ public class Action {
 
         if (sim.getStatus().getMoney() == 0){
             System.out.println(sim.getName() + " tidak mempunyai uang");
+            return;
         }
 
         if (sim.getWorld().getListSim().size() == 1){
             System.out.println("Tidak ada sim lain di world ini");
+            return;
         }
 
         Sim receiver;
@@ -302,7 +309,6 @@ public class Action {
         
         System.out.println("Berkhayal selama " + duration/60 + " menit...");
 
-        // Simulate daydreaming for the given duration
         try {
             Thread.sleep(duration * 1000);
         } catch (InterruptedException e) {
