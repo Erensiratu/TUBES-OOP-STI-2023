@@ -294,7 +294,7 @@ public class SimPlicity {
             return;
         }
         if (currentWorld.getListHouse().size() == 1){
-            System.out.println("Sim sedang sibuk");
+            System.out.println("Hanya ada 1 rumah di world ini");
             return;
         }
         // TODO
