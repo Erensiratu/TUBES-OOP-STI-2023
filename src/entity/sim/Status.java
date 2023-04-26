@@ -91,4 +91,12 @@ public class Status {
             mood -= value;
         }
     }
+
+    public void displayStatus() {
+        System.out.println("Status Sim:");
+        System.out.println("Uang: " + money);
+        System.out.println("Kekenyangan: " + hunger);
+        System.out.println("Kesehatan: " + health);
+        System.out.println("Mood: " + mood);
+    }
 }

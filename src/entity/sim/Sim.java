@@ -40,6 +40,18 @@ public class Sim {
     public String getName(){
         return name;
     }
+    
+    public Point getLocation(){
+        return currentLocation;
+    }
+
+    public Room getRoom(){
+        return currentRoom;
+    }
+    
+    public House getHouse(){
+        return currentHouse;
+    }
 
     public void setLocation(Point newLocation){
         currentLocation = newLocation;

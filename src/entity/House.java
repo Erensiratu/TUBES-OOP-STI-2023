@@ -130,29 +130,33 @@ public class House {
         return primaryRoom;
     }
 
-    public Room getRoom() {
-        Room retRoom = null;
-        boolean valid = false;
+    // public Room getRoom() {
+    //     Room retRoom = null;
+    //     boolean valid = false;
         
-        displayRoom();
+    //     displayRoom();
 
-        while (!valid) {
-            System.out.print("Masukkan nama ruangan: ");
-            String roomName = scanner.nextLine();
+    //     while (!valid) {
+    //         System.out.print("Masukkan nama ruangan: ");
+    //         String roomName = scanner.nextLine();
             
-            for (Room room : rooms) {
-                if (room.getName().toLowerCase().equals(roomName.toLowerCase())) {
-                    retRoom = room;
-                    valid = true;
-                    break;
-                }
-            }
+    //         for (Room room : rooms) {
+    //             if (room.getName().toLowerCase().equals(roomName.toLowerCase())) {
+    //                 retRoom = room;
+    //                 valid = true;
+    //                 break;
+    //             }
+    //         }
             
-            if (!valid) {
-                System.out.println("\n\nNama ruangan tidak valid, silahkan ulangi masukkan\n");
-            }
-        }
+    //         if (!valid) {
+    //             System.out.println("\n\nNama ruangan tidak valid, silahkan ulangi masukkan\n");
+    //         }
+    //     }
         
-        return retRoom;
+    //     return retRoom;
+    // }
+
+    public List<Room> getRoomList(){
+        return rooms;
     }
 }

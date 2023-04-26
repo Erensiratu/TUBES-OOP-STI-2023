@@ -77,6 +77,7 @@ public class SimPlicity {
         
         House tempHouse = House.getInstance(point);
         Sim tempSim = Sim.getInstance(simName, tempHouse, tempHouse.getPrimaryRoom(), Point.getInstance(0, 0));
+        tempSim.setItem(tempSim.getRoom().getObject(Point.getInstance(0, 0)));
 
         currentWorld.addHouse(tempHouse);
         currentWorld.addSim(tempSim);
@@ -115,7 +116,7 @@ public class SimPlicity {
     }
 
     public void viewSimInfo(){
-        //buat sim
+        currentSim.getStatus().displayStatus();
     }
 
     public void action(){
@@ -123,15 +124,52 @@ public class SimPlicity {
     }
 
     public void viewCurrentLocation(){
-
+        System.out.println("Lokasi sim di ruangan:\nX: " + currentSim.getLocation().getX() + "\nY: " + currentSim.getLocation().getY());
+        if (currentSim.getItem() == null){
+            System.out.println("Sim sedang berada di objek manapun");
+        } else {
+            System.out.println("Sim sedang berada di objek " + currentSim.getItem().getName());
+        }
     }
 
     public void moveRoom(){
+        if (!currentSim.getAction().isIdle()){
+            System.out.println("Sim sedang sibuk");
+            return;
+        }
+        if (currentSim.getHouse().getRoomList().size() == 1){
+            System.out.println("Hanya ada satu ruangan di rumah ini");
+            return;
+        }
 
+        boolean valid = false;  
+        currentSim.getHouse().displayRoom();
+
+        while (!valid) {
+            System.out.print("Masukkan nama ruangan: ");
+            String roomName = scanner.nextLine();
+
+            if (roomName.toLowerCase(null).equals(currentSim.getRoom().getName().toLowerCase())){
+                System.out.println(currentSim.getName() + " sudah berada di " + currentSim.getRoom().getName());
+                continue;
+            }
+                
+            for (Room room : currentSim.getHouse().getRoomList()) {
+                if (room.getName().toLowerCase().equals(roomName.toLowerCase())) {
+                    currentSim.setRoom(room);
+                    valid = true;
+                    break;
+                }
+            }
+                
+            if (!valid) {
+                System.out.println("\n\nNama ruangan tidak valid, silahkan ulangi masukkan\n");
+            }
+        }
     }
 
     public void listObject(){
-
+        currentSim.getRoom().printRoom();
     }
 
     public void goToObject(){

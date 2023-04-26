@@ -29,6 +29,15 @@ public class Room {
         return this.locationRoom;
     }
 
+    public Furniture getObject(Point location){
+        for (Furniture object : this.objects){
+            if (object.getPoint().equals(location)){
+                return object;
+            }
+        }
+        return null;
+    }
+
     // Method yang satu ini hanya digunakan saat inisiasi objek dari kelas House
     public void addObject(Furniture object, Point location) throws RoomException {
         int objectWidth, objectLength;
