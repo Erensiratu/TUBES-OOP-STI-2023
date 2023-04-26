@@ -49,19 +49,13 @@ public class SimPlicity {
             System.out.printf("Masukkan nama sim: ");
             simName = scanner.nextLine().trim();
             if (simName.isEmpty()){
-                System.out.println("\n\nSilakan masukkan nama yang benar\n");
+                System.out.println("\n\nSilahkan masukkan nama yang benar\n");
             }
-            found = false;
             for (Sim sim : currentWorld.getListSim()){
                 if (sim.getName().toLowerCase().equals(simName.toLowerCase())) {
                     System.out.println(sim.getName() + " telah diambil, silahkan pilih nama yang lain\n");
-                    currentSim = sim;
-                    found = true;
-                    break;
+                    continue;
                 }
-            }
-            if (found){
-                simName = "";
             }
         }
 

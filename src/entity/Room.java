@@ -187,7 +187,7 @@ public class Room {
 
         while (count == 0){
             System.out.printf("\nMasukkan nama furnitur: ");
-            furnitureName = scanner.nextLine();
+            furnitureName = scanner.nextLine().trim();
             for (Furniture furniture : objects){
                 if (furniture.getName().equals(furnitureName)){
                     idx = objects.indexOf(furniture);
@@ -255,7 +255,7 @@ public class Room {
 
         while (count == 0){
             System.out.printf("\nMasukkan nama furnitur: ");
-            furnitureName = scanner.nextLine();
+            furnitureName = scanner.nextLine().trim();
             for (Furniture furniture : objects){
                 if (furniture.getName().equals(furnitureName)){
                     idx = objects.indexOf(furniture);
