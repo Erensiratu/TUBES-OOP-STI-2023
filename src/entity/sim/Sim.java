@@ -136,4 +136,17 @@ public class Sim {
         }
         return null;
     }
+
+    public void simUpdate(){
+        if ( currentWorld.getClock().getTime()  - timeSinceLastSleep >= 600000){
+            timeSinceLastSleep = currentWorld.getClock().getTime();
+            status.decreaseMood(5);
+            status.decreaseHealth(5);  
+        }
+        if ((currentWorld.getClock().getTime() - timeSinceLastSupper >= 240000) && (hadShit) ) {
+            timeSinceLastSupper = currentWorld.getClock().getTime();
+            status.decreaseMood(5);
+            status.decreaseHealth(5);  
+        }
+    }
 }
