@@ -32,6 +32,10 @@ public class Sim {
         this.status = status;
     }
 
+    public static Sim getInstance(String name, Room currentRoom, Point currentLocation, House currentHouse, Status status){
+        return new Sim(name, currentRoom, currentLocation, currentHouse, status);
+    }
+
 
     //method
     public String getName(){

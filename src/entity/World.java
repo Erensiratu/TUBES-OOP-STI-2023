@@ -14,7 +14,6 @@ public class World {
     private static World instance ;
 
     private World(){
-        
         listHouse = new ArrayList<House>();
         listSim = new ArrayList<Sim>();
         Timer.init(listSim);

@@ -16,8 +16,7 @@ public class House {
     Room primaryRoom;
     Scanner scanner = new Scanner(System.in);
     
-    public House(String name, Sim owner, Point location) {
-        this.owner = owner;
+    public House(Point location) {
         this.location = location;
         this.rooms = new ArrayList<>();
         primaryRoom = new Room("Ruang Utama", new Point(0, 0));
@@ -32,9 +31,17 @@ public class House {
         }
         rooms.add(primaryRoom);
     }
+
+    public static House getInstance(Point location){
+        return new House(location);
+    }
     
     public String getName() {
         return String.format(owner.getName() + "'s House");
+    }
+
+    public void setOwner(Sim sim){
+        owner = sim;
     }
 
     public Sim getOwner(){
@@ -110,5 +117,38 @@ public class House {
         });
 
         buildRoomThread.start();
+    }
+
+    public void displayRoom() {
+        System.out.println("Daftar ruangan di " + this.getName() + ":");
+        for (Room room : rooms) {
+            System.out.println("> " + room.getName());
+        }
+    }
+
+    public Room getRoom() {
+        Room retRoom = null;
+        boolean valid = false;
+        
+        displayRoom();
+
+        while (!valid) {
+            System.out.print("Masukkan nama ruangan: ");
+            String roomName = scanner.nextLine();
+            
+            for (Room room : rooms) {
+                if (room.getName().toLowerCase().equals(roomName.toLowerCase())) {
+                    retRoom = room;
+                    valid = true;
+                    break;
+                }
+            }
+            
+            if (!valid) {
+                System.out.println("\n\nNama ruangan tidak valid, silahkan ulangi masukkan\n");
+            }
+        }
+        
+        return retRoom;
     }
 }

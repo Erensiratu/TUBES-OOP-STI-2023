@@ -1,6 +1,5 @@
 package entity;
 import java.util.*;
-
 import entity.sim.Sim;
 import entity.Timer;
 import entity.item.Useable;
@@ -8,6 +7,117 @@ import entity.House;
 import entity.Room;
 
 public class SimPlicity {
+    private Sim currentSim;
+    private World currentWorld;
+    Scanner scanner = new Scanner(System.in);
+
+    private static SimPlicity instance = new SimPlicity();
+
+    private SimPlicity(){
+        currentWorld = World.getInstance();
+    }
+
+    public static SimPlicity getInstance(){
+        return instance;
+    }
+
+    public void startGame(){
+        currentWorld.getClock().setTime();
+        addSim();
+    }
+    
+    public void save(){
+        //buat sim
+    }
+
+    public void load(){
+        //buat sim
+    }
+
+    public void help(){
+        //buat sim
+    }
+
+    public void exit(){
+        System.exit(0);
+    }
+
+    public void addSim(){
+        String simName = "";
+        while (simName.isEmpty()) {
+            System.out.printf("Masukkan nama sim: ");
+            simName = scanner.nextLine().trim();
+            if (simName.isEmpty()){
+                System.out.printl("\n\nSilakan masukkan nama yang benar\n");
+            }
+        }
+
+        Point point = null;
+        boolean valid = false;
+        while (!valid) {
+            System.out.print("\n\nMasukkan koordinat rumah di axis x (0-63): ");
+            int x = scanner.nextInt();
+            System.out.print("\n\nMasukkan koordinat rumah di axis y (0-63): ");
+            int y = scanner.nextInt();
+            point = new Point(x, y);
+            if (x < 0 || x > 63 || y < 0 || y > 63) {
+                System.out.println("Kedua titik koordinat harus dalam range 0-63");
+                continue;
+            }
+            valid = true;
+            for (House house : currentWorld.getListHouse()) {
+                if (house.getLocation().equals(point)) {
+                    System.out.println("Sudah ada rumah di titik ini");
+                    valid = false;
+                    break;
+                }
+            }
+        }
+
+        currentWorld.addHouse(House.getInstance(point));
+
+        currentWorld.addSim(Sim.getInstance(simName, ));
+    }
+
+    public void changeSim(){
+        //buat sim
+    }
+
+    public void viewSimInfo(){
+        //buat sim
+    }
+
+    public void action(){
+
+    }
+
+    public void viewCurrentLocation(){
+
+    }
+
+    public void moveRoom(){
+
+    }
+
+    public void listObject(){
+
+    }
+
+    public void goToObject(){
+
+    }
+
+    public void viewInventory(){
+
+    }
+
+    public void editRoom(){
+
+    }
+
+    public void upgradeHouse(){
+    
+    }
     public static void main(String[] args) throws Exception {
         /*ArrayList<Item> items = new ArrayList<>();
         items.add(new Bistik());
