@@ -1,4 +1,4 @@
-package entity.sim;
+
 
 import java.util.Scanner;
 
@@ -7,6 +7,7 @@ import entity.item.Purchaseable;
 import entity.item.Useable;
 import entity.item.food.ingredient.IngredientFactory;
 import entity.item.furniture.FurnitureFactory;
+import entity.sim.Sim;
 
 public class Action {
     private boolean idle;
