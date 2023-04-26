@@ -4,6 +4,9 @@ import entity.item.Item;
 import entity.Point;
 import entity.Room;
 import entity.World;
+
+import java.util.Currency;
+
 import entity.House;
 
 
@@ -126,6 +129,10 @@ public class Sim {
     }
     public void setHadWorkedToday(boolean hadWorkedToday){
         return this.hadWorkedToday = hadWorkedToday;
+    }
+
+    public World getCurrentWorld(){
+        return currentWorld;
     }
 
     public Sim searchSim(String simName){
