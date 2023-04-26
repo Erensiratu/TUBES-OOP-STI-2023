@@ -48,7 +48,15 @@ public class Timer {
         }
         if (!allIdle){
             time = time + System.currentTimeMillis() - start;
-            day = (int) (time/720000);
+            if (day != (int) (time/720000)){
+                day = (int) (time/720000);
+                for(Sim i : listSim){
+                    i.changeDayUpdate();
+                }
+            }
+
+            
+            
         }
     }
     public long getTime(){
@@ -57,4 +65,8 @@ public class Timer {
     public int getDay(){
         return day;
     }
+    public long getRemainingTime(){
+        return 720000-(time % 720000);
+    }
+
 }
