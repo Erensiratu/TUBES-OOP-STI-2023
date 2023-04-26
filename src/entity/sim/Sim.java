@@ -10,7 +10,7 @@ import java.util.Currency;
 import entity.House;
 
 
-public class Sim implements {
+public class Sim implements ChangeDayListener {
     String name;
     Occupation occupation;
     InventoryManager inventory;
