@@ -10,7 +10,7 @@ import java.util.Currency;
 import entity.House;
 
 
-public class Sim {
+public class Sim implements {
     String name;
     Occupation occupation;
     InventoryManager inventory;
@@ -155,5 +155,9 @@ public class Sim {
             status.decreaseMood(5);
             status.decreaseHealth(5);  
         }
+    }
+
+    public void changeDayUpdate(){
+        hadWorkedToday = false;
     }
 }
