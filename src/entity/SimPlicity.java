@@ -1,12 +1,12 @@
 package entity;
+
 import java.util.*;
-import entity.sim.Sim;
-import entity.item.furniture.Furniture;
+
 
 public class SimPlicity {
     private Sim currentSim;
     private static World currentWorld;
-    Scanner scanner = new Scanner(System.in);
+    private static Scanner input = new Scanner(System.in);
 
     private static SimPlicity instance = new SimPlicity();
 
@@ -47,7 +47,7 @@ public class SimPlicity {
         String simName = "";
         while (simName.isEmpty()) {
             System.out.printf("Masukkan nama sim: ");
-            simName = scanner.nextLine().trim();
+            simName = input.nextLine().trim();
             if (simName.isEmpty()){
                 System.out.println("\n\nSilahkan masukkan nama yang benar\n");
             }
@@ -63,9 +63,9 @@ public class SimPlicity {
         boolean valid = false;
         while (!valid) {
             System.out.print("\n\nMasukkan koordinat rumah di axis x (0-63): ");
-            int x = scanner.nextInt();
+            int x = input.nextInt();
             System.out.print("\n\nMasukkan koordinat rumah di axis y (0-63): ");
-            int y = scanner.nextInt();
+            int y = input.nextInt();
             point = new Point(x, y);
             if (x < 0 || x > 63 || y < 0 || y > 63) {
                 System.out.println("Kedua titik koordinat harus dalam range 0-63");
@@ -93,14 +93,14 @@ public class SimPlicity {
         if (currentWorld.getListSim().size() > 1){
             String simName = "";
             boolean found = false;
-            while (!found || simName.isEmpty() || simName.toLowerCase(null).equals(currentSim.getName().toLowerCase())){
+            while (!found || simName.isEmpty() || simName.toLowerCase().equals(currentSim.getName().toLowerCase())){
                 System.out.print("\n\nMasukkan nama sim: ");
-                simName = scanner.nextLine().trim();
+                simName = input.nextLine().trim();
                 if (simName.isEmpty()) {
                     System.out.println("Masukkan nama sim yang valid");
                     continue;
                 }
-                if (simName.toLowerCase(null).equals(currentSim.getName().toLowerCase())){
+                else if (simName.toLowerCase().equals(currentSim.getName().toLowerCase())){
                     System.out.println(simName + " sedang dimainkan\n");
                     continue;
                 }
@@ -153,9 +153,9 @@ public class SimPlicity {
 
         while (!valid) {
             System.out.print("Masukkan nama ruangan: ");
-            String roomName = scanner.nextLine().trim();
+            String roomName = input.nextLine().trim();
 
-            if (roomName.toLowerCase(null).equals(currentSim.getRoom().getName().toLowerCase())){
+            if (roomName.toLowerCase().equals(currentSim.getRoom().getName().toLowerCase())){
                 System.out.println(currentSim.getName() + " sudah berada di " + currentSim.getRoom().getName());
                 continue;
             }
@@ -194,7 +194,7 @@ public class SimPlicity {
 
         while (count == 0){
             System.out.printf("\nMasukkan nama furnitur: ");
-            furnitureName = scanner.nextLine().trim();
+            furnitureName = input.nextLine().trim();
             for (Furniture furniture : objects){
                 if (furniture.getName().toLowerCase().equals(furnitureName.toLowerCase())){
                     idx = objects.indexOf(furniture);
@@ -223,9 +223,9 @@ public class SimPlicity {
             while (!found){
                 System.out.println("\nMasukkan koordinat furnitur yang ingin dikunjungi");
                 System.out.printf("\nX: ");
-                x = scanner.nextInt();
+                x = input.nextInt();
                 System.out.printf("\nY: ");
-                y = scanner.nextInt();
+                y = input.nextInt();
                 for (Furniture furniture : objects){    
                     if (furniture.getPoint().equals(x, y)){
                         found = true;
@@ -269,7 +269,7 @@ public class SimPlicity {
 
             while (!valid) {
                 System.out.print("Masukkan nama ruangan yang dijadikan acuan: ");
-                String roomName = scanner.nextLine().trim();
+                String roomName = input.nextLine().trim();
                     
                 for (Room room : currentSim.getHouse().getRoomList()) {
                     if (room.getName().toLowerCase().equals(roomName.toLowerCase())) {
@@ -295,7 +295,30 @@ public class SimPlicity {
             System.out.println("Hanya ada 1 rumah di world ini");
             return;
         }
-        // TODO
+        
+        boolean valid = false;
+        String visiteeString;
+        House visitee;
+        while(!valid){
+            System.out.print("\n\nMasukkan nama rumah: ");
+            visiteeString = input.nextLine().trim();
+            if (visiteeString.isEmpty()) {
+                System.out.println("Masukkan nama rumah yang valid");
+                continue;
+            }
+            else if (visiteeString.toLowerCase().equals(currentSim.getHouse().getName().toLowerCase())){
+                System.out.println(currentSim.getName() + " sedang berada di"+ visiteeString +"\n");
+                continue;
+            }
+            for (House house : currentWorld.getListHouse()){
+                if (visiteeString.toLowerCase().equals(house.getName().toLowerCase())){
+                    currentSim.moveHouse(house);
+                    valid = true;
+                    break;
+                }
+            }
+            
+        }
     }
 
     public void displayMenu(){
@@ -305,58 +328,78 @@ public class SimPlicity {
     public static void main(String[] args) throws Exception {
         SimPlicity game = SimPlicity.getInstance();
 
-        try (Scanner initialInput = new Scanner(System.in)) {
+
             System.out.print("Selamat datang di Sim-Plicity! :3\nMasukkan [START] untuk memulai game Sim-Plicity\nMasukkan input lain untuk keluar dari program\n> ");
-            String strInput = initialInput.nextLine().trim();
+            String strInput = input.nextLine().trim();
 
             if (!strInput.toLowerCase().equals("start")){
                 game.exit();
             } else{
                 game.startGame();
+                game.displayMenu();
             }
-        }
 
-        try (Scanner input = new Scanner(System.in)) {
+
             while (true){
                 currentWorld.getClock().setTime();
-                game.displayMenu();
-                System.out.print("Masukkan angka dari 1-14: ");
-                int intInput = input.nextInt();
-                switch (intInput){
-                    case 1:
-                        game.addSim();
-                    case 2:
-                        game.changeSim();
-                    case 3:
-                        game.viewSimInfo();
-                    case 4:
-                        game.action();
-                    case 5:
-                        game.viewCurrentLocation();
-                    case 6:
-                        game.moveRoom();
-                    case 7:
-                        game.listObject();
-                    case 8:
-                        game.goToObject();
-                    case 9:
-                        game.viewInventory();
-                    case 10:
-                        game.editRoom();
-                    case 11:
-                        game.upgradeHouse();
-                    case 12:
-                        game.moveHouse();
-                    case 13:
-                        game.help();
-                    case 14:
-                        game.exit();
-                    default:
-                        System.out.println("\n\nMasukkan angka yang valid, yaitu 1-14\n");
+                
+
+                if (input.hasNext()){
+                    
+                    System.out.print("Masukkan angka dari 1-14: ");
+                
+                    int intInput = input.nextInt();
+                    switch (intInput){
+                        case 1:
+                            game.addSim();
+                            break;
+                        case 2:
+                            game.changeSim();
+                            break;
+                        case 3:
+                            game.viewSimInfo();
+                            break;
+                        case 4:
+                            game.action();
+                            break;
+                        case 5:
+                            game.viewCurrentLocation();
+                            break;
+                        case 6:
+                            game.moveRoom();
+                            break;
+                        case 7:
+                            game.listObject();
+                            break;
+                        case 8:
+                            game.goToObject();
+                            break;
+                        case 9:
+                            game.viewInventory();
+                            break;
+                        case 10:
+                            game.editRoom();
+                            break;
+                        case 11:
+                            game.upgradeHouse();
+                            break;
+                        case 12:
+                            game.moveHouse();
+                            break;
+                        case 13:
+                            game.help();
+                            break;
+                        case 14:
+                            game.exit();
+                            break;
+                        default:
+                            System.out.println("\n\nMasukkan angka yang valid, yaitu 1-14\n");
+                    }
+                    currentWorld.getClock().updateTime();
+                    game.displayMenu();
                 }
-                currentWorld.getClock().updateTime();
             }
-        }
+        
         
 
     }
