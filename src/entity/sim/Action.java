@@ -371,7 +371,7 @@ public class Action {
             System.out.println("Maaf, Sim telah bekerja hari ini");
             return;
         }
-        sim.setHadWorkedToday(true)
+        sim.setHadWorkedToday(true);
         sim.getOcupation().doWork();
     }
 

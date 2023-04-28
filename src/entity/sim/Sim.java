@@ -5,11 +5,7 @@ import entity.Point;
 import entity.Room;
 import entity.World;
 import entity.ChangeDayListener;
-
-import java.util.Currency;
-
 import entity.House;
-
 
 public class Sim implements ChangeDayListener {
     String name;
