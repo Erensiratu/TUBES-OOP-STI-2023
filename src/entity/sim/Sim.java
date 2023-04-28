@@ -4,6 +4,7 @@ import entity.item.Item;
 import entity.Point;
 import entity.Room;
 import entity.World;
+import entity.ChangeDayListener;
 
 import java.util.Currency;
 
@@ -109,7 +110,7 @@ public class Sim implements ChangeDayListener {
     public long getTimeSinceLastSupper(){
         return timeSinceLastSupper;
     }
-    public void setTimeSinceLastSupper(long timeSinceLastSupper){
+    public long setTimeSinceLastSupper(long timeSinceLastSupper){
         return this.timeSinceLastSupper = timeSinceLastSupper;
     }
     public long getTimeSinceLastSleep(){
@@ -121,13 +122,13 @@ public class Sim implements ChangeDayListener {
     public boolean getHadShit(){
         return hadShit;
     }
-    public void setHadShit(boolean hadShit){
+    public boolean setHadShit(boolean hadShit){
         return this.hadShit = hadShit;
     }
     public boolean getHadWorkedToday(){
         return hadWorkedToday;
     }
-    public void setHadWorkedToday(boolean hadWorkedToday){
+    public boolean setHadWorkedToday(boolean hadWorkedToday){
         return this.hadWorkedToday = hadWorkedToday;
     }
 
