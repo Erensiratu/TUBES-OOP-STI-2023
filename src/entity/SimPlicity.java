@@ -5,7 +5,7 @@ import entity.item.furniture.Furniture;
 
 public class SimPlicity {
     private Sim currentSim;
-    private World currentWorld;
+    private static World currentWorld;
     Scanner scanner = new Scanner(System.in);
 
     private static SimPlicity instance = new SimPlicity();
