@@ -1,55 +1,78 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
-public class SimsGUI extends JFrame {
-    private JTextField nameField;
-    private JList<String> inventoryList;
+public class SimPlicityGUI {
+    private SimPlicity simPlicity;
 
-    public SimsGUI() {
-        // Create JPanel for main content
-        JPanel contentPane = new JPanel(new BorderLayout());
+    public SimPlicityGUI() {
+        simPlicity = SimPlicity.getInstance();
 
-        // Create JPanel for input form
-        JPanel inputPanel = new JPanel(new GridLayout(2, 2));
-        JLabel nameLabel = new JLabel("Name:");
-        nameField = new JTextField();
-        JButton addButton = new JButton("Add");
-        addButton.addActionListener(e -> addItemToList());
-        inputPanel.add(nameLabel);
-        inputPanel.add(nameField);
-        inputPanel.add(addButton);
+        // create the main window
+        JFrame frame = new JFrame("SimPlicity");
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Create JPanel for inventory list
-        JPanel inventoryPanel = new JPanel(new BorderLayout());
-        JLabel inventoryLabel = new JLabel("Inventory:");
-        inventoryPanel.add(inventoryLabel, BorderLayout.NORTH);
-        inventoryList = new JList<>();
-        JScrollPane inventoryScrollPane = new JScrollPane(inventoryList);
-        inventoryPanel.add(inventoryScrollPane, BorderLayout.CENTER);
+        // create the panel that will hold the buttons
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 2));
 
-        // Add input form and inventory list to main content panel
-        contentPane.add(inputPanel, BorderLayout.NORTH);
-        contentPane.add(inventoryPanel, BorderLayout.CENTER);
+        // create the buttons
+        JButton startButton = new JButton("Start Game");
+        JButton saveButton = new JButton("Save");
+        JButton loadButton = new JButton("Load");
+        JButton helpButton = new JButton("Help");
+        JButton exitButton = new JButton("Exit");
+        JButton addSimButton = new JButton("Add Sim");
 
-        // Set JFrame properties
-        setTitle("Sims Game");
-        setContentPane(contentPane);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-    }
+        // add the buttons to the panel
+        panel.add(startButton);
+        panel.add(saveButton);
+        panel.add(loadButton);
+        panel.add(helpButton);
+        panel.add(exitButton);
+        panel.add(addSimButton);
 
-    private void addItemToList() {
-        String itemName = nameField.getText();
-        if (!itemName.isEmpty()) {
-            DefaultListModel<String> listModel = (DefaultListModel<String>) inventoryList.getModel();
-            listModel.addElement(itemName);
-            nameField.setText("");
-        }
+        // add the panel to the main window
+        frame.getContentPane().add(panel, BorderLayout.CENTER);
+
+        // add action listeners to the buttons
+        startButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                simPlicity.startGame();
+            }
+        });
+        saveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                simPlicity.save();
+            }
+        });
+        loadButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                simPlicity.load();
+            }
+        });
+        helpButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                simPlicity.help();
+            }
+        });
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                simPlicity.exit();
+            }
+        });
+        addSimButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                simPlicity.addSim();
+            }
+        });
+
+        // display the main window
+        frame.setVisible(true);
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(SimsGUI::new);
+        new SimPlicityGUI();
     }
 }
