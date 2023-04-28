@@ -1,8 +1,7 @@
-package entity.item.furniture.bed;
+package entity.item.furniture;
 
 import java.util.Scanner;
 
-import entity.item.furniture.Furniture;
 import entity.sim.Sim;
 
 public abstract class Bed extends Furniture{

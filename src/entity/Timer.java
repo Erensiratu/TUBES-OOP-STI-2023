@@ -1,7 +1,6 @@
 package entity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import entity.sim.Sim;
 
@@ -54,9 +53,6 @@ public class Timer {
                     i.changeDayUpdate();
                 }
             }
-
-            
-            
         }
     }
     public long getTime(){
