@@ -2,12 +2,7 @@ package entity;
 
 import java.util.*;
 
-import entity.item.furniture.Clock;
-import entity.item.furniture.TableAndChair;
-import entity.item.furniture.Toilet;
-import entity.item.furniture.bed.SingleBed;
-import entity.item.furniture.stove.GasStove;
-import entity.sim.Sim;
+
 
 public class House {
     Sim owner;

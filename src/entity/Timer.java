@@ -1,8 +1,8 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import entity.sim.Sim;
 
 public class Timer {
     private long time;
@@ -16,6 +16,10 @@ public class Timer {
         time = 0;
         day = 0;
     }
+    public static Timer getInstance(){
+        return instance;
+    }
+
     private Timer(ArrayList<Sim> listSim,int day, long time){
         this.time = time;
         this.day = day;
@@ -28,7 +32,7 @@ public class Timer {
         }
     }
     
-    public synchronized static void Timer(ArrayList<Sim> listSim,int day, long time){
+    public synchronized static void init(ArrayList<Sim> listSim, int day, long time){
         if (instance == null){
             instance = new Timer(listSim, day, time);
         }
@@ -53,6 +57,9 @@ public class Timer {
                     i.changeDayUpdate();
                 }
             }
+
+            
+            
         }
     }
     public long getTime(){

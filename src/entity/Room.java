@@ -2,9 +2,7 @@ package entity;
 
 import java.util.*;
 
-import entity.item.Item;
-import entity.item.furniture.Furniture;
-import entity.sim.Sim;
+
 
 public class Room {
     final int WIDTH = 6;
