@@ -58,7 +58,7 @@ public class Occupation {
         int input = -1;
 
         while ((input % 120 != 0) || (input <= 0)){
-            System.out.println("\nMasukkan durasi kerja dalam detik\n Durasi kerja: ");
+            System.out.println("\nMasukkan durasi kerja dalam detik\nDurasi kerja: ");
             input = scanner.nextInt();
 
             if ((input % 120 != 0) || (input <= 0)){

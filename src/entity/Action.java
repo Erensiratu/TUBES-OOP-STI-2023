@@ -22,8 +22,14 @@ public class Action {
 
     public void exercise() {
 
+        System.out.println("Masukkan durasi olahraga yang ingin dilakukan: ");
         int duration = scanner.nextInt();
         scanner.nextLine();
+
+        sim.status.addMood(duration*0.5);
+        sim.status.addHunger(-duration*0.25);
+        sim.status.addHealth(duration*0.25);
+
         Thread buyThread = new Thread(() -> {
     
             System.out.println(sim.getName() + " sedang berolahraga");
@@ -41,7 +47,7 @@ public class Action {
         buyThread.start();
     }
     public void startActivity() {
-        System.out.println("Sim akan mulai melakukan aktivitas.\n Silahkan pilih aktivitasnya");
+        System.out.println("Sim akan mulai melakukan aktivitas.\nSilahkan pilih aktivitasnya");
         boolean valid = false;
         while (!valid){
             String userInputsString = scanner.nextLine();

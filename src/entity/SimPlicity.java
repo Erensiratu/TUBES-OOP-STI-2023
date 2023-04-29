@@ -64,7 +64,7 @@ public class SimPlicity {
         while (!valid) {
             System.out.print("\n\nMasukkan koordinat rumah di axis x (0-63): ");
             int x = input.nextInt();
-            System.out.print("\n\nMasukkan koordinat rumah di axis y (0-63): ");
+            System.out.print("Masukkan koordinat rumah di axis y (0-63): ");
             int y = input.nextInt();
             point = new Point(x, y);
             if (x < 0 || x > 63 || y < 0 || y > 63) {
@@ -74,7 +74,8 @@ public class SimPlicity {
             valid = true;
             for (House house : currentWorld.getListHouse()) {
                 if (house.getLocation().equals(point)) {
-                    System.out.println("Sudah ada rumah di titik ini");
+                    System.out.println("Sudah ada rumah di titik ini.");
+                    System.out.println("Silahkan pilih koordinat titik yang lain.");
                     valid = false;
                     break;
                 }
@@ -117,7 +118,7 @@ public class SimPlicity {
                 }
             }
         } else {
-            System.out.println("Tidak ada sim lain di dunia ini");
+            System.out.println("\nTidak ada sim lain di dunia ini");
         }
     }
 
@@ -322,7 +323,7 @@ public class SimPlicity {
     }
 
     public void displayMenu(){
-        System.out.println("Menu\n1. Add Sim\n2. Change Sim\n3. View Sim Info\n4. Actions\n5. View Current Location\n6. Move Room\n7. Object List\n8. Go To Object\n9. View Inventory\n10. Edit Room\n11. Upgrade House\n12. Move House\n13. Help\n14. Exit");
+        System.out.println("\n\nMenu\n1. Add Sim\n2. Change Sim\n3. View Sim Info\n4. Actions\n5. View Current Location\n6. Move Room\n7. Object List\n8. Go To Object\n9. View Inventory\n10. Edit Room\n11. Upgrade House\n12. Move House\n13. Help\n14. Exit");
     }
 
     public static void main(String[] args) throws Exception {
@@ -343,11 +344,12 @@ public class SimPlicity {
             while (true){
                 currentWorld.getClock().setTime();
                 
+                System.out.print("Masukkan angka dari 1-14: ");
 
                 if (input.hasNext()){
                     
-                    System.out.print("Masukkan angka dari 1-14: ");
-                
+                    
+                    System.out.println("\n");
                     int intInput = input.nextInt();
                     switch (intInput){
                         case 1:
