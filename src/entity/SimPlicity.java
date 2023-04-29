@@ -37,9 +37,25 @@ public class SimPlicity {
 
     public void help(){
         //buat sim
+        System.out.println("Berikut ini opsi pilihan yang dapat anda pilih.\n");
+        System.out.println("1. Menciptakan Sim yang baru.");
+        System.out.println("2. Mengubah Sim yang sedang digunakan.");
+        System.out.println("3. Melihat info dari Sim yang sedang digunakan.");
+        System.out.println("4. Memilih aksi yang akan dilakukan.");
+        System.out.println("5. Melihat lokasi Sim terkini.");
+        System.out.println("6. Berpindah ruangan.");
+        System.out.println("7. Melihat daftar item di ruangan terkini.");
+        System.out.println("8. Menuju untuk menggunakan item lain yang dimiliki.");
+        System.out.println("9. Melihat daftar item yang dimiliki oleh Sim.");
+        System.out.println("10. Mengedit ruangan untuk menambahkan, meindahkan, atau menghapus item di ruangan tersebut.");
+        System.out.println("11. Menambahkan ruangan pada rumah.");
+        System.out.println("12. Berkunjung ke rumah Sim yang lain.");
+        System.out.println("13. Bantuan untuk melihat daftar opsi yang dapat dipilih. {seperti yang anda lihat sekarang ^_^}");
+        System.out.println("14. Keluar permainan.");
     }
 
     public void exit(){
+        System.out.println("Sampai Jumpa! ^_^");
         System.exit(0);
     }
 
@@ -353,6 +369,7 @@ public class SimPlicity {
                         game.exit();
                     default:
                         System.out.println("\n\nMasukkan angka yang valid, yaitu 1-14\n");
+                        System.out.println("Masukkan angka 13 untuk melihat opsi pilihan.");
                 }
                 currentWorld.getClock().updateTime();
             }
