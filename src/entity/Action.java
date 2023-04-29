@@ -413,7 +413,7 @@ public class Action {
         Purchaseable item = null;
         
         int quantity = -1;
-        String itemName = null;
+        String itemName = "";
         System.out.println("Silakan pilih kategori belanja:\n1 untuk Furnitur\n2 untuk Bahan Makanan\n3 untuk Batal\n");
         
         int input = -1;
@@ -430,7 +430,7 @@ public class Action {
         switch (input){
             case 1:
                 System.out.println("Daftar Furnitur:\n1. Kasur Single\n2. Kasur Queen\n3. Kasur King\n4. Kompor Gas\n5. Kompor Listrik\n6. Kanvas\n7. Jam\n8. Shower\n9. Meja dan Kursi\n 10. Toilet\n");
-                while (itemName == null){
+                while (itemName.isEmpty()){
                     System.out.printf("Masukkan nama furnitur: ");
                     itemName = scanner.nextLine();
                 }
@@ -438,7 +438,7 @@ public class Action {
                 break;
             case 2:
                 System.out.println("Daftar Bahan Makanan:\n1. Ayam\n2. Bayam\n3. Kacang\n4. Kentang\n5. Nasi\n6. Sapi\n7. Susu\n8. Wortel\n");
-                while (itemName == null){
+                while (itemName.isEmpty()){
                     System.out.printf("Masukkan nama bahan makanan: ");
                     itemName = scanner.nextLine();
                 }
@@ -458,6 +458,7 @@ public class Action {
     
         final Item finalItem = (Item) item;
         finalItem.add(quantity);
+        
         
         if (sim.getStatus().getMoney() >= item.getPrice() * quantity){
             sim.getStatus().decreaseMoney(item.getPrice() * quantity);
