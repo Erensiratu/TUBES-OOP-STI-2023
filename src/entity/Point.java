@@ -1,5 +1,7 @@
 package entity;
 
+import java.lang.annotation.Retention;
+
 public class Point {
     int x;
     int y;
@@ -11,7 +13,7 @@ public class Point {
 
     public static Point getInstance(int x, int y){
         return new Point(x, y);
-}
+    }
     public int getX(){
         return x;
     }
@@ -38,5 +40,9 @@ public class Point {
 
     public String displayPoint(){
         return String.format("X: %d, Y: %d", getX(), getY());
+    }
+
+    public int getDistance(Point p){
+        return (int) Math.round(Math.sqrt( (x - p.getX())*(x - p.getX()) + (y - p.getY())*(y - p.getY())  ) );
     }
 }

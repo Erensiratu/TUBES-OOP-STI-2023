@@ -2,12 +2,7 @@ package entity;
 
 import java.util.*;
 
-import entity.item.furniture.Clock;
-import entity.item.furniture.TableAndChair;
-import entity.item.furniture.Toilet;
-import entity.item.furniture.bed.SingleBed;
-import entity.item.furniture.stove.GasStove;
-import entity.sim.Sim;
+
 
 public class House {
     Sim owner;
@@ -23,9 +18,9 @@ public class House {
         try {
             primaryRoom.addObject(new SingleBed(1), new Point(0, 0));
             primaryRoom.addObject(new Toilet(1), new Point(5, 0));
-            primaryRoom.addObject(new GasStove(1), new Point(5, 4));
-            primaryRoom.addObject(new Clock(1), new Point(0, 5));
-            primaryRoom.addObject(new TableAndChair(1), new Point(1, 0));
+            primaryRoom.addObject(new GasStove(1), new Point(4, 5));
+            primaryRoom.addObject(new Clock(1), new Point(3, 0));
+            primaryRoom.addObject(new TableAndChair(1), new Point(1, 1));
         } catch (RoomException e) {
             System.out.println(e.getMessage());
         }

@@ -2,9 +2,7 @@ package entity;
 
 import java.util.*;
 
-import entity.item.Item;
-import entity.item.furniture.Furniture;
-import entity.sim.Sim;
+
 
 public class Room {
     final int WIDTH = 6;
@@ -12,7 +10,7 @@ public class Room {
     private Furniture[][] grid;
     private Point locationRoom;
     private ArrayList<Furniture> objects;
-    Scanner scanner = new Scanner(System.in);
+    
     
     public Room(String name, Point locationRoom) {
         this.name = name;
@@ -74,6 +72,7 @@ public class Room {
     }
 
     private void addObject(Furniture object) throws RoomException {
+        Scanner scanner = new Scanner(System.in);
         int x,y;
         System.out.printf("\nMasukkan x: ");
         x = scanner.nextInt();
@@ -111,7 +110,7 @@ public class Room {
         }
 
         object.setLocation(location);
-
+        scanner.close();
         objects.add(object);
     }
 
@@ -137,6 +136,7 @@ public class Room {
     }
 
     public void editRoom(Sim sim) {
+        Scanner scanner = new Scanner(System.in);
         printRoom();
         System.out.printf("\nPilih aksi:\n1. Letakkan Objek\n2. Pindahkan Objek\n3. Ambil Objek\nNomor aksi:");
         int x = scanner.nextInt();
@@ -160,9 +160,11 @@ public class Room {
                 removeObjectAction(sim);
                 break;
         }
+        scanner.close();
     }
 
     private void addObjectAction(Sim sim) {
+        
         Furniture currentFurniture = sim.getInventory().chooseFurniture();
         if (currentFurniture != null) {
             try {
@@ -176,6 +178,7 @@ public class Room {
     }
 
     private void moveObjectAction(Sim sim) {
+        Scanner scanner = new Scanner(System.in);
         if (objects.isEmpty()) {
             System.out.println("\nRuang ini tidak mempunyai furnitur");
             return;
@@ -184,6 +187,8 @@ public class Room {
         int idx = -1;
         int count = 0;
         String furnitureName = null;
+
+
 
         while (count == 0){
             System.out.printf("\nMasukkan nama furnitur: ");
@@ -241,11 +246,14 @@ public class Room {
             sim.getInventory().addItem((Item) currentFurniture);
             System.out.println("Furnitur telah diletakkan kembali ke inventory sim");
         }
+        scanner.close();
     }
 
     private void removeObjectAction(Sim sim) {
+        Scanner scanner = new Scanner(System.in);
         if (objects.isEmpty()) {
             System.out.println("\nRuang ini tidak mempunyai furnitur");
+            scanner.close();
             return;
         }
         Furniture currentFurniture = null;
@@ -302,6 +310,7 @@ public class Room {
             }
         }
         sim.getInventory().addItem((Item) currentFurniture);
+        scanner.close();
         System.out.println("Furnitur telah diletakkan kembali ke inventory sim");
     }
 

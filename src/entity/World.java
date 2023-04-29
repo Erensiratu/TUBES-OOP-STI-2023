@@ -1,8 +1,8 @@
+package entity;
 import java.util.ArrayList;
 
 import org.w3c.dom.ls.LSInput;
 
-import entity.sim.Sim;
 
 public class World {
     final int WORLD_LENGTH = 64;
@@ -33,9 +33,9 @@ public class World {
             instance = new World();
         }
     }
-    public synchronized static void init(Timer clock, ArrayList<House> listHouse, ArrayList<Sim> listSim){
+    public synchronized static void init(ArrayList<House> listHouse, ArrayList<Sim> listSim, int day, long time){
         if (instance == null){
-            instance = new World(clock,listHouse,listSim);
+            instance = new World(listHouse,listSim, day, time);
         }
     }
     public synchronized void addHouse(House h){
