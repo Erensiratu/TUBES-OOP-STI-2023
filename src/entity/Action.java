@@ -25,7 +25,7 @@ public class Action {
         int duration = scanner.nextInt();
         scanner.nextLine();
         System.out.println(sim.getName()+" akan melakukan olahraga selama "+ duration);
-        Thread buyThread = new Thread(() -> {
+        Thread excerciseThread = new Thread(() -> {
     
             System.out.println(sim.getName() + " sedang berolahraga");
                 
@@ -39,8 +39,14 @@ public class Action {
         });
 
         // Memulai thread
-        buyThread.start();
+        excerciseThread.start();
+        try {
+            excerciseThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
+
     public void startActivity() {
         System.out.println("Daftar Aktivitas:\n1. Kerja\n2. Olahraga\n3. Mengobrol\n4. Transfer Uang\n5. Menghadiahkan Barang\n6. Menghayal\n7. Menggunakan Objek\n8. Membeli Barang\n9. Batal\n\n");
         System.out.println("Sim akan mulai melakukan aktivitas");
@@ -343,9 +349,11 @@ public class Action {
             }
         });
         dreamThread.start();
-        
- 
-
+        try {
+            dreamThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void converse() {
@@ -416,8 +424,11 @@ public class Action {
             }
         });
         converseThread.start();
-        
-  
+        try {
+            converseThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void work() {

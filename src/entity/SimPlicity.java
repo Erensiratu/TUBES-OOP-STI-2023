@@ -8,7 +8,7 @@ public class SimPlicity implements ChangeDayListener{
     private static Scanner input = new Scanner(System.in);
 
     private static SimPlicity instance = new SimPlicity();
-    private static boolean hasChangeSim = false;
+    private static boolean hasAddSim = false;
 
     private SimPlicity(){
         currentWorld = World.getInstance();
@@ -44,6 +44,13 @@ public class SimPlicity implements ChangeDayListener{
     }
 
     public void addSim(){ // 1
+        if (hasAddSim){
+            System.out.println("Hanya bisa mengganti sim sekali tiap hari");
+            return;
+        } else {
+            hasAddSim = true;
+        }
+
         Scanner nameScanner = new Scanner(System.in);
         String simName = "";
         while (simName.isEmpty()) {
@@ -91,13 +98,6 @@ public class SimPlicity implements ChangeDayListener{
     }
 
     public void changeSim(){ // 2
-        if (hasChangeSim){
-            System.out.println("Hanya bisa mengganti sim sekali tiap hari");
-            return;
-        } else {
-            hasChangeSim = true;
-        }
-
         if (currentWorld.getListSim().size() > 1){
             String simName = "";
             boolean found = false;
@@ -108,7 +108,7 @@ public class SimPlicity implements ChangeDayListener{
                     System.out.println("Masukkan nama sim yang valid");
                     continue;
                 }
-                else if (simName.t3oLowerCase().equals(currentSim.getName().toLowerCase())){
+                else if (simName.toLowerCase().equals(currentSim.getName().toLowerCase())){
                     System.out.println(simName + " sedang dimainkan\n");
                     continue;
                 }
@@ -404,6 +404,6 @@ public class SimPlicity implements ChangeDayListener{
             }
     }
     public void changeDayUpdate(){
-        hasChangeSim = false;
+        hasAddSim = false;
     }
 }

@@ -95,5 +95,10 @@ public class Occupation {
         });
 
         workThread.start();
+        try {
+            workThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

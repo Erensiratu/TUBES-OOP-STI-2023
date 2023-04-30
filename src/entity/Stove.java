@@ -61,6 +61,11 @@ public abstract class Stove extends Furniture{
             setVacancy(true);
         });
         cookThread.start();
+        try {
+            cookThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

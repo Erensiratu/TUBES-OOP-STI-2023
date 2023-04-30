@@ -45,6 +45,11 @@ public class Toilet extends Furniture{
 
         // Memulai thread
         toiletThread.start();
+        try {
+            toiletThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 

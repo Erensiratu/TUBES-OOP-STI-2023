@@ -42,6 +42,11 @@ public class Shower extends Furniture{
 
         // Memulai thread
         showerThread.start();
+        try {
+            showerThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 

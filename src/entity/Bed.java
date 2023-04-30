@@ -56,6 +56,11 @@ public abstract class Bed extends Furniture{
 
         // Memulai thread
         sleepThread.start();
+        try {
+            sleepThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     };
 
     @Override

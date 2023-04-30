@@ -75,6 +75,11 @@ public class TableAndChair extends Furniture{
     
         // Memulai thread
         eatThread.start();
+        try {
+            eatThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
