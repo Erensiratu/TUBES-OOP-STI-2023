@@ -13,29 +13,29 @@ public class World {
 
     private static World instance ;
 
-    private World(){
+    private World(SimPlicity s){
         listHouse = new ArrayList<House>();
         listSim = new ArrayList<Sim>();
-        Timer.init(listSim);
+        Timer.init(listSim, s);
         clock = Timer.getInstance();
     }
-    private World(ArrayList<House> listHouse, ArrayList<Sim> listSim, int day, long time){
+    private World(ArrayList<House> listHouse, ArrayList<Sim> listSim, int day, long time, SimPlicity s){
         this.listHouse = listHouse;
         this.listSim = listSim;
-        Timer.init( listSim ,day,time);
+        Timer.init( listSim ,day,time, s);
         clock = Timer.getInstance();
     }
     public static World getInstance(){
         return instance;
     }
-    public synchronized static void init(){
+    public synchronized static void init(SimPlicity s){
         if (instance == null){
-            instance = new World();
+            instance = new World(s);
         }
     }
-    public synchronized static void init(ArrayList<House> listHouse, ArrayList<Sim> listSim, int day, long time){
+    public synchronized static void init(ArrayList<House> listHouse, ArrayList<Sim> listSim, int day, long time, SimPlicity s){
         if (instance == null){
-            instance = new World(listHouse,listSim, day, time);
+            instance = new World(listHouse,listSim, day, time, s);
         }
     }
     public synchronized void addHouse(House h){

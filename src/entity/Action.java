@@ -22,14 +22,9 @@ public class Action {
 
     public void exercise() {
 
-        System.out.println("Masukkan durasi olahraga yang ingin dilakukan: ");
         int duration = scanner.nextInt();
         scanner.nextLine();
-
-        sim.status.addMood(duration*0.5);
-        sim.status.addHunger(-duration*0.25);
-        sim.status.addHealth(duration*0.25);
-
+        System.out.printlin(sim.getName()+" akan melakukan olahraga selama "+ duration);
         Thread buyThread = new Thread(() -> {
     
             System.out.println(sim.getName() + " sedang berolahraga");
@@ -47,43 +42,78 @@ public class Action {
         buyThread.start();
     }
     public void startActivity() {
-        System.out.println("Sim akan mulai melakukan aktivitas.\nSilahkan pilih aktivitasnya");
-        boolean valid = false;
-        while (!valid){
-            String userInputsString = scanner.nextLine();
-            valid = true;
-            if (userInputsString.trim().toLowerCase().equals("exercise")){
-                exercise();
-            }
-            else if (userInputsString.trim().toLowerCase().equals("useitem")){
-                if (sim.getItem() instanceof Useable){
-                    useItem();
-                } else {
-                    System.out.println("Benda yang dipilih bukan merupakan benda yang bisa digunakan");
-                }
-                
-            }  
-            else if (userInputsString.trim().toLowerCase().equals("transfer")){
-                transferMoney();
-            }
-            else if (userInputsString.trim().toLowerCase().equals("daydream")){
-                dayDream();
-            }
-            else if (userInputsString.trim().toLowerCase().equals("work")){
-                work();
-            }
-            else if (userInputsString.trim().toLowerCase().equals("buyitem")){
-                buyFurniture();
-            } 
-            else if (userInputsString.trim().toLowerCase().equals("converse")) {
-                converse();
-            }
-            else {
-                valid = false;
-                System.out.println(userInputsString+" bukan merupakan aktivitas yang bisa dijalankan");
-            }
+        System.out.println("Daftar Aktivitas:\n1. Kerja\n2. Olahraga\n3. Mengobrol\n4. Transfer Uang\n5. Menghadiahkan Barang\n6. Menghayal\n7. Menggunakan Objek\n8. Membeli Barang\n9. Batal\n\n");
+        System.out.println("Sim akan mulai melakukan aktivitas");
 
+        int input = 0;
+        while (input < 1 || input > 9){
+            System.out.printf("\nMasukkan angka dari 1-9: ");
+            input = scanner.nextInt();
+
+            if (input < 1 || input > 9){
+                System.out.println("\n\nMasukan tidak valid, silakan ulangi");
+            }
         }
+
+        switch(input){
+            case 1:
+                work();
+                break;
+            case 2:
+                exercise();
+                break;
+            case 3:
+                converse();
+                break;
+            case 4:
+                transferMoney();
+                break;
+            case 5:
+                giftItem();
+                break;
+            case 6:
+                dayDream();
+                break;
+            case 7:
+                useItem();
+                break;
+            case 8: 
+                buyItem();
+                break;
+            case 9:
+                return;
+        }
+
+            // valid = true;
+            // if (userInputsString.trim().toLowerCase().equals("exercise")){
+            //     exercise();
+            // }
+            // else if (userInputsString.trim().toLowerCase().equals("useitem")){
+            //     if (sim.getItem() instanceof Useable){
+            //         useItem();
+            //     } else {
+            //         System.out.println("Benda yang dipilih bukan merupakan benda yang bisa digunakan");
+            //     }
+            // }  
+            // else if (userInputsString.trim().toLowerCase().equals("transfer")){
+            //     transferMoney();
+            // }
+            // else if (userInputsString.trim().toLowerCase().equals("daydream")){
+            //     dayDream();
+            // }
+            // else if (userInputsString.trim().toLowerCase().equals("work")){
+            //     work();
+            // }
+            // else if (userInputsString.trim().toLowerCase().equals("buyitem")){
+            //     buyItem();
+            // } 
+            // else if (userInputsString.trim().toLowerCase().equals("converse")) {
+            //     converse();
+            // }
+            // else {
+            //     valid = false;
+            //     System.out.println(userInputsString+" bukan merupakan aktivitas yang bisa dijalankan");
+            // }
     }
     
 
@@ -297,10 +327,11 @@ public class Action {
             scanner.nextLine();
         } 
         int duration = durationInput;
+        System.out.println("Berkhayal selama " + duration/60 + " menit...");
         Thread dreamThread = new Thread( new Runnable() {
             public void run() {
                 idle = false;
-                System.out.println("Berkhayal selama " + duration/60 + " menit...");
+
                 try {
                     Thread.sleep(duration*1000);
                 } catch (InterruptedException e) {
@@ -365,13 +396,13 @@ public class Action {
 
         // Simulate a conversation
         Sim otherSim = otherSim2;
-
+        System.out.println( sim.getName() +" berkomunikasi dengan " + otherSim.getName() + "...");
         
         Thread converseThread = new Thread( new Runnable() {
             public void run() {
                 idle = false;
                 otherSim.getAction().setIdle(false);
-                System.out.println("Berkomunikasi dengan " + otherSim.getName() + "...");
+                
                 try {
                     Thread.sleep(15000);
                 } catch (InterruptedException e) {
@@ -408,6 +439,11 @@ public class Action {
             return;
         }
 
+        if (!((Furniture) sim.getItem()).getVacancy()){
+            System.out.println("Maaf, benda sedang digunakan oleh sim lain.");
+            return;
+        }
+
         Useable item = (Useable) sim.getItem();
 
         idle = false;
@@ -420,7 +456,7 @@ public class Action {
         System.out.println("Selesai menggunakan!");
     }
 
-    public void buyFurniture(){
+    public void buyItem(){
         Purchaseable item = null;
         
         int quantity = -1;

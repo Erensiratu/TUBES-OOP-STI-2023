@@ -2,13 +2,13 @@ package entity;
 
 import java.util.*;
 
-
-public class SimPlicity {
+public class SimPlicity implements ChangeDayListener{
     private Sim currentSim;
     private static World currentWorld;
     private static Scanner input = new Scanner(System.in);
 
     private static SimPlicity instance = new SimPlicity();
+    private static boolean hasChangeSim = false;
 
     private SimPlicity(){
         currentWorld = World.getInstance();
@@ -19,7 +19,7 @@ public class SimPlicity {
     }
 
     public void startGame(){
-        World.init();
+        World.init(this);
         currentWorld = World.getInstance();
         currentWorld.getClock().setTime();
         addSim();
@@ -64,7 +64,7 @@ public class SimPlicity {
         while (!valid) {
             System.out.print("\n\nMasukkan koordinat rumah di axis x (0-63): ");
             int x = input.nextInt();
-            System.out.print("Masukkan koordinat rumah di axis y (0-63): ");
+            System.out.print("\n\nMasukkan koordinat rumah di axis y (0-63): ");
             int y = input.nextInt();
             point = new Point(x, y);
             if (x < 0 || x > 63 || y < 0 || y > 63) {
@@ -74,8 +74,7 @@ public class SimPlicity {
             valid = true;
             for (House house : currentWorld.getListHouse()) {
                 if (house.getLocation().equals(point)) {
-                    System.out.println("Sudah ada rumah di titik ini.");
-                    System.out.println("Silahkan pilih koordinat titik yang lain.");
+                    System.out.println("Sudah ada rumah di titik ini");
                     valid = false;
                     break;
                 }
@@ -91,6 +90,13 @@ public class SimPlicity {
     }
 
     public void changeSim(){ // 2
+        if (hasChangeSim){
+            System.out.println("Hanya bisa mengganti sim sekali tiap hari");
+            return;
+        } else {
+            hasChangeSim = true;
+        }
+
         if (currentWorld.getListSim().size() > 1){
             String simName = "";
             boolean found = false;
@@ -118,7 +124,7 @@ public class SimPlicity {
                 }
             }
         } else {
-            System.out.println("\nTidak ada sim lain di dunia ini");
+            System.out.println("Tidak ada sim lain di dunia ini");
         }
     }
 
@@ -323,7 +329,7 @@ public class SimPlicity {
     }
 
     public void displayMenu(){
-        System.out.println("\n\nMenu\n1. Add Sim\n2. Change Sim\n3. View Sim Info\n4. Actions\n5. View Current Location\n6. Move Room\n7. Object List\n8. Go To Object\n9. View Inventory\n10. Edit Room\n11. Upgrade House\n12. Move House\n13. Help\n14. Exit");
+        System.out.println("Menu\n1. Add Sim\n2. Change Sim\n3. View Sim Info\n4. Actions\n5. View Current Location\n6. Move Room\n7. Object List\n8. Go To Object\n9. View Inventory\n10. Edit Room\n11. Upgrade House\n12. Move House\n13. Help\n14. Exit");
     }
 
     public static void main(String[] args) throws Exception {
@@ -337,19 +343,14 @@ public class SimPlicity {
                 game.exit();
             } else{
                 game.startGame();
-                game.displayMenu();
             }
 
 
             while (true){
-                currentWorld.getClock().setTime();
-                
+                game.displayMenu();
                 System.out.print("Masukkan angka dari 1-14: ");
-
+                currentWorld.getClock().setTime();
                 if (input.hasNext()){
-                    
-                    
-                    System.out.println("\n");
                     int intInput = input.nextInt();
                     switch (intInput){
                         case 1:
@@ -398,11 +399,10 @@ public class SimPlicity {
                             System.out.println("\n\nMasukkan angka yang valid, yaitu 1-14\n");
                     }
                     currentWorld.getClock().updateTime();
-                    game.displayMenu();
                 }
             }
-        
-        
-
+    }
+    public void changeDayUpdate(){
+        hasChangeSim = false;
     }
 }

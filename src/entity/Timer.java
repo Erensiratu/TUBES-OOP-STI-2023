@@ -7,34 +7,46 @@ import java.util.List;
 public class Timer {
     private long time;
     private long start = System.currentTimeMillis();
-    private ArrayList<Sim> listSim;
     private int day;
     private static Timer instance;
+    private static ArrayList<ChangeDayListener> subscriber;
+    private static ArrayList<Sim> listSim;
 
-    private Timer(ArrayList<Sim> listSim){
-        this.listSim = listSim;
+    private Timer(ArrayList<Sim> listSim, SimPlicity s){
+        ArrayList<ChangeDayListener> subscriber = new ArrayList<ChangeDayListener>();
         time = 0;
         day = 0;
+        Timer.listSim = listSim;
+        subscriber.add(s);
+        for (ChangeDayListener i : listSim){
+            subscriber.add(i);
+        }
+        
     }
     public static Timer getInstance(){
         return instance;
     }
 
-    private Timer(ArrayList<Sim> listSim,int day, long time){
+    private Timer(ArrayList<Sim> listSim,int day, long time, SimPlicity s){
+        ArrayList<ChangeDayListener> subscriber = new ArrayList<ChangeDayListener>();
         this.time = time;
         this.day = day;
-        this.listSim = listSim;
+        Timer.listSim = listSim;
+        subscriber.add(s);
+        for (ChangeDayListener i : listSim){
+            subscriber.add(i);
+        }
     }
 
-    public synchronized static void init(ArrayList<Sim> listSim){
+    public synchronized static void init(ArrayList<Sim> listSim, SimPlicity s){
         if (instance == null){
-            instance = new Timer(listSim);
+            instance = new Timer(listSim, s);
         }
     }
     
-    public synchronized static void init(ArrayList<Sim> listSim, int day, long time){
+    public synchronized static void init(ArrayList<Sim> listSim, int day, long time, SimPlicity s){
         if (instance == null){
-            instance = new Timer(listSim, day, time);
+            instance = new Timer(listSim, day, time, s);
         }
     }
 
@@ -53,7 +65,7 @@ public class Timer {
             time = time + System.currentTimeMillis() - start;
             if (day != (int) (time/720000)){
                 day = (int) (time/720000);
-                for(Sim i : listSim){
+                for(ChangeDayListener i : subscriber){
                     i.changeDayUpdate();
                 }
             }
