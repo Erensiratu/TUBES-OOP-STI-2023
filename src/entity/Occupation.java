@@ -56,11 +56,11 @@ public class Occupation {
         int input = -1;
 
         while ((input % 120 != 0) || (input <= 0)){
-            System.out.println("\nMasukkan durasi kerja dalam detik\n Durasi kerja: ");
+            System.out.print("\nMasukkan durasi kerja dalam detik\nDurasi kerja: ");
             input = scanner.nextInt();
 
             if ((input % 120 != 0) || (input <= 0)){
-                System.out.println("Durasi kerja harus dalam kelipatan 120 dan lebih dari 0");
+                System.out.println("\n\nDurasi kerja harus dalam kelipatan 120 dan lebih dari 0");
             }
         }
 
@@ -68,7 +68,7 @@ public class Occupation {
         
         Thread workThread = new Thread(() -> {
             sim.getAction().setIdle(false);
-            System.out.println(sim.getName() + " mulai bekerja selama " + duration + " detik");
+            System.out.println("\n" + sim.getName() + " mulai bekerja selama " + duration + " detik");
             try {
                 Thread.sleep((duration) * 1000);
             } catch (InterruptedException e) {
@@ -87,6 +87,8 @@ public class Occupation {
                 }
             }
 
+            sim.getStatus().decreaseHunger(duration/30*10);
+            sim.getStatus().decreaseMood(duration/30*10);
             sim.getStatus().addMoney(profession.getSalary()*((totalDuration)/240));
             
             sim.getAction().setIdle(true);

@@ -37,6 +37,10 @@ public class Sim implements ChangeDayListener {
         hadWorkedToday = false;
         hadShit = false;
 
+        this.getInventory().addItem(Ayam.getInstance(1));
+        this.getInventory().addItem(Nasi.getInstance(1));
+        this.getInventory().addItem(Nasi.getInstance(2));
+
     }
 
     public static Sim getInstance(String name, World currentWorld, House currentHouse, Room currentRoom, Point currentLocation){
@@ -164,18 +168,24 @@ public class Sim implements ChangeDayListener {
         long duration = (currentHouse.getLocation().getDistance(house.getLocation()))*1000;
         Thread moveThread = new Thread( () -> {
             action.setIdle(false);
-            System.out.print( " "+name + "berkunjung ke "+ house.getName() +"\n" );
+            System.out.println(name + " sedang berjalan ke ke "+ house.getName() + "\n");
             try {
                 Thread.sleep(duration);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             currentHouse = house;
+            currentRoom = currentHouse.getPrimaryRoom();
             status.addMood(duration/30);
             status.decreaseHunger(duration/30);
             System.out.print("Kunjungan "+ name + " selesai\n");
             action.setIdle(true);
         });
         moveThread.start();
+        try {
+            moveThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

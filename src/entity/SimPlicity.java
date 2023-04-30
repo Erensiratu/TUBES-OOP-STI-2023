@@ -249,6 +249,15 @@ public class SimPlicity implements ChangeDayListener{
 
         currentSim.setItem(newFurniture);
         currentSim.setLocation(newFurniture.getPoint());
+
+        System.out.println("\nObjek saat ini: " + currentSim.getItem().getName());
+        System.out.printf("Masukkan 'Ya' untuk menggunakan objek\nMasukkan input lain untuk keluar dari menu ini\n> ");
+
+        String answer = input.nextLine().trim();
+
+        if (answer.toLowerCase().equals("ya")){
+            currentSim.getAction().useItem();
+        }
     }
 
     public void viewInventory(){ // 9
@@ -266,6 +275,11 @@ public class SimPlicity implements ChangeDayListener{
     public void upgradeHouse(){ // 11
         if (!currentSim.getHouse().getOwner().getName().equals(currentSim.getName())){
             System.out.println(currentSim.getName() + " sedang tidak berada di rumahnya");
+            return;
+        }
+
+        if (currentSim.getStatus().getMoney() < 1500){
+            System.out.println(currentSim.getName() + " tidak mempunyai uang yang cukup untuk membangun ruangan baru di rumahnya");
             return;
         }
         
@@ -308,14 +322,14 @@ public class SimPlicity implements ChangeDayListener{
         String visiteeString;
         House visitee;
         while(!valid){
-            System.out.print("\n\nMasukkan nama rumah: ");
+            System.out.print("\n\nMasukkan nama rumah sim yang ingin dikunjungi: ");
             visiteeString = input.nextLine().trim();
             if (visiteeString.isEmpty()) {
-                System.out.println("Masukkan nama rumah yang valid");
+                System.out.println("Masukkan nama rumah sim yang valid");
                 continue;
             }
             else if (visiteeString.toLowerCase().equals(currentSim.getHouse().getName().toLowerCase())){
-                System.out.println(currentSim.getName() + " sedang berada di"+ visiteeString +"\n");
+                System.out.println(currentSim.getName() + " sedang berada di "+ visiteeString +"\n");
                 continue;
             }
             for (House house : currentWorld.getListHouse()){
@@ -325,12 +339,11 @@ public class SimPlicity implements ChangeDayListener{
                     break;
                 }
             }
-            
         }
     }
 
     public void displayMenu(){
-        System.out.println("Menu\n1. Add Sim\n2. Change Sim\n3. View Sim Info\n4. Actions\n5. View Current Location\n6. Move Room\n7. Object List\n8. Go To Object\n9. View Inventory\n10. Edit Room\n11. Upgrade House\n12. Move House\n13. Help\n14. Exit");
+        System.out.println("\nMenu\n1. Add Sim\n2. Change Sim\n3. View Sim Info\n4. Actions\n5. View Current Location\n6. Move Room\n7. Object List\n8. Go To Object\n9. View Inventory\n10. Edit Room\n11. Upgrade House\n12. Move House\n13. Help\n14. Exit");
     }
 
     public static void main(String[] args) throws Exception {

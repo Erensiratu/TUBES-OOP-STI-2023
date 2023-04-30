@@ -18,6 +18,7 @@ public class House {
         try {
             primaryRoom.addObject(new SingleBed(1), new Point(0, 0));
             primaryRoom.addObject(new Toilet(1), new Point(5, 0));
+            primaryRoom.addObject(new Toilet(1), new Point(4, 0));
             primaryRoom.addObject(new GasStove(1), new Point(4, 5));
             primaryRoom.addObject(new Clock(1), new Point(3, 0));
             primaryRoom.addObject(new TableAndChair(1), new Point(1, 1));
@@ -124,32 +125,6 @@ public class House {
     public Room getPrimaryRoom(){
         return primaryRoom;
     }
-
-    // public Room getRoom() {
-    //     Room retRoom = null;
-    //     boolean valid = false;
-        
-    //     displayRoom();
-
-    //     while (!valid) {
-    //         System.out.print("Masukkan nama ruangan: ");
-    //         String roomName = scanner.nextLine();
-            
-    //         for (Room room : rooms) {
-    //             if (room.getName().toLowerCase().equals(roomName.toLowerCase())) {
-    //                 retRoom = room;
-    //                 valid = true;
-    //                 break;
-    //             }
-    //         }
-            
-    //         if (!valid) {
-    //             System.out.println("\n\nNama ruangan tidak valid, silahkan ulangi masukkan\n");
-    //         }
-    //     }
-        
-    //     return retRoom;
-    // }
 
     public List<Room> getRoomList(){
         return rooms;

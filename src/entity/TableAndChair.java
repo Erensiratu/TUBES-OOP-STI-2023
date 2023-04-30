@@ -20,13 +20,12 @@ public class TableAndChair extends Furniture{
             return;
         }
         
-        System.out.print("Daftar makanan yang ada di inventory " + sim.getName());
-    
-        int count = 1;
+        System.out.print("Daftar makanan yang ada di inventory " + sim.getName() + "\n");
+
         for (Item item : sim.getInventory().getList()){
             if (item instanceof Food){
                 Food food = (Food) item;
-                System.out.println(count + ". " + food.getName() + " (" + food.getFullness() + " Kekenyangan) : " + food.getQuantity() + " buah");
+                System.out.println("> " + food.getName() + " (" + food.getFullness() + " Kekenyangan) : " + food.getQuantity() + " buah");
             }
         }
         
@@ -36,9 +35,10 @@ public class TableAndChair extends Furniture{
         Food currentFood = null;
     
         for (Item item : sim.getInventory().getList()){
-            if (item.getName().equals(foodName)){
+            if (item.getName().toLowerCase().equals(foodName.toLowerCase())){
                 found = true;
                 currentFood = (Food) item;
+                sim.getInventory().removeItem(item, 1);
                 break;
             }
         }

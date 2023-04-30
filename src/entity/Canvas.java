@@ -47,6 +47,11 @@ public class Canvas extends Furniture{
 
         // Memulai thread
         paintThread.start();
+        try {
+            paintThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 

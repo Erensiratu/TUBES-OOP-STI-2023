@@ -26,15 +26,25 @@ public abstract class Stove extends Furniture{
             String input = scanner.nextLine();
             cuisine = CuisineFactory.createCuisine(input, 1);
             if (cuisine == null){
-                System.out.println("\n\nNama masaka tidak valid");
+                System.out.println("\nNama masakan tidak valid");
             }
         }
     
         ArrayList<Item> ingredients = new ArrayList<>();
         ingredients.addAll(cuisine.getRecipe());
 
-        if(!sim.getInventory().getList().containsAll(ingredients)){
-            System.out.println("Bahan makanan di inventory tidak cukup untuk membuat " + cuisine.getName());
+        int count = 0;
+
+        for (Item i : ingredients){
+            for (Item j : sim.getInventory().getList()){
+                if (j.getName().equals(i.getName())){
+                    count++;
+                }
+            }
+        }
+
+        if (count != ingredients.size()){
+            System.out.println("Bahan makanan di inventory tidak cukup untuk membuat " + cuisine.getName() + "\n");
             return;
         } 
 
@@ -56,7 +66,9 @@ public abstract class Stove extends Furniture{
             System.out.println(sim.getName() + " selesai memasak " + finalCuisine.getName());
             sim.getStatus().addMood(10);
             sim.getInventory().addItem(finalCuisine);
-            sim.getInventory().getList().removeAll(ingredients);
+            for (Item i : ingredients){
+                sim.getInventory().removeItem(i, 1);
+            }
 
             setVacancy(true);
         });

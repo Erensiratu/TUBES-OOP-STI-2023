@@ -10,6 +10,7 @@ public class Room {
     private Furniture[][] grid;
     private Point locationRoom;
     private ArrayList<Furniture> objects;
+    Scanner scanner = new Scanner(System.in);
     
     
     public Room(String name, Point locationRoom) {
@@ -72,7 +73,6 @@ public class Room {
     }
 
     private void addObject(Furniture object) throws RoomException {
-        Scanner scanner = new Scanner(System.in);
         int x,y;
         System.out.printf("\nMasukkan x: ");
         x = scanner.nextInt();
@@ -110,7 +110,6 @@ public class Room {
         }
 
         object.setLocation(location);
-        scanner.close();
         objects.add(object);
     }
 
@@ -136,7 +135,6 @@ public class Room {
     }
 
     public void editRoom(Sim sim) {
-        Scanner scanner = new Scanner(System.in);
         printRoom();
         System.out.printf("\nPilih aksi:\n1. Letakkan Objek\n2. Pindahkan Objek\n3. Ambil Objek\nNomor aksi:");
         int x = scanner.nextInt();
@@ -178,7 +176,6 @@ public class Room {
     }
 
     private void moveObjectAction(Sim sim) {
-        Scanner scanner = new Scanner(System.in);
         if (objects.isEmpty()) {
             System.out.println("\nRuang ini tidak mempunyai furnitur");
             return;
@@ -186,20 +183,18 @@ public class Room {
         Furniture currentFurniture = null;
         int idx = -1;
         int count = 0;
-        String furnitureName = null;
-
-
+        String furnitureName = "";
 
         while (count == 0){
             System.out.printf("\nMasukkan nama furnitur: ");
             furnitureName = scanner.nextLine().trim();
             for (Furniture furniture : objects){
-                if (furniture.getName().equals(furnitureName)){
+                if (furniture.getName().toLowerCase().equals(furnitureName.toLowerCase())){
                     idx = objects.indexOf(furniture);
                     count++;
                 }
             }
-            if (count ==0 ){
+            if (count == 0 ){
                 System.out.println("\nNama furnitur tidak valid");
             }
         }
@@ -211,7 +206,7 @@ public class Room {
             System.out.println("Terdapat " + count + " " + furnitureName + " di ruangan ini");
             count = 1;
             for (Furniture furniture : objects){
-                if (furniture.getName().equals(furnitureName)){
+                if (furniture.getName().toLowerCase().equals(furnitureName.toLowerCase())){
                     System.out.println(furniture.getName() + " " + count + ": " + furniture.getPoint().displayPoint());
                 }
             }
@@ -246,11 +241,9 @@ public class Room {
             sim.getInventory().addItem((Item) currentFurniture);
             System.out.println("Furnitur telah diletakkan kembali ke inventory sim");
         }
-        scanner.close();
     }
 
     private void removeObjectAction(Sim sim) {
-        Scanner scanner = new Scanner(System.in);
         if (objects.isEmpty()) {
             System.out.println("\nRuang ini tidak mempunyai furnitur");
             scanner.close();
@@ -259,13 +252,13 @@ public class Room {
         Furniture currentFurniture = null;
         int idx = -1;
         int count = 0;
-        String furnitureName = null;
+        String furnitureName = "";
 
         while (count == 0){
             System.out.printf("\nMasukkan nama furnitur: ");
             furnitureName = scanner.nextLine().trim();
             for (Furniture furniture : objects){
-                if (furniture.getName().equals(furnitureName)){
+                if (furniture.getName().toLowerCase().equals(furnitureName.toLowerCase())){
                     idx = objects.indexOf(furniture);
                     count++;
                 }
@@ -282,7 +275,7 @@ public class Room {
             System.out.println("Terdapat " + count + " " + furnitureName + " di ruangan ini");
             count = 1;
             for (Furniture furniture : objects){
-                if (furniture.getName().equals(furnitureName)){
+                if (furniture.getName().toLowerCase().equals(furnitureName.toLowerCase())){
                     System.out.println(furniture.getName() + " " + count + ": " + furniture.getPoint().displayPoint());
                 }
             }
@@ -310,14 +303,13 @@ public class Room {
             }
         }
         sim.getInventory().addItem((Item) currentFurniture);
-        scanner.close();
         System.out.println("Furnitur telah diletakkan kembali ke inventory sim");
     }
 
     public void printRoom() {
         System.out.println("\nTampilan ruangan:");
         for (int i = 0; i < WIDTH; i++) {
-            System.out.print(" " + i);
+            System.out.print("   " + i);
         }
         System.out.println();
         for (int i = 0; i < WIDTH; i++) {
@@ -332,12 +324,12 @@ public class Room {
             System.out.printf("\n");
         }
 
-        System.out.println("\nDaftar furnitur");
+        System.out.println("\nDaftar furnitur:");
 
         int count = 1;
 
         for (Furniture furniture : objects){
-            System.out.printf("%d. %s", count, furniture.getName());
+            System.out.printf("%d. %s\n", count, furniture.getName());
             count++;
         }
 
