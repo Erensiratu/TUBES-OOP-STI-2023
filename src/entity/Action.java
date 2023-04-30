@@ -24,7 +24,7 @@ public class Action {
 
         int duration = scanner.nextInt();
         scanner.nextLine();
-        System.out.printlin(sim.getName()+" akan melakukan olahraga selama "+ duration);
+        System.out.println(sim.getName()+" akan melakukan olahraga selama "+ duration);
         Thread buyThread = new Thread(() -> {
     
             System.out.println(sim.getName() + " sedang berolahraga");
