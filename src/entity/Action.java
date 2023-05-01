@@ -63,7 +63,7 @@ public class Action {
     }
 
     public void startActivity() {
-        System.out.println("\nDaftar Aktivitas:\n1. Kerja\n2. Olahraga\n3. Mengobrol\n4. Transfer Uang\n5. Menghadiahkan Barang\n6. Menghayal\n7. Menggunakan Objek\n8. Membeli Barang\n9. Batal\n");
+        System.out.println("\nDaftar Aktivitas:\n1. Kerja\n2. Olahraga\n3. Mengobrol\n4. Transfer Uang\n5. Menghadiahkan Barang\n6. Menghayal\n7. Menggunakan Objek\n8. Membeli Barang\n9. Ganti Pekerjaan\n10. Batal\n");
 
         int input = 0;
         while (input < 1 || input > 9){
@@ -101,8 +101,15 @@ public class Action {
                 buyItem();
                 break;
             case 9:
+                changeProfession();
+                break;
+            case 10:
                 return;
         }
+    }
+
+    public void changeProfession(){
+        sim.getOcupation().changeProfession();
     }
     
 

@@ -22,7 +22,37 @@ public class Occupation {
         return profession;
     }
 
-    public void changeProfession(Profession newProfession){
+    public void changeProfession(){
+        System.out.println("1.Badut Sulap\n2. Koki\n3. Dokter\n4. Polisi\5. Programmer");
+        int input = 0;
+        while (input < 1 || input > 5){
+            System.out.print("\nMasukkan angka 1-5: ");
+            input = scanner.nextInt();
+            if (input < 1 || input > 5){
+                System.out.println("\n\nMasukkan angka yang valid");
+            }
+        }
+
+        Profession newProfession;
+
+        switch(input) {
+            case 1:
+                newProfession = Clown.getInstance();
+                break;
+            case 2:
+                newProfession = Cook.getInstance();
+                break;
+            case 3:
+                newProfession = Doctor.getInstance();
+                break;
+            case 4:
+                newProfession = Police.getInstance();
+                break;
+            case 5:
+                newProfession = Programmer.getInstance();
+                break;
+        }
+
         if ((timesWorked > 720) && (sim.getStatus().getMoney() < newProfession.getSalary()/2)){
             sim.getStatus().decreaseMoney(newProfession.getSalary()/2);
             profession = newProfession;           

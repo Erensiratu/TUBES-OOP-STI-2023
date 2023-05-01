@@ -110,6 +110,7 @@ public class Room {
         }
 
         object.setLocation(location);
+        System.out.println(object.getName() + " berhasil diletakkan di ruangan");
         objects.add(object);
     }
 
@@ -130,7 +131,7 @@ public class Room {
                 grid[i][j] = null;
             }
         }
-    
+        
         objects.remove(object);
     }
 
