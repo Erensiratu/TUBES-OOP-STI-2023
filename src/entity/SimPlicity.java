@@ -39,6 +39,12 @@ public class SimPlicity implements ChangeDayListener{
         System.out.println("                                     HELP                                     ");
         System.out.println("                               panduan permainan                              ");
         System.out.println("------------------------------------------------------------------------------");
+        System.out.println("Selamat datang di SIMPLICITY, tempat tinggal manusia - manusia kecil yang akan");
+        System.out.println("  bergantung pada bantuanmu! Bantu para sim untuk meraih kesejahteraan dengan ");
+        System.out.println("      menjaga agar mereka tetap kenyang, senang, bugar, dan berkecukupan.     ");
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("                              Instruksi Bermain                               ");
+        System.out.println("                                                                              ");
         System.out.println("1.  Add Sim               : membuat sim baru");
         System.out.println("2.  Change Sim            : mengganti sim yang dikontrol");
         System.out.println("3.  View Sim Info         : menampilkan status sim");
