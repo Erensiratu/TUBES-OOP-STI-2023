@@ -8,16 +8,18 @@ public class Timer {
     private long time;
     private long start = System.currentTimeMillis();
     private int day;
+    private boolean run = false;
+    private boolean exit = false;
     private static Timer instance;
-    private static ArrayList<ChangeDayListener> subscriber;
+    private static ArrayList<ChangeDayListener> subscriber = new ArrayList<ChangeDayListener>(); ;
     private static ArrayList<Sim> listSim;
+    private static ArrayList<TickListener> secondSubscriber = new ArrayList<TickListener>(); 
 
-    private Timer(ArrayList<Sim> listSim, SimPlicity s){
-        ArrayList<ChangeDayListener> subscriber = new ArrayList<ChangeDayListener>();
+    private Timer(ArrayList<Sim> listSim){
+
         time = 0;
         day = 0;
         Timer.listSim = listSim;
-        subscriber.add(s);
         for (ChangeDayListener i : listSim){
             subscriber.add(i);
         }
@@ -27,26 +29,24 @@ public class Timer {
         return instance;
     }
 
-    private Timer(ArrayList<Sim> listSim,int day, long time, SimPlicity s){
-        ArrayList<ChangeDayListener> subscriber = new ArrayList<ChangeDayListener>();
+    private Timer(ArrayList<Sim> listSim,int day, long time){
         this.time = time;
         this.day = day;
         Timer.listSim = listSim;
-        subscriber.add(s);
         for (ChangeDayListener i : listSim){
             subscriber.add(i);
         }
     }
 
-    public synchronized static void init(ArrayList<Sim> listSim, SimPlicity s){
+    public synchronized static void init(ArrayList<Sim> listSim){
         if (instance == null){
-            instance = new Timer(listSim, s);
+            instance = new Timer(listSim);
         }
     }
     
-    public synchronized static void init(ArrayList<Sim> listSim, int day, long time, SimPlicity s){
+    public synchronized static void init(ArrayList<Sim> listSim, int day, long time){
         if (instance == null){
-            instance = new Timer(listSim, day, time, s);
+            instance = new Timer(listSim, day, time);
         }
     }
 
@@ -54,24 +54,16 @@ public class Timer {
         start = System.currentTimeMillis();
     }
 
-    public synchronized void updateTime(){
-        boolean allIdle = true;
-        for(Sim i : listSim){
-            if (!(i.getAction().isIdle())){
-                allIdle = false;
-            }
-        }
-        if (!allIdle){
-            time = time + System.currentTimeMillis() - start;
-            if (day != (int) (time/720000)){
-                day = (int) (time/720000);
-                for(ChangeDayListener i : subscriber){
-                    i.changeDayUpdate();
-                }
-            }
 
-            
-            
+    private void changeDay(){
+        for(ChangeDayListener i : subscriber){
+            i.changeDayUpdate();
+        }
+    }
+
+    private void changeSecond() {
+        for(TickListener i : secondSubscriber){
+            i.changeSecUpdate();
         }
     }
     public long getTime(){
@@ -82,6 +74,52 @@ public class Timer {
     }
     public long getRemainingTime(){
         return 720000-(time % 720000);
+    }
+
+    public void checkRun(){
+        boolean allIdle = true;
+        for(Sim i : listSim){
+            if (!(i.getAction().isIdle())){
+                allIdle = false;
+            }
+        }
+        run = !allIdle;
+    }
+
+    public Thread timerThread = new Thread(new Runnable(){
+
+        public void run(){
+            while(!exit){
+
+                try {
+                    Thread.sleep(1000);
+                    
+                } catch(InterruptedException e){
+
+                }
+                if (run){
+                    time += 1000;
+                    changeSecond();
+                    if (day != (time/720000)){
+                        day = (int) time/720000;
+                        changeDay();
+                    }
+                }                
+                checkRun();
+            }
+        }
+    } ); 
+    
+    public void startTime(){
+        timerThread.start();
+    }
+
+    public void addEventListener(ChangeDayListener i){
+        subscriber.add(i);
+    }
+
+    public void addEventListener(TickListener i){
+        secondSubscriber.add(i);
     }
 
 }

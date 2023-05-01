@@ -13,7 +13,7 @@ public class Sim implements ChangeDayListener {
     Point currentLocation;
     Room currentRoom;
     House currentHouse;
-    World currentWorld;
+    static World  currentWorld;
     Item currentItem;
     Status status;
     long timeSinceLastSupper;
@@ -23,7 +23,7 @@ public class Sim implements ChangeDayListener {
 
     public Sim(String name, World currentWorld, House currentHouse, Room currentRoom, Point currentLocation){
         this.name = name;
-        this.currentWorld = currentWorld;
+        Sim.currentWorld = currentWorld;
         this.currentHouse = currentHouse;
         this.currentRoom = currentRoom;
         this.currentLocation = currentLocation;
@@ -125,7 +125,7 @@ public class Sim implements ChangeDayListener {
         this.hadWorkedToday = hadWorkedToday;
     }
 
-    public World getCurrentWorld(){
+    public static World getCurrentWorld(){
         return currentWorld;
     }
 

@@ -107,26 +107,13 @@ public class House {
         }
 
         final String roomNameFinal = roomName;
-
-        Thread buildRoomThread = new Thread(() -> {
-            System.out.println(this.getName() + " sedang di-upgrade");
-                
-            try {
-                Thread.sleep(1000 * 18 * 60);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            rooms.add(new Room(roomNameFinal, roomLocation));
-
-            System.out.println(this.getName() + " selesai di-upgrade");
-        });
-
+        BuildRoomThread buildRoomThread = new BuildRoomThread(1000 * 18 * 60, roomNameFinal, roomLocation);
         buildRoomThread.start();
+        Sim.getCurrentWorld().getClock().addEventListener(buildRoomThread);
     }
 
     public void displayRoom() {
-        System.out.println("Daftar ruangan di " + this.getName() + ":");
+
         for (Room room : rooms) {
             System.out.println("> " + room.getName());
         }
@@ -138,5 +125,27 @@ public class House {
 
     public List<Room> getRoomList(){
         return rooms;
+    }
+
+    public class BuildRoomThread extends Thread implements TickListener {
+        private long duration ;
+        private String roomNameFinal;
+        private Point roomLocation;
+        public BuildRoomThread(long duration, String roomNameFinal, Point roomLocation){
+            this.duration = duration;
+            this.roomNameFinal = roomNameFinal;
+            this.roomLocation = roomLocation;
+
+        }
+        public void run(){
+            System.out.println(roomNameFinal + " sedang di-upgrade\n");
+            while(duration > 0){
+            }
+            rooms.add(new Room(roomNameFinal, roomLocation));
+            System.out.println(roomNameFinal + " selesai di-upgrade\n");
+        }
+        public void changeSecUpdate(){
+            duration -= 1000;
+        }
     }
 }
