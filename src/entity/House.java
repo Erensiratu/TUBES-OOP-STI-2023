@@ -121,7 +121,7 @@ public class House {
         }
 
         final String roomNameFinal = roomName;
-        BuildRoomThread buildRoomThread = new BuildRoomThread(1000, roomNameFinal, roomLocation);
+        BuildRoomThread buildRoomThread = new BuildRoomThread(1000*18*60, roomNameFinal, roomLocation);
         buildRoomThread.start();
         Sim.getCurrentWorld().getClock().addSecEventListener(buildRoomThread);
     }
@@ -163,7 +163,7 @@ public class House {
         }
         public void changeSecUpdate(){
             duration = duration -  1000;
-            System.out.println("test\n");
+
         }
     }
 }
