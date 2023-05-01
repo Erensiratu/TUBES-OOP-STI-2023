@@ -130,6 +130,8 @@ public class SimPlicity implements ChangeDayListener{
     }
 
     public void viewSimInfo(){ // 3
+        System.out.println("Nama Sim : " + currentSim.getName());
+        System.out.println("Pekerjaan Sim : " + currentSim.getOcupation().getProfession().getName());
         currentSim.getStatus().displayStatus();
     }
 
@@ -217,11 +219,13 @@ public class SimPlicity implements ChangeDayListener{
         if (count == 1){
             newFurniture = objects.get(idx);
         } else {
+            ArrayList<Point> points = new ArrayList<>();
             System.out.println("Terdapat " + count + " " + furnitureName + " di ruangan ini");
             count = 1;
             for (Furniture furniture : objects){
-                if (furniture.getName().equals(furnitureName)){
+                if (furniture.getName().toLowerCase().equals(furnitureName.toLowerCase())){
                     System.out.println(furniture.getName() + " " + count + ": " + furniture.getPoint().displayPoint());
+                    points.add(furniture.getPoint());
                 }
             }
                 
@@ -234,15 +238,24 @@ public class SimPlicity implements ChangeDayListener{
                 x = input.nextInt();
                 System.out.printf("\nY: ");
                 y = input.nextInt();
+
+                for (Point p : points){
+                    if (p.equals(x, y)){
+                        found = true;
+                    }
+                }
+
+                if (!found){
+                    System.out.println("\nKoordinat tidak valid");
+                    continue;
+                }
+
                 for (Furniture furniture : objects){    
                     if (furniture.getPoint().equals(x, y)){
                         found = true;
                         newFurniture = furniture;
                         break;
                     }
-                }
-                if (!found){
-                    System.out.println("\nKoordinat tidak valid");
                 }
             }
         }

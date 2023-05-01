@@ -136,7 +136,7 @@ public class Room {
 
     public void editRoom(Sim sim) {
         printRoom();
-        System.out.printf("\nPilih aksi:\n1. Letakkan Objek\n2. Pindahkan Objek\n3. Ambil Objek\nNomor aksi:");
+        System.out.printf("\nPilih aksi:\n1. Letakkan Objek\n2. Pindahkan Objek\n3. Ambil Objek\nNomor aksi: ");
         int x = scanner.nextInt();
         scanner.nextLine();
         while ((x < 1) || (x > 3)) {
@@ -205,9 +205,11 @@ public class Room {
         } else {
             System.out.println("Terdapat " + count + " " + furnitureName + " di ruangan ini");
             count = 1;
+            ArrayList<Point> points = new ArrayList<>();
             for (Furniture furniture : objects){
                 if (furniture.getName().toLowerCase().equals(furnitureName.toLowerCase())){
                     System.out.println(furniture.getName() + " " + count + ": " + furniture.getPoint().displayPoint());
+                    points.add(furniture.getPoint());
                 }
             }
                 
@@ -220,16 +222,24 @@ public class Room {
                 i = scanner.nextInt();
                 System.out.printf("\nY: ");
                 j = scanner.nextInt();
+
+                for (Point p : points){
+                    if (p.equals(i, j)){
+                        found = true;
+                    }
+                }
+
+                if (!found){
+                    System.out.println("\nKoordinat tidak valid");
+                    continue;
+                }
+
                 for (Furniture furniture : objects){
                     if (furniture.getPoint().equals(i, j)){
-                        found = true;
                         currentFurniture = furniture;
                         removeObject(furniture);
                         break;
                     }
-                }
-                if (!found){
-                    System.out.println("\nKoordinat tidak valid");
                 }
             }
         }
@@ -272,11 +282,13 @@ public class Room {
             currentFurniture = objects.get(idx);
             removeObject(objects.get(idx));
         } else {
+            ArrayList<Point> points = new ArrayList<>();
             System.out.println("Terdapat " + count + " " + furnitureName + " di ruangan ini");
             count = 1;
             for (Furniture furniture : objects){
                 if (furniture.getName().toLowerCase().equals(furnitureName.toLowerCase())){
                     System.out.println(furniture.getName() + " " + count + ": " + furniture.getPoint().displayPoint());
+                    points.add(furniture.getPoint());
                 }
             }
                 
@@ -289,17 +301,26 @@ public class Room {
                 i = scanner.nextInt();
                 System.out.printf("\nY: ");
                 j = scanner.nextInt();
+
+                for (Point p : points){
+                    if (p.equals(i, j)){
+                        found = true;
+                    }
+                }
+
+                if (!found){
+                    System.out.println("\nKoordinat tidak valid");
+                    continue;
+                }
+
                 for (Furniture furniture : objects){    
                     if (furniture.getPoint().equals(i, j)){
-                        found = true;
                         currentFurniture = furniture;
                         removeObject(furniture);
                         break;
                     }
                 }
-                    if (!found){
-                        System.out.println("\nKoordinat tidak valid");
-                    }
+                    
             }
         }
         sim.getInventory().addItem((Item) currentFurniture);
@@ -309,7 +330,7 @@ public class Room {
     public void printRoom() {
         System.out.println("\nTampilan ruangan:");
         for (int i = 0; i < WIDTH; i++) {
-            System.out.print("   " + i);
+            System.out.print("  " + i);
         }
         System.out.println();
         for (int i = 0; i < WIDTH; i++) {
@@ -329,7 +350,7 @@ public class Room {
         int count = 1;
 
         for (Furniture furniture : objects){
-            System.out.printf("%d. %s\n", count, furniture.getName());
+            System.out.printf("%d. %s : %s\n", count, furniture.getName(), furniture.getPoint().displayPoint());
             count++;
         }
 

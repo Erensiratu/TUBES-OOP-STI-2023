@@ -36,11 +36,6 @@ public class Sim implements ChangeDayListener {
         timeSinceLastSupper = currentWorld.getClock().getTime();
         hadWorkedToday = false;
         hadShit = false;
-
-        this.getInventory().addItem(Ayam.getInstance(1));
-        this.getInventory().addItem(Nasi.getInstance(1));
-        this.getInventory().addItem(Nasi.getInstance(2));
-
     }
 
     public static Sim getInstance(String name, World currentWorld, House currentHouse, Room currentRoom, Point currentLocation){

@@ -64,23 +64,22 @@ public class InventoryManager {
                 count++;
             }
         }
-
         if (count == 1){
             System.out.println("Tidak ada furnitur");
             return null;
-        } else{
-            System.out.printf("\nMasukkan nama furnitur: ");
-            String furnitureName = scanner.nextLine();
 
+        } else{
+            String furnitureName;
             while (true){
-                System.out.printf("\nTidak ada furnitur dengan nama %s\nMasukkan nama furnitur: ", furnitureName);
+                System.out.printf("\nMasukkan nama furnitur: ");
                 furnitureName = scanner.nextLine();
                 for (Item item : inventory){
-                    if (furnitureName.equals(item.getName())){
+                    if (furnitureName.toLowerCase().equals(item.getName().toLowerCase())){
                         removeItem(item, 1);
                         return (Furniture) item;
                     }
                 }
+                System.out.println("\nMasukkan nama furnitur yang valid");
             }
         }
     }

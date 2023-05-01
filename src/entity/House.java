@@ -18,10 +18,10 @@ public class House {
         try {
             primaryRoom.addObject(new SingleBed(1), new Point(0, 0));
             primaryRoom.addObject(new Toilet(1), new Point(5, 0));
-            primaryRoom.addObject(new Toilet(1), new Point(4, 0));
             primaryRoom.addObject(new GasStove(1), new Point(4, 5));
             primaryRoom.addObject(new Clock(1), new Point(3, 0));
             primaryRoom.addObject(new TableAndChair(1), new Point(1, 1));
+            primaryRoom.addObject(new Toilet(1), new Point(4, 0));
         } catch (RoomException e) {
             System.out.println(e.getMessage());
         }
@@ -96,18 +96,28 @@ public class House {
         }
 
         Point roomLocation = new Point(x, y);
-        String roomName = scanner.nextLine();
+        String roomName = "";
+        
+        while (roomName.isEmpty()){
+            System.out.print("\nMasukkan nama ruangan baru: ");
+            roomName = scanner.nextLine().trim();
+            if (roomName.isEmpty()){
+                System.out.println("Tolong masukkan nama yang valid");
+            }
+        }
+
+        final String roomNameFinal = roomName;
 
         Thread buildRoomThread = new Thread(() -> {
             System.out.println(this.getName() + " sedang di-upgrade");
                 
             try {
-                Thread.sleep(18 * 60 * 1000);
+                Thread.sleep(1000 * 18 * 60);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
-            rooms.add(new Room(roomName, roomLocation));
+            rooms.add(new Room(roomNameFinal, roomLocation));
 
             System.out.println(this.getName() + " selesai di-upgrade");
         });
