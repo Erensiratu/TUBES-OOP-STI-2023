@@ -515,24 +515,39 @@ public class Action {
         if (sim.getStatus().getMoney() >= item.getPrice() * quantity){
             sim.getStatus().decreaseMoney(item.getPrice() * quantity);
             final int deliveryTime = item.getDelliveryTime();
-            Thread buyThread = new Thread(() -> {
-    
-                System.out.println("Barang sedang diantar ke " + sim.getName());
-                    
-                try {
-                    Thread.sleep(deliveryTime * 1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-    
-                sim.getInventory().addItem(finalItem);
-                System.out.println(sim.getName() + " telah menerima pesanannya");
-            });
-    
+            BuyItemThread buyThread = new BuyItemThread(deliveryTime, sim, finalItem);
             // Memulai thread
             buyThread.start();
+            Sim.getCurrentWorld().getClock().addSecEventListener(buyThread);
         } else{
             System.out.println("Uang milik " + sim.getName() + " tidak cukup untuk membeli barang ini");
         }
+
+
     }
+    public class BuyItemThread extends Thread implements TickListener {
+        private volatile long duration ;
+        private Sim sim;
+        private Item finalItem;
+        public BuyItemThread(long duration, Sim sim, Item finalItem){
+            this.duration = duration;
+            this.finalItem = finalItem;
+            this.sim = sim;
+
+        }
+        public void run(){
+            System.out.println("Barang sedang diantar ke " + sim.getName());
+
+            while(duration > 0){
+
+            }
+            sim.getInventory().addItem(finalItem);
+            System.out.println(sim.getName() + " telah menerima pesanannya");
+        }
+        public void changeSecUpdate(){
+            duration = duration -  1000;
+
+        }
+    }
+    
 }
