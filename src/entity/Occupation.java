@@ -33,7 +33,7 @@ public class Occupation {
             }
         }
 
-        Profession newProfession;
+        Profession newProfession = null;
 
         switch(input) {
             case 1:

@@ -29,20 +29,19 @@ public class SimPlicity implements ChangeDayListener{
                     }
                 }
                 currentWorld.getListSim().remove(sim);
-                Sysem.out.println(sim.getName() + " telah wafat");
-                deadSim++;
+                System.out.println(sim.getName() + " telah wafat");
             }
         }
 
         if (currentWorld.getListSim().size() == 0){
-            Sysem.out.println("Semua sim telah wafat\nGAME OVER");
+            System.out.println("Semua sim telah wafat\nGAME OVER");
             exit();
         } else{
             if (!currentSimAlive){
                 for (Sim sim : currentWorld.getListSim()){
                     if (sim.getStatus().isAlive()){
                         currentSim = sim;
-                        Sysem.out.println("Sekarang memainkan sim " + sim.getName());
+                        System.out.println("Sekarang memainkan sim " + sim.getName());
                     }
                 }
             }
