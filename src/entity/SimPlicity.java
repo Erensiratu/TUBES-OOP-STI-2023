@@ -19,12 +19,14 @@ public class SimPlicity implements ChangeDayListener{
     }
 
     public void startGame(){
-        World.init(this);
+        World.init();
         currentWorld = World.getInstance();
+        currentWorld.getClock().addEventListener(this);
+        
         currentWorld.getClock().setTime();
         addSim();
         currentSim = currentWorld.getListSim().get(0);
-
+        currentWorld.getClock().startTime();
     }
     
     public void save(){
@@ -36,29 +38,7 @@ public class SimPlicity implements ChangeDayListener{
     }
 
     public void help(){
-        System.out.println("                                     HELP                                     ");
-        System.out.println("                               panduan permainan                              ");
-        System.out.println("------------------------------------------------------------------------------");
-        System.out.println("Selamat datang di SIMPLICITY, tempat tinggal manusia - manusia kecil yang akan");
-        System.out.println("  bergantung pada bantuanmu! Bantu para sim untuk meraih kesejahteraan dengan ");
-        System.out.println("      menjaga agar mereka tetap kenyang, senang, bugar, dan berkecukupan.     ");
-        System.out.println("------------------------------------------------------------------------------");
-        System.out.println("                              Instruksi Bermain                               ");
-        System.out.println("                                                                              ");
-        System.out.println("1.  Add Sim               : membuat sim baru");
-        System.out.println("2.  Change Sim            : mengganti sim yang dikontrol");
-        System.out.println("3.  View Sim Info         : menampilkan status sim");
-        System.out.println("4.  Actions               : memilih aksi yang akan dilakukan oleh sim");
-        System.out.println("5.  View Current Location : menampilkan lokasi sim terpilih");
-        System.out.println("6.  Move Room             : memindahkan sim ke ruangan lain");
-        System.out.println("7.  Object List           : menampilkan daftar objek yang berada di ruangan");
-        System.out.println("8.  Go To Object          : memilih objek yang ingin dituju oleh sim");
-        System.out.println("9.  View Inventory        : menampilkan isi inventory sim");
-        System.out.println("10. Edit Room             : mengubah susunan objek di ruangan");
-        System.out.println("11. Upgrade House         : menambahkan ruangan baru dalam rumah");
-        System.out.println("12. Move House            : memindahkan sim ke rumah lain");
-        System.out.println("13. Help                  : menampilkan panduan permainan");
-        System.out.println("14. Exit                  : keluar dari permainan");
+        //buat sim
     }
 
     public void exit(){
@@ -67,7 +47,7 @@ public class SimPlicity implements ChangeDayListener{
 
     public void addSim(){ // 1
         if (hasAddSim){
-            System.out.println("Hanya bisa mengganti sim sekali tiap hari");
+            System.out.println("Hanya bisa menambahkan sim sekali tiap hari");
             return;
         } else {
             hasAddSim = true;
@@ -117,6 +97,7 @@ public class SimPlicity implements ChangeDayListener{
 
         currentWorld.addHouse(tempHouse);
         currentWorld.addSim(tempSim);
+        currentWorld.getClock().addEventListener(tempSim);
     }
 
     public void changeSim(){ // 2
@@ -397,10 +378,10 @@ public class SimPlicity implements ChangeDayListener{
 
             while (true){
                 game.displayMenu();
-                System.out.print("Masukkan angka dari 1-14: ");
-                currentWorld.getClock().setTime();
+                System.out.println("\nMasukkan angka dari 1-14: \n");
                 if (input.hasNext()){
                     int intInput = input.nextInt();
+                    input.nextLine();
                     switch (intInput){
                         case 1:
                             game.addSim();
@@ -447,7 +428,6 @@ public class SimPlicity implements ChangeDayListener{
                         default:
                             System.out.println("\n\nMasukkan angka yang valid, yaitu 1-14\n");
                     }
-                    currentWorld.getClock().updateTime();
                 }
             }
     }

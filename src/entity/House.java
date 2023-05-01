@@ -63,7 +63,9 @@ public class House {
             while ((direction < 1) || (direction > 5)){
                 System.out.printf("\n\nMasukan tidak valid\nMasukkan nomor: ");
                 direction = scanner.nextInt();
+                
             }
+
             switch (direction){
                 case 1:
                     x++;
@@ -99,15 +101,17 @@ public class House {
         String roomName = "";
         
         while (roomName.isEmpty()){
+            scanner.nextLine();
             System.out.print("\nMasukkan nama ruangan baru: ");
             roomName = scanner.nextLine().trim();
+            
             if (roomName.isEmpty()){
                 System.out.println("Tolong masukkan nama yang valid");
             }
         }
 
         final String roomNameFinal = roomName;
-        BuildRoomThread buildRoomThread = new BuildRoomThread(1000 * 18 * 60, roomNameFinal, roomLocation);
+        BuildRoomThread buildRoomThread = new BuildRoomThread(1000*18*60, roomNameFinal, roomLocation);
         buildRoomThread.start();
         Sim.getCurrentWorld().getClock().addEventListener(buildRoomThread);
     }
