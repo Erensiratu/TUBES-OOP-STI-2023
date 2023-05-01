@@ -18,6 +18,38 @@ public class SimPlicity implements ChangeDayListener{
         return instance;
     }
 
+    public void checkGameOver(){
+        boolean currentSimAlive = currentSim.getStatus().isAlive();
+
+        for (Sim sim : currentWorld.getListSim()){
+            if (!sim.getStatus().isAlive()){
+                for (House house : currentWorld.getListHouse()){ // Rumah sim baru akan hilang apabila semua sim yang ada telah pergi
+                    if (house.getOwner().equals(sim.getName())){
+                        currentWorld.getListHouse().remove(house);
+                    }
+                }
+                currentWorld.getListSim().remove(sim);
+                Sysem.out.println(sim.getName() + " telah wafat");
+                deadSim++;
+            }
+        }
+
+        if (currentWorld.getListSim().size() == 0){
+            Sysem.out.println("Semua sim telah wafat\nGAME OVER");
+            exit();
+        } else{
+            if (!currentSimAlive){
+                for (Sim sim : currentWorld.getListSim()){
+                    if (sim.getStatus().isAlive()){
+                        currentSim = sim;
+                        Sysem.out.println("Sekarang memainkan sim " + sim.getName());
+                    }
+                }
+            }
+        }
+
+    }
+
     public void startGame(){
         World.init();
         currentWorld = World.getInstance();
@@ -27,14 +59,6 @@ public class SimPlicity implements ChangeDayListener{
         addSim();
         currentSim = currentWorld.getListSim().get(0);
         currentWorld.getClock().startTime();
-    }
-    
-    public void save(){
-        //buat sim
-    }
-
-    public void load(){
-        //buat sim
     }
 
     public void help(){
@@ -289,6 +313,11 @@ public class SimPlicity implements ChangeDayListener{
     }
 
     public void upgradeHouse(){ // 11
+        if (currentSim.getHouse().isUpgrading()){
+            System.out.println("Rumah " + currentSim.getName() + " sedang dibangun ruangan baru");
+            return;
+        }
+
         if (!currentSim.getHouse().getOwner().getName().equals(currentSim.getName())){
             System.out.println(currentSim.getName() + " sedang tidak berada di rumahnya");
             return;
@@ -363,7 +392,7 @@ public class SimPlicity implements ChangeDayListener{
     }
 
     public static void main(String[] args) throws Exception {
-        SimPlicity game = SimPlicity.getInstance();
+            SimPlicity game = SimPlicity.getInstance();
 
 
             System.out.print("Selamat datang di Sim-Plicity! :3\nMasukkan [START] untuk memulai game Sim-Plicity\nMasukkan input lain untuk keluar dari program\n> ");
@@ -377,6 +406,7 @@ public class SimPlicity implements ChangeDayListener{
 
 
             while (true){
+                game.checkGameOver();
                 game.displayMenu();
                 System.out.println("\nMasukkan angka dari 1-14: \n");
                 if (input.hasNext()){

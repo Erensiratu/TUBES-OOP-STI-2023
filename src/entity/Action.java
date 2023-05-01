@@ -24,7 +24,7 @@ public class Action {
         int input = -1;
 
         while ((input % 20 != 0) || (input <= 0)){
-            System.out.println("\nMasukkan durasi kerja dalam detik\n Durasi kerja: ");
+            System.out.println("\nMasukkan durasi kerja dalam detik\n Durasi olahraga: ");
             input = scanner.nextInt();
 
             if ((input % 120 != 0) || (input <= 0)){
@@ -303,20 +303,19 @@ public class Action {
             System.out.println("Maaf, Sim sedang sibuk.");
             return;
         }
-
         
-        System.out.println("Masukkan durasi berkhayal : ");
+        System.out.print("Masukkan durasi berkhayal: ");
         int durationInput = scanner.nextInt();
 
         scanner.nextLine();
         while (durationInput <= 0){
-            System.out.println("Input durasi tidak valid.");
-            System.out.println("Masukkan durasi berkhayal: ");
+            System.out.println("\n\nInput durasi tidak valid.");
+            System.out.print("\nMasukkan durasi berkhayal: ");
             durationInput = scanner.nextInt();
             scanner.nextLine();
         } 
         int duration = durationInput;
-        System.out.println("Berkhayal selama " + duration/60 + " menit...");
+        System.out.println("\n\nBerkhayal selama " + duration + " detik...");
         Thread dreamThread = new Thread( new Runnable() {
             public void run() {
                 idle = false;
@@ -470,7 +469,7 @@ public class Action {
         while (item == null){
             switch (input){
                 case 1:
-                    System.out.println("Daftar Furnitur:\n1. Kasur Single\n2. Kasur Queen\n3. Kasur King\n4. Kompor Gas\n5. Kompor Listrik\n6. Kanvas\n7. Jam\n8. Shower\n9. Meja dan Kursi\n 10. Toilet\n");
+                    System.out.println("Daftar Furnitur:\n1. Kasur Single\n2. Kasur Queen\n3. Kasur King\n4. Kompor Gas\n5. Kompor Listrik\n6. Kanvas\n7. Jam\n8. Shower\n9. Meja dan Kursi\n10. Toilet\n");
                     while (itemName.isEmpty()){
                         System.out.printf("Masukkan nama furnitur: ");
                         itemName = scanner.nextLine();

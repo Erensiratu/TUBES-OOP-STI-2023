@@ -8,10 +8,20 @@ public class House {
     Sim owner;
     private Point location;
     private List<Room> rooms;
+    private boolean upgrading;
     Room primaryRoom;
     Scanner scanner = new Scanner(System.in);
+
+    public boolean isUpgrading() {
+        return upgrading;
+    }
+
+    public void setUpgrading(boolean upgrading) {
+        this.upgrading = upgrading;
+    }
     
     public House(Point location) {
+        upgrading = false;
         this.location = location;
         this.rooms = new ArrayList<>();
         primaryRoom = new Room("Ruang Utama", new Point(0, 0));
@@ -142,11 +152,13 @@ public class House {
 
         }
         public void run(){
+            setUpgrading(true);
             System.out.println(roomNameFinal + " sedang di-upgrade\n");
             while(duration > 0){
             }
             rooms.add(new Room(roomNameFinal, roomLocation));
             System.out.println(roomNameFinal + " selesai di-upgrade\n");
+            setUpgrading(false);
         }
         public void changeSecUpdate(){
             duration -= 1000;
