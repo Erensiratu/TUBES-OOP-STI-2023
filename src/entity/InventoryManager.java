@@ -76,7 +76,7 @@ public class InventoryManager {
                 for (Item item : inventory){
                     if (furnitureName.toLowerCase().equals(item.getName().toLowerCase())){
                         removeItem(item, 1);
-                        return (Furniture) item;
+                        return FurnitureFactory.createFurniture(item.getName(), 1);
                     }
                 }
                 System.out.println("\nMasukkan nama furnitur yang valid");
