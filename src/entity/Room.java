@@ -138,6 +138,7 @@ public class Room {
         printRoom();
         System.out.printf("\nPilih aksi:\n1. Letakkan Objek\n2. Pindahkan Objek\n3. Ambil Objek\nNomor aksi:");
         int x = scanner.nextInt();
+        scanner.nextLine();
         while ((x < 1) || (x > 3)) {
             System.out.printf("\n\nSilahkan ulangi input: ");
             x = scanner.nextInt();
@@ -158,7 +159,6 @@ public class Room {
                 removeObjectAction(sim);
                 break;
         }
-        scanner.close();
     }
 
     private void addObjectAction(Sim sim) {
