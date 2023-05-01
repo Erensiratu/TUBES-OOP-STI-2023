@@ -118,7 +118,7 @@ public class Timer {
         subscriber.add(i);
     }
 
-    public void addEventListener(TickListener i){
+    public void addSecEventListener(TickListener i){
         secondSubscriber.add(i);
     }
 
