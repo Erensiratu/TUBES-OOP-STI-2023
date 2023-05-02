@@ -4,11 +4,12 @@ import java.util.Random;
 import java.util.Scanner;
 
 
-public class Occupation {
+public class Occupation implements ChangeDayListener {
     Sim sim;
     Profession profession;
     int timesWorked;
     boolean excessTime;
+    int daySinceChangeJob;
 
     Scanner scanner = new Scanner(System.in);
 
@@ -16,6 +17,8 @@ public class Occupation {
         this.sim = sim;
         profession = getRandomProfession();
         timesWorked = 0;
+        daySinceChangeJob = 999;
+        Sim.getCurrentWorld().getClock().addEventListener(this);
     }
 
     public Profession getProfession() {
@@ -82,7 +85,11 @@ public class Occupation {
     }
 
     public void doWork(){
-        
+        if (daySinceChangeJob <= 2){
+            System.out.println("Maaf, belum bisa bekerja dengan pekerjaan barunya, silahkan coba lagi di lain hari");
+            return;
+        }
+
         int input = -1;
 
         while ((input % 120 != 0) || (input <= 0)){
@@ -132,5 +139,12 @@ public class Occupation {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void changeDayUpdate(){
+        decrementDayCounter();
+    }
+    public synchronized void decrementDayCounter(){
+        daySinceChangeJob--;
     }
 }

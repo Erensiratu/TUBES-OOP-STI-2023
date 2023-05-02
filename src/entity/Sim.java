@@ -18,7 +18,6 @@ public class Sim implements ChangeDayListener {
     Status status;
     long timeSinceLastSupper;
     long timeSinceLastSleep;
-    int daySinceChangeJob;
     boolean hadShit;
     boolean hadWorkedToday;
 
@@ -35,7 +34,6 @@ public class Sim implements ChangeDayListener {
         currentHouse.setOwner(this);
         timeSinceLastSleep = currentWorld.getClock().getTime();
         timeSinceLastSupper = currentWorld.getClock().getTime();
-        daySinceChangeJob = 999;
         hadWorkedToday = false;
         hadShit = false;
     }
