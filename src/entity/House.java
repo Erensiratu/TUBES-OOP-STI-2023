@@ -162,8 +162,10 @@ public class House {
             setUpgrading(false);
         }
         public void changeSecUpdate(){
+            durationDecrement();
+        }
+        public synchronized void durationDecrement(){
             duration = duration -  1000;
-
         }
     }
 }

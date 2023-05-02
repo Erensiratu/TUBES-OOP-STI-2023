@@ -526,7 +526,7 @@ public class Action {
 
     }
     public class BuyItemThread extends Thread implements TickListener {
-        private volatile long duration ;
+        private long duration ;
         private Sim sim;
         private Item finalItem;
         public BuyItemThread(long duration, Sim sim, Item finalItem){
@@ -545,9 +545,12 @@ public class Action {
             System.out.println(sim.getName() + " telah menerima pesanannya");
         }
         public void changeSecUpdate(){
-            duration = duration -  1000;
-
+            durationDecrement();
         }
+        public synchronized void durationDecrement(){
+            duration = duration -  1000;
+        }
+
     }
     
 }

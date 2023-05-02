@@ -18,6 +18,7 @@ public class Sim implements ChangeDayListener {
     Status status;
     long timeSinceLastSupper;
     long timeSinceLastSleep;
+    int daySinceChangeJob;
     boolean hadShit;
     boolean hadWorkedToday;
 
@@ -34,6 +35,7 @@ public class Sim implements ChangeDayListener {
         currentHouse.setOwner(this);
         timeSinceLastSleep = currentWorld.getClock().getTime();
         timeSinceLastSupper = currentWorld.getClock().getTime();
+        daySinceChangeJob = 999;
         hadWorkedToday = false;
         hadShit = false;
     }
@@ -103,7 +105,7 @@ public class Sim implements ChangeDayListener {
     public long getTimeSinceLastSupper(){
         return timeSinceLastSupper;
     }
-    public void setTimeSinceLastSupper(long timeSinceLastSupper){
+    public synchronized void setTimeSinceLastSupper(long timeSinceLastSupper){
         this.timeSinceLastSupper = timeSinceLastSupper;
     }
     public long getTimeSinceLastSleep(){
@@ -115,13 +117,13 @@ public class Sim implements ChangeDayListener {
     public boolean getHadShit(){
         return hadShit;
     }
-    public void setHadShit(boolean hadShit){
+    public synchronized void setHadShit(boolean hadShit){
         this.hadShit = hadShit;
     }
     public boolean getHadWorkedToday(){
         return hadWorkedToday;
     }
-    public void setHadWorkedToday(boolean hadWorkedToday){
+    public synchronized void setHadWorkedToday(boolean hadWorkedToday){
         this.hadWorkedToday = hadWorkedToday;
     }
 
