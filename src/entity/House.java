@@ -12,7 +12,7 @@ public class House {
     Room primaryRoom;
     Scanner scanner = new Scanner(System.in);
 
-    public boolean isUpgrading() {
+    public synchronized boolean isUpgrading() {
         return upgrading;
     }
 
