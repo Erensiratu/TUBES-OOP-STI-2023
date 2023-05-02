@@ -57,24 +57,24 @@ public class Status {
         alive = false;
     }
 
-    public void addMoney(double value){
+    public synchronized void addMoney(double value){
         money += value;
     }
-    public void addHunger(double value){
+    public synchronized void addHunger(double value){
         if (hunger + value > 100){
             hunger = 100;
         } else {
             hunger += value;
         }
     }
-    public void addHealth(double value){
+    public synchronized void addHealth(double value){
         if (health + value > 100){
             health = 100;
         } else {
             health += value;
         }
     }
-    public void addMood(double value){
+    public synchronized void addMood(double value){
         if (mood + value > 100){
             mood = 100;
         } else {
@@ -82,14 +82,14 @@ public class Status {
         }
     }
 
-    public void decreaseMoney(double value){
+    public synchronized void decreaseMoney(double value){
         if (money - value < 0){
             money = 0;
         } else {
             money -= value;
         }
     }
-    public void decreaseHunger(double value){
+    public synchronized void decreaseHunger(double value){
         if (hunger - value < 0){
             hunger = 0;
             kill();
@@ -97,7 +97,7 @@ public class Status {
             hunger -= value;
         }
     }
-    public void decreaseHealth(double value){
+    public synchronized void decreaseHealth(double value){
         if (health - value < 0){
             health = 0;
             kill();
@@ -105,7 +105,7 @@ public class Status {
             health -= value;
         }
     }
-    public void decreaseMood(double value){
+    public synchronized void decreaseMood(double value){
         if (mood - value < 0){
             mood = 0;
             kill();
