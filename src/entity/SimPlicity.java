@@ -61,7 +61,29 @@ public class SimPlicity implements ChangeDayListener{
     }
 
     public void help(){
-        //buat sim
+        System.out.println("                                     HELP                                     ");
+        System.out.println("                               panduan permainan                              ");
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("Selamat datang di SIMPLICITY, tempat tinggal manusia - manusia kecil yang akan");
+        System.out.println("  bergantung pada bantuanmu! Bantu para sim untuk meraih kesejahteraan dengan ");
+        System.out.println("      menjaga agar mereka tetap kenyang, senang, bugar, dan berkecukupan.     ");
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("                              Instruksi Bermain                               ");
+        System.out.println("                                                                              ");
+        System.out.println("1.  Add Sim               : membuat sim baru");
+        System.out.println("2.  Change Sim            : mengganti sim yang dikontrol");
+        System.out.println("3.  View Sim Info         : menampilkan status sim");
+        System.out.println("4.  Actions               : memilih aksi yang akan dilakukan oleh sim");
+        System.out.println("5.  View Current Location : menampilkan lokasi sim terpilih");
+        System.out.println("6.  Move Room             : memindahkan sim ke ruangan lain");
+        System.out.println("7.  Object List           : menampilkan daftar objek yang berada di ruangan");
+        System.out.println("8.  Go To Object          : memilih objek yang ingin dituju oleh sim");
+        System.out.println("9.  View Inventory        : menampilkan isi inventory sim");
+        System.out.println("10. Edit Room             : mengubah susunan objek di ruangan");
+        System.out.println("11. Upgrade House         : menambahkan ruangan baru dalam rumah");
+        System.out.println("12. Move House            : memindahkan sim ke rumah lain");
+        System.out.println("13. Help                  : menampilkan panduan permainan");
+        System.out.println("14. Exit                  : keluar dari permainan");
     }
 
     public void exit(){
