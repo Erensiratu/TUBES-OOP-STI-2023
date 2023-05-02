@@ -100,8 +100,8 @@ public class Timer {
                 if (run){
                     time += 1000;
                     changeSecond();
-                    if (day != (time/720000)){
-                        day = (int) time/720000;
+                    if (day != (time/10000)){
+                        day = (int) time/10000;
                         changeDay();
                     }
                 }                
