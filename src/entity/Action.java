@@ -66,11 +66,11 @@ public class Action {
         System.out.println("\nDaftar Aktivitas:\n1. Kerja\n2. Olahraga\n3. Mengobrol\n4. Transfer Uang\n5. Menghadiahkan Barang\n6. Menghayal\n7. Menggunakan Objek\n8. Membeli Barang\n9. Ganti Pekerjaan\n10. Batal\n");
 
         int input = 0;
-        while (input < 1 || input > 9){
-            System.out.printf("\nMasukkan angka dari 1-9: ");
+        while (input < 1 || input > 10){
+            System.out.printf("\nMasukkan angka dari 1-10: ");
             input = scanner.nextInt();
 
-            if (input < 1 || input > 9){
+            if (input < 1 || input > 10){
                 System.out.println("\n\nMasukan tidak valid, silakan ulangi");
             }
         }
@@ -482,6 +482,13 @@ public class Action {
                         itemName = scanner.nextLine();
                     }
                     item = (Purchaseable) FurnitureFactory.createFurniture(itemName, 0);
+
+                    if (item == null){
+                        System.out.println("\nNama item tidak valid, mohon ulangi masukkan");
+                        System.out.printf("\nMasukkan nama furnitur: ");
+                        itemName = scanner.nextLine();
+                        System.out.println();
+                    }
                     break;
                 case 2:
                     System.out.println("Daftar Bahan Makanan:\n1. Ayam\n2. Bayam\n3. Kacang\n4. Kentang\n5. Nasi\n6. Sapi\n7. Susu\n8. Wortel\n");
@@ -490,15 +497,18 @@ public class Action {
                         itemName = scanner.nextLine();
                     }
                     item = (Purchaseable) IngredientFactory.createIngredient(itemName, 0);
+
+                    if (item == null){
+                        System.out.println("\nNama item tidak valid, mohon ulangi masukkan");
+                        System.out.printf("\nMasukkan nama furnitur: ");
+                        itemName = scanner.nextLine();
+                        System.out.println();
+                    }
                     break;
                 case 3:
                     return;
                 default:
                     throw new IllegalArgumentException("Invalid option: " + input);
-            }
-
-            if (item == null){
-                System.out.println("\nNama item tidak valid, mohon ulangi masukkan\n\n");
             }
         }
         
