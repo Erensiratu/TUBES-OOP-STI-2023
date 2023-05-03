@@ -20,19 +20,23 @@ public class SimPlicity implements ChangeDayListener{
 
     public void checkGameOver(){
         boolean currentSimAlive = currentSim.getStatus().isAlive();
-
-        for (Sim sim : currentWorld.getListSim()){
-            if (!sim.getStatus().isAlive()){
-                for (House house : currentWorld.getListHouse()){ // Rumah sim baru akan hilang apabila semua sim yang ada telah pergi
-                    if (house.getOwner().equals(sim.getName())){
-                        currentWorld.getListHouse().remove(house);
+    
+        Iterator<Sim> simIterator = currentWorld.getListSim().iterator();
+        while (simIterator.hasNext()) {
+            Sim sim = simIterator.next();
+            if (!sim.getStatus().isAlive()) {
+                Iterator<House> houseIterator = currentWorld.getListHouse().iterator();
+                while (houseIterator.hasNext()) {
+                    House house = houseIterator.next();
+                    if (house.getOwner().equals(sim.getName())) {
+                        houseIterator.remove();
                     }
                 }
-                currentWorld.getListSim().remove(sim);
+                simIterator.remove();
                 System.out.println(sim.getName() + " telah wafat");
             }
         }
-
+    
         if (currentWorld.getListSim().size() == 0){
             System.out.println("Semua sim telah wafat\nGAME OVER");
             exit();
@@ -42,11 +46,11 @@ public class SimPlicity implements ChangeDayListener{
                     if (sim.getStatus().isAlive()){
                         currentSim = sim;
                         System.out.println("Sekarang memainkan sim " + sim.getName());
+                        return;
                     }
                 }
             }
         }
-
     }
 
     public void startGame(){
