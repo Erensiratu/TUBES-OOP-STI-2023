@@ -518,7 +518,7 @@ public class Action {
             System.out.println();
         }
     
-        final Item finalItem = (Item) item;
+        Item finalItem = (Item) item;
         finalItem.add(quantity);
         
         
@@ -535,32 +535,6 @@ public class Action {
 
 
     }
-    public class BuyItemThread extends Thread implements TickListener {
-        private long duration ;
-        private Sim sim;
-        private Item finalItem;
-        public BuyItemThread(long duration, Sim sim, Item finalItem){
-            this.duration = duration;
-            this.finalItem = finalItem;
-            this.sim = sim;
 
-        }
-        public void run(){
-            System.out.println("Barang sedang diantar ke " + sim.getName());
-
-            while(duration > 0){
-
-            }
-            sim.getInventory().addItem(finalItem);
-            System.out.println(sim.getName() + " telah menerima pesanannya");
-        }
-        public void changeSecUpdate(){
-            durationDecrement();
-        }
-        public synchronized void durationDecrement(){
-            duration = duration -  1000;
-        }
-
-    }
     
 }
