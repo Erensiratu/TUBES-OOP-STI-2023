@@ -13,7 +13,7 @@ public class Clock extends Furniture{
 
     public void use(Sim sim){
         // Implementasi
-        System.out.println(sim.getCurrentWorld().getClock().getRemainingTime());
+        System.out.println(Sim.getCurrentWorld().getClock().getRemainingTime());
     }
 
     @Override

@@ -121,9 +121,11 @@ public class House {
         }
 
         final String roomNameFinal = roomName;
-        BuildRoomThread buildRoomThread = new BuildRoomThread(1000*18*60, roomNameFinal, roomLocation);
+        BuildRoomThread buildRoomThread = new BuildRoomThread(1000*18*60, roomNameFinal, roomLocation, this);
         buildRoomThread.start();
         Sim.getCurrentWorld().getClock().addSecEventListener(buildRoomThread);
+        buildRoomThread = null;
+        Sim.getCurrentWorld().getClock().addPassiveThread(buildRoomThread);
     }
 
     public void displayRoom() {
@@ -141,31 +143,5 @@ public class House {
         return rooms;
     }
 
-    public class BuildRoomThread extends Thread implements TickListener {
-        private volatile long duration ;
-        private String roomNameFinal;
-        private Point roomLocation;
-        public BuildRoomThread(long duration, String roomNameFinal, Point roomLocation){
-            this.duration = duration;
-            this.roomNameFinal = roomNameFinal;
-            this.roomLocation = roomLocation;
 
-        }
-        public void run(){
-            setUpgrading(true);
-            System.out.println(roomNameFinal + " sedang di-upgrade\n");
-            while(duration > 0){
-
-            }
-            rooms.add(new Room(roomNameFinal, roomLocation));
-            System.out.println(roomNameFinal + " selesai di-upgrade\n");
-            setUpgrading(false);
-        }
-        public void changeSecUpdate(){
-            durationDecrement();
-        }
-        public synchronized void durationDecrement(){
-            duration = duration -  1000;
-        }
-    }
 }

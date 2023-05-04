@@ -14,6 +14,7 @@ public class Timer {
     private static ArrayList<ChangeDayListener> subscriber = new ArrayList<ChangeDayListener>(); ;
     private static ArrayList<Sim> listSim;
     private static ArrayList<TickListener> secondSubscriber = new ArrayList<TickListener>(); 
+    private static ArrayList<PassiveThread> listPassiveThread = new ArrayList<PassiveThread>();
 
     private Timer(ArrayList<Sim> listSim){
 
@@ -59,6 +60,7 @@ public class Timer {
         for(ChangeDayListener i : subscriber){
             i.changeDayUpdate();
         }
+        System.out.println("Hari telah berubah, semoga hari besok lebih baik dari hari ini.");
     }
 
     private void changeSecond() {
@@ -122,4 +124,10 @@ public class Timer {
         secondSubscriber.add(i);
     }
 
+    public void addPassiveThread(PassiveThread i){
+        listPassiveThread.add(i);
+    }
+    public void garbageCleaner(){
+
+    }
 }
