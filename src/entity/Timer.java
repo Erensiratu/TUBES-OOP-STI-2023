@@ -127,6 +127,10 @@ public class Timer {
     public void addPassiveThread(PassiveThread i){
         listPassiveThread.add(i);
     }
+    public ArrayList<PassiveThread> getPassiveThread(){
+        return listPassiveThread;
+    }
+
     public void garbageCleaner(){
 
     }

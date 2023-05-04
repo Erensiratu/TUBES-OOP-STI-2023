@@ -8,7 +8,7 @@ public class BuyItemThread extends PassiveThread {
         setDuration(duration);
         this.finalItem = finalItem;
         this.sim = sim;
-
+        this.setName("Pembelian "+finalItem.getName()+" oleh "+sim.getName());
     }
     public void run(){
         System.out.println("Barang sedang diantar ke " + sim.getName());

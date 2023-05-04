@@ -16,4 +16,5 @@ public abstract class PassiveThread extends Thread implements TickListener {
     public void setDuration(long duration){
         this.duration = duration;
     }
+
 }

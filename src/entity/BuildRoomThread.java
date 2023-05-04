@@ -9,7 +9,7 @@ public class BuildRoomThread extends PassiveThread {
         this.roomNameFinal = roomNameFinal;
         this.roomLocation = roomLocation;
         this.house = house;
-
+        setName("Pembangunan ruangan "+roomNameFinal+" di dalam "+house.getName());
     }
     public void run(){
         house.setUpgrading(true);

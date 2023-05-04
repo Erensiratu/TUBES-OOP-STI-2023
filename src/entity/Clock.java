@@ -14,6 +14,9 @@ public class Clock extends Furniture{
     public void use(Sim sim){
         // Implementasi
         System.out.println(Sim.getCurrentWorld().getClock().getRemainingTime());
+        for(PassiveThread i : Sim.getCurrentWorld().getClock().getPassiveThread()){
+            System.out.println(i.getName() + " akan tersisa "+ i.getDuration() );
+        }
     }
 
     @Override

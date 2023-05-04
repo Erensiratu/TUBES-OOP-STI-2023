@@ -529,9 +529,12 @@ public class Action {
             // Memulai thread
             buyThread.start();
             Sim.getCurrentWorld().getClock().addSecEventListener(buyThread);
+            Sim.getCurrentWorld().getClock().addPassiveThread(buyThread);
         } else{
             System.out.println("Uang milik " + sim.getName() + " tidak cukup untuk membeli barang ini");
         }
+
+        
 
 
     }
