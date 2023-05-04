@@ -468,6 +468,7 @@ public class Action {
             System.out.printf("\nMasukkan nomor: ");
             input = scanner.nextInt();
             System.out.println();
+            scanner.nextLine();
 
             if((input < 1) || (input > 3)){
                 System.out.println("Tolong masukkan input yang valid");
