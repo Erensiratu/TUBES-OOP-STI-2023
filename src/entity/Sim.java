@@ -5,7 +5,7 @@ import java.util.Currency;
 
 
 
-public class Sim implements ChangeDayListener {
+public class Sim implements ChangeDayListener, TickListener {
     String name;
     Occupation occupation;
     InventoryManager inventory;
@@ -35,7 +35,8 @@ public class Sim implements ChangeDayListener {
         timeSinceLastSleep = currentWorld.getClock().getTime();
         timeSinceLastSupper = currentWorld.getClock().getTime();
         hadWorkedToday = false;
-        hadShit = false;
+        hadShit = true;
+        Sim.getCurrentWorld().getClock().addSecEventListener(this);
     }
 
     public static Sim getInstance(String name, World currentWorld, House currentHouse, Room currentRoom, Point currentLocation){
@@ -138,17 +139,22 @@ public class Sim implements ChangeDayListener {
         return null;
     }
 
-    public void simUpdate(){
-        if ( currentWorld.getClock().getTime()  - timeSinceLastSleep >= 600000){
-            timeSinceLastSleep = currentWorld.getClock().getTime();
+    public void changeSecUpdate(){
+        setTimeSinceLastSleep(getTimeSinceLastSleep()+1000);
+        setTimeSinceLastSupper(getTimeSinceLastSupper()+1000);
+        if (getTimeSinceLastSleep() >= 600000){
+            setTimeSinceLastSleep(0);
+            status.decreaseMood(5);
+            status.decreaseHealth(5);
+            System.out.println("WARNING!!\n"+getName()+" kekurangan tidur!\n Kesehatan dan kesejahteraan berkurang 5.");
+        }
+        if ((getTimeSinceLastSupper() >= 240000) && (!getHadShit())){
             status.decreaseMood(5);
             status.decreaseHealth(5);  
+            setTimeSinceLastSupper(0);
+            System.out.println("WARNING!!\n"+getName()+" belum buang air!\n Kesehatan dan kesejahteraan berkurang 5.");
         }
-        if ((currentWorld.getClock().getTime() - timeSinceLastSupper >= 240000) && (hadShit) ) {
-            timeSinceLastSupper = currentWorld.getClock().getTime();
-            status.decreaseMood(5);
-            status.decreaseHealth(5);  
-        }
+
     }
 
     public void changeDayUpdate(){
