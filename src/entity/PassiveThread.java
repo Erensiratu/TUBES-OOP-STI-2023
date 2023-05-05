@@ -17,4 +17,8 @@ public abstract class PassiveThread extends Thread implements TickListener {
         this.duration = duration;
     }
 
+    public boolean isUsed(){
+        return isAlive();
+    }
+
 }

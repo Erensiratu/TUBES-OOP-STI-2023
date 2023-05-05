@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Timer {
     private long time;
-    private long start = System.currentTimeMillis();
     private int day;
     private boolean run = false;
     private boolean exit = false;
@@ -51,9 +50,6 @@ public class Timer {
         }
     }
 
-    public synchronized void setTime(){
-        start = System.currentTimeMillis();
-    }
 
 
     private void changeDay(){
@@ -61,12 +57,14 @@ public class Timer {
             i.changeDayUpdate();
         }
         System.out.println("Hari telah berubah, semoga hari besok lebih baik dari hari ini.");
+        garbageDayCleaner();
     }
 
     private void changeSecond() {
         for(TickListener i : secondSubscriber){
             i.changeSecUpdate();
         }
+        garbageSecondCleaner();
     }
     public long getTime(){
         return time;
@@ -131,7 +129,11 @@ public class Timer {
         return listPassiveThread;
     }
 
-    public void garbageCleaner(){
-
+    public void garbageSecondCleaner(){
+        secondSubscriber.removeIf(e -> !e.isUsed());
+        listPassiveThread.removeIf(e -> !e.isUsed());
+    }
+    public void garbageDayCleaner(){
+        subscriber.removeIf(e->!e.isUsed());
     }
 }

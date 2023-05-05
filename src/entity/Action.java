@@ -501,7 +501,7 @@ public class Action {
 
                     if (item == null){
                         System.out.println("\nNama item tidak valid, mohon ulangi masukkan");
-                        System.out.printf("\nMasukkan nama furnitur: ");
+                        System.out.printf("\nMasukkan nama bahan makanan: ");
                         itemName = scanner.nextLine();
                         System.out.println();
                     }
@@ -526,7 +526,7 @@ public class Action {
         if (sim.getStatus().getMoney() >= item.getPrice() * quantity){
             sim.getStatus().decreaseMoney(item.getPrice() * quantity);
             final int deliveryTime = item.getDelliveryTime();
-            BuyItemThread buyThread = new BuyItemThread(deliveryTime, sim, finalItem);
+            BuyItemThread buyThread = new BuyItemThread(deliveryTime*1000, sim, finalItem);
             // Memulai thread
             buyThread.start();
             Sim.getCurrentWorld().getClock().addSecEventListener(buyThread);

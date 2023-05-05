@@ -147,4 +147,8 @@ public class Occupation implements ChangeDayListener {
     public synchronized void decrementDayCounter(){
         daySinceChangeJob--;
     }
+
+    public boolean isUsed(){
+        return sim.getStatus().isAlive();
+    }
 }

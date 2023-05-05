@@ -161,6 +161,11 @@ public class Sim implements ChangeDayListener, TickListener {
         hadWorkedToday = false;
     }
 
+    public boolean isUsed(){
+        return status.isAlive();
+    }
+
+
     public void moveHouse(House house){
         if (!action.isIdle()){
             System.out.println("Maaf, Sim sedang sibuk.");

@@ -58,7 +58,6 @@ public class SimPlicity implements ChangeDayListener{
         currentWorld = World.getInstance();
         currentWorld.getClock().addEventListener(this);
         
-        currentWorld.getClock().setTime();
         addSim();
         currentSim = currentWorld.getListSim().get(0);
         currentWorld.getClock().startTime();
@@ -488,5 +487,9 @@ public class SimPlicity implements ChangeDayListener{
     }
     public void changeDayUpdate(){
         hasAddSim = false;
+    }
+
+    public boolean isUsed(){
+        return true;
     }
 }
