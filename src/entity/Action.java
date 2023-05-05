@@ -24,11 +24,11 @@ public class Action {
         int input = -1;
 
         while ((input % 20 != 0) || (input <= 0)){
-            System.out.println("\nMasukkan durasi kerja dalam detik\n Durasi olahraga: ");
+            System.out.print("\nMasukkan durasi olahraga dalam detik\nDurasi olahraga: ");
             input = scanner.nextInt();
 
-            if ((input % 120 != 0) || (input <= 0)){
-                System.out.println("Durasi kerja harus dalam kelipatan 20 dan lebih dari 0");
+            if ((input % 20 != 0) || (input <= 0)){
+                System.out.println("Durasi olahraga harus dalam kelipatan 20 dan lebih dari 0");
             }
         }
 

@@ -85,10 +85,15 @@ public class InventoryManager {
     }
 
     public void displayInventory(){
-        System.out.println("Isi inventory sim " + sim.getName());
-        for (Item item : inventory){
-            System.out.println("> " + item.getName() + " : " + item.getQuantity() + " buah");
+        if(inventory.size() == 0){
+            System.out.println(sim.getName() + " tidak memiliki apapun di inventory");
+        } else{
+            System.out.println("Isi inventory sim " + sim.getName() + " :");
+            for (Item item : inventory){
+                System.out.println("> " + item.getName() + " : " + item.getQuantity() + " buah");
+            }
         }
+        
     }
 
     // public Food chooseFood(){

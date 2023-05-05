@@ -330,6 +330,7 @@ public class Room {
 
     public void printRoom() {
         System.out.println("\nTampilan ruangan:");
+        System.out.println("Pada koordinat yang diberi tanda [-] berarti sudah ditempati oleh objek\n");
         for (int i = 0; i < WIDTH; i++) {
             System.out.print("  " + i);
         }

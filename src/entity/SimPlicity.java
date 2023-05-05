@@ -273,9 +273,11 @@ public class SimPlicity implements ChangeDayListener{
             ArrayList<Point> points = new ArrayList<>();
             System.out.println("Terdapat " + count + " " + furnitureName + " di ruangan ini");
             count = 1;
+            int i = 0;
             for (Furniture furniture : objects){
                 if (furniture.getName().toLowerCase().equals(furnitureName.toLowerCase())){
-                    System.out.println(furniture.getName() + " " + count + ": " + furniture.getPoint().displayPoint());
+                    System.out.println(furniture.getName() + " " + (count+i) + ": " + furniture.getPoint().displayPoint());
+                    i ++;
                     points.add(furniture.getPoint());
                 }
             }
@@ -417,9 +419,13 @@ public class SimPlicity implements ChangeDayListener{
 
     public static void main(String[] args) throws Exception {
             SimPlicity game = SimPlicity.getInstance();
-
-
-            System.out.print("Selamat datang di Sim-Plicity! :3\nMasukkan [START] untuk memulai game Sim-Plicity\nMasukkan input lain untuk keluar dari program\n> ");
+            System.out.println("\n");
+            System.out.println("    █▀ █▀▀ █░░ ▄▀█ █▀▄▀█ ▄▀█ ▀█▀   █▀▄ ▄▀█ ▀█▀ ▄▀█ █▄░█ █▀▀   █▀▄ █");
+            System.out.println("    ▄█ ██▄ █▄▄ █▀█ █░▀░█ █▀█ ░█░   █▄▀ █▀█ ░█░ █▀█ █░▀█ █▄█   █▄▀ █");
+            System.out.println("\n");
+            System.out.println("             █▀ █ █▀▄▀█ █▀█ █░░ █ █▀▀ █ ▀█▀ █▄█");
+            System.out.println("             ▄█ █ █░▀░█ █▀▀ █▄▄ █ █▄▄ █ ░█░ ░█░");
+            System.out.print("\nMasukkan [START] untuk memulai game Sim-Plicity\nMasukkan input lain untuk keluar dari program\n> ");
             String strInput = input.nextLine().trim();
 
             if (!strInput.toLowerCase().equals("start")){
