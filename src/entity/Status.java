@@ -129,10 +129,10 @@ public class Status {
 
 
     public void displayStatus() {
-        System.out.println("Status Sim:");
-        System.out.println("Uang: " + money);
-        System.out.println("Kekenyangan: " + hunger);
-        System.out.println("Kesehatan: " + health);
-        System.out.println("Mood: " + mood);
+        System.out.println("\nStatus Sim");
+        System.out.println("Uang        : " + money);
+        System.out.println("Kekenyangan : " + hunger);
+        System.out.println("Kesehatan   : " + health);
+        System.out.println("Mood        : " + mood);
     }
 }

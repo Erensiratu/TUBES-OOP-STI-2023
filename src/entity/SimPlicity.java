@@ -90,6 +90,7 @@ public class SimPlicity implements ChangeDayListener{
     }
 
     public void exit(){
+        System.out.println("\nTerima kasih sudah bermain!!!");
         System.exit(0);
     }
 
@@ -187,8 +188,8 @@ public class SimPlicity implements ChangeDayListener{
     }
 
     public void viewSimInfo(){ // 3
-        System.out.println("\nNama Sim : " + currentSim.getName());
-        System.out.println("Pekerjaan Sim : " + currentSim.getOcupation().getProfession().getName());
+        System.out.println("\nNama Sim  : " + currentSim.getName());
+        System.out.println("Pekerjaan   : " + currentSim.getOcupation().getProfession().getName());
         currentSim.getStatus().displayStatus();
     }
 
@@ -441,10 +442,21 @@ public class SimPlicity implements ChangeDayListener{
     }
 
     public static void main(String[] args) throws Exception {
-            SimPlicity game = SimPlicity.getInstance();
-
-
-            System.out.print("Selamat datang di Sim-Plicity! :3\nMasukkan [START] untuk memulai game Sim-Plicity\nMasukkan input lain untuk keluar dari program\n> ");
+            SimPlicity game = SimPlicity.getInstance();                                                              
+            System.out.println(" \n ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄       ▄▄                 ▄▄▄▄▄▄▄▄▄▄▄ ▄           ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄         ▄ ");
+            System.out.println(" ▐░░░░░░░░░░░▐░░░░░░░░░░░▐░░▌     ▐░░▌               ▐░░░░░░░░░░░▐░▌         ▐░░░░░░░░░░░▐░░░░░░░░░░░▐░░░░░░░░░░░▐░░░░░░░░░░░▐░▌       ▐░▌");
+            System.out.println(" ▐░█▀▀▀▀▀▀▀▀▀ ▀▀▀▀█░█▀▀▀▀▐░▌░▌   ▐░▐░▌               ▐░█▀▀▀▀▀▀▀█░▐░▌          ▀▀▀▀█░█▀▀▀▀▐░█▀▀▀▀▀▀▀▀▀ ▀▀▀▀█░█▀▀▀▀ ▀▀▀▀█░█▀▀▀▀▐░▌       ▐░▌");
+            System.out.println(" ▐░▌              ▐░▌    ▐░▌▐░▌ ▐░▌▐░▌               ▐░▌       ▐░▐░▌              ▐░▌    ▐░▌              ▐░▌         ▐░▌    ▐░▌       ▐░▌");
+            System.out.println(" ▐░▌              ▐░▌    ▐░▌▐░▌ ▐░▌▐░▌               ▐░▌       ▐░▐░▌              ▐░▌    ▐░▌              ▐░▌         ▐░▌    ▐░▌       ▐░▌");
+            System.out.println(" ▐░▌              ▐░▌    ▐░▌▐░▌ ▐░▌▐░▌               ▐░▌       ▐░▐░▌              ▐░▌    ▐░▌              ▐░▌         ▐░▌    ▐░▌       ▐░▌");
+            System.out.println(" ▐░█▄▄▄▄▄▄▄▄▄     ▐░▌    ▐░▌ ▐░▐░▌ ▐░▌  ▄▄▄▄▄▄▄▄▄▄▄  ▐░█▄▄▄▄▄▄▄█░▐░▌              ▐░▌    ▐░▌              ▐░▌         ▐░▌    ▐░█▄▄▄▄▄▄▄█░▌");
+            System.out.println(" ▐░░░░░░░░░░░▌    ▐░▌    ▐░▌  ▐░▌  ▐░▌  ░░░░░░░░░░░  ▐░░░░░░░░░░░▐░▌              ▐░▌    ▐░▌              ▐░▌         ▐░▌    ▐░░░░░░░░░░░▌");
+            System.out.println("  ▀▀▀▀▀▀▀▀▀█░▌    ▐░▌    ▐░▌   ▀   ▐░▌  ▀▀▀▀▀▀▀▀▀▀▀  ▐░█▀▀▀▀▀▀▀▀▀▐░▌              ▐░▌    ▐░▌              ▐░▌         ▐░▌     ▀▀▀▀█░█▀▀▀▀ ");
+            System.out.println("           ▐░▌    ▐░▌    ▐░▌       ▐░▌               ▐░▌         ▐░▌              ▐░▌    ▐░▌              ▐░▌         ▐░▌         ▐░▌     ");
+            System.out.println("  ▄▄▄▄▄▄▄▄▄█░▌▄▄▄▄█░█▄▄▄▄▐░▌       ▐░▌               ▐░▌         ▐░█▄▄▄▄▄▄▄▄▄ ▄▄▄▄█░█▄▄▄▄▐░█▄▄▄▄▄▄▄▄▄ ▄▄▄▄█░█▄▄▄▄     ▐░▌         ▐░▌    ");
+            System.out.println(" ▐░░░░░░░░░░░▐░░░░░░░░░░░▐░▌       ▐░▌               ▐░▌         ▐░░░░░░░░░░░▐░░░░░░░░░░░▐░░░░░░░░░░░▐░░░░░░░░░░░▌    ▐░▌         ▐░▌     ");
+            System.out.println("  ▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀ ▀         ▀                 ▀           ▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀      ▀           ▀   ");
+            System.out.print("\nSelamat datang di Sim-Plicity! :3\n\nMasukkan 'START' untuk memulai game Sim-Plicity\nMasukkan input lain untuk keluar dari program\n\n> ");
             String strInput = input.nextLine().trim();
 
             if (!strInput.toLowerCase().equals("start")){
