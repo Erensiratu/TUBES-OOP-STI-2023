@@ -90,6 +90,7 @@ public class SimPlicity implements ChangeDayListener{
     }
 
     public void exit(){
+        System.out.println("\nTerima kasih sudah bermain!!!");
         System.exit(0);
     }
 
@@ -120,13 +121,13 @@ public class SimPlicity implements ChangeDayListener{
         Point point = null;
         boolean valid = false;
         while (!valid) {
-            System.out.print("\n\nMasukkan koordinat rumah di axis x (0-63): ");
+            System.out.print("\nMasukkan koordinat rumah di axis x (0-64): ");
             int x = input.nextInt();
-            System.out.print("\n\nMasukkan koordinat rumah di axis y (0-63): ");
+            System.out.print("\nMasukkan koordinat rumah di axis y (0-64): ");
             int y = input.nextInt();
             point = new Point(x, y);
-            if (x < 0 || x > 63 || y < 0 || y > 63) {
-                System.out.println("Kedua titik koordinat harus dalam range 0-63");
+            if (x < 0 || x > 64 || y < 0 || y > 64) {
+                System.out.println("Kedua titik koordinat harus dalam range 0-64");
                 continue;
             }
             valid = true;
@@ -150,6 +151,12 @@ public class SimPlicity implements ChangeDayListener{
 
     public void changeSim(){ // 2
         if (currentWorld.getListSim().size() > 1){
+            System.out.println("Daftar sim lain di world ini: ");
+            for (Sim otherSim : currentSim.getWorld().getListSim()){
+                if (!otherSim.getName().equals(currentSim.getName())){
+                    System.out.println("> " + otherSim.getName());
+                }
+            }
             String simName = "";
             boolean found = false;
             while (!found){
@@ -181,8 +188,8 @@ public class SimPlicity implements ChangeDayListener{
     }
 
     public void viewSimInfo(){ // 3
-        System.out.println("Nama Sim : " + currentSim.getName());
-        System.out.println("Pekerjaan Sim : " + currentSim.getOcupation().getProfession().getName());
+        System.out.println("\nNama Sim  : " + currentSim.getName());
+        System.out.println("Pekerjaan   : " + currentSim.getOcupation().getProfession().getName());
         currentSim.getStatus().displayStatus();
     }
 
@@ -191,21 +198,25 @@ public class SimPlicity implements ChangeDayListener{
     }
 
     public void viewCurrentLocation(){ // 5
-        System.out.println("Lokasi sim di ruangan:\nX: " + currentSim.getLocation().getX() + "\nY: " + currentSim.getLocation().getY());
+        System.out.println("\nLokasi sim di ruangan:\nX: " + currentSim.getLocation().getX() + "\nY: " + currentSim.getLocation().getY());
         if (currentSim.getItem() == null){
             System.out.println("Sim tidak sedang berada di objek manapun");
         } else {
-            System.out.println("Sim sedang berada di objek " + currentSim.getItem().getName());
+            if (currentSim.getItem() == null){
+                System.out.println("Sim sedang tidak berada di objek apapun, silahkan gunakan command Go To Object");
+            } else{
+                System.out.println("Sim sedang berada di objek " + currentSim.getItem().getName());
+            }
         }
     }
 
     public void moveRoom(){ // 6
         if (!currentSim.getAction().isIdle()){
-            System.out.println("Sim sedang sibuk");
+            System.out.println("\nSim sedang sibuk");
             return;
         }
         if (currentSim.getHouse().getRoomList().size() == 1){
-            System.out.println("Hanya ada satu ruangan di rumah ini");
+            System.out.println("\nHanya ada satu ruangan di rumah ini");
             return;
         }
 
@@ -213,7 +224,7 @@ public class SimPlicity implements ChangeDayListener{
         currentSim.getHouse().displayRoom();
 
         while (!valid) {
-            System.out.print("Masukkan nama ruangan: ");
+            System.out.print("\nMasukkan nama ruangan: ");
             String roomName = input.nextLine().trim();
 
             if (roomName.toLowerCase().equals(currentSim.getRoom().getName().toLowerCase())){
@@ -322,6 +333,7 @@ public class SimPlicity implements ChangeDayListener{
         String answer = input.nextLine().trim();
 
         if (answer.toLowerCase().equals("ya")){
+            System.out.println("");
             currentSim.getAction().useItem();
         }
     }
@@ -340,17 +352,17 @@ public class SimPlicity implements ChangeDayListener{
 
     public void upgradeHouse(){ // 11
         if (currentSim.getHouse().isUpgrading()){
-            System.out.println("Rumah " + currentSim.getName() + " sedang dibangun ruangan baru");
+            System.out.println("\nRumah " + currentSim.getName() + " sedang dibangun ruangan baru");
             return;
         }
 
         if (!currentSim.getHouse().getOwner().getName().equals(currentSim.getName())){
-            System.out.println(currentSim.getName() + " sedang tidak berada di rumahnya");
+            System.out.println("\n" + currentSim.getName() + " sedang tidak berada di rumahnya");
             return;
         }
 
         if (currentSim.getStatus().getMoney() < 1500){
-            System.out.println(currentSim.getName() + " tidak mempunyai uang yang cukup untuk membangun ruangan baru di rumahnya");
+            System.out.println("\n" + currentSim.getName() + " tidak mempunyai uang yang cukup untuk membangun ruangan baru di rumahnya");
             return;
         }
         
@@ -361,7 +373,7 @@ public class SimPlicity implements ChangeDayListener{
             boolean valid = false;  
 
             while (!valid) {
-                System.out.print("Masukkan nama ruangan yang dijadikan acuan: ");
+                System.out.print("\nMasukkan nama ruangan yang dijadikan acuan: ");
                 String roomName = input.nextLine().trim();
                     
                 for (Room room : currentSim.getHouse().getRoomList()) {
@@ -380,12 +392,13 @@ public class SimPlicity implements ChangeDayListener{
     }
     
     public void moveHouse(){ // 12
+
         if (!currentSim.getAction().isIdle()){
-            System.out.println("Sim sedang sibuk");
+            System.out.println("\nSim sedang sibuk");
             return;
         }
         if (currentWorld.getListHouse().size() == 1){
-            System.out.println("Hanya ada 1 rumah di world ini");
+            System.out.println("\nHanya ada 1 rumah di world ini");
             return;
         }
         
@@ -406,6 +419,8 @@ public class SimPlicity implements ChangeDayListener{
             for (House house : currentWorld.getListHouse()){
                 if (visiteeString.toLowerCase().equals(house.getName().toLowerCase())){
                     currentSim.moveHouse(house);
+                    currentSim.setLocation(new Point(0,0));
+                    currentSim.setItem(null);
                     valid = true;
                     break;
                 }
@@ -414,18 +429,37 @@ public class SimPlicity implements ChangeDayListener{
     }
 
     public void displayMenu(){
-        System.out.println("\nMenu\n1. Add Sim\n2. Change Sim\n3. View Sim Info\n4. Actions\n5. View Current Location\n6. Move Room\n7. Object List\n8. Go To Object\n9. View Inventory\n10. Edit Room\n11. Upgrade House\n12. Move House\n13. Help\n14. Exit");
+        System.out.println("\n ▄▄       ▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄        ▄ ▄         ▄ ");
+        System.out.println("▐░░▌     ▐░░▐░░░░░░░░░░░▐░░▌      ▐░▐░▌       ▐░▌");
+        System.out.println("▐░▌░▌   ▐░▐░▐░█▀▀▀▀▀▀▀▀▀▐░▌░▌     ▐░▐░▌       ▐░▌");
+        System.out.println("▐░▌▐░▌ ▐░▌▐░▐░▌         ▐░▌▐░▌    ▐░▐░▌       ▐░▌");
+        System.out.println("▐░▌ ▐░▐░▌ ▐░▐░█▄▄▄▄▄▄▄▄▄▐░▌ ▐░▌   ▐░▐░▌       ▐░▌");
+        System.out.println("▐░▌  ▐░▌  ▐░▐░░░░░░░░░░░▐░▌  ▐░▌  ▐░▐░▌       ▐░▌");
+        System.out.println("▐░▌   ▀   ▐░▐░█▀▀▀▀▀▀▀▀▀▐░▌   ▐░▌ ▐░▐░▌       ▐░▌");
+        System.out.println("▐░▌       ▐░▐░▌         ▐░▌    ▐░▌▐░▐░▌       ▐░▌");
+        System.out.println("▐░▌       ▐░▐░█▄▄▄▄▄▄▄▄▄▐░▌     ▐░▐░▐░█▄▄▄▄▄▄▄█░▌");
+        System.out.println("▐░▌       ▐░▐░░░░░░░░░░░▐░▌      ▐░░▐░░░░░░░░░░░▌");
+        System.out.println(" ▀         ▀ ▀▀▀▀▀▀▀▀▀▀▀ ▀        ▀▀ ▀▀▀▀▀▀▀▀▀▀▀ ");
+        System.out.println("\n1. Add Sim\n2. Change Sim\n3. View Sim Info\n4. Actions\n5. View Current Location\n6. Move Room\n7. Object List\n8. Go To Object\n9. View Inventory\n10. Edit Room\n11. Upgrade House\n12. Move House\n13. Help\n14. Exit");
     }
 
     public static void main(String[] args) throws Exception {
-            SimPlicity game = SimPlicity.getInstance();
-            System.out.println("\n");
-            System.out.println("    █▀ █▀▀ █░░ ▄▀█ █▀▄▀█ ▄▀█ ▀█▀   █▀▄ ▄▀█ ▀█▀ ▄▀█ █▄░█ █▀▀   █▀▄ █");
-            System.out.println("    ▄█ ██▄ █▄▄ █▀█ █░▀░█ █▀█ ░█░   █▄▀ █▀█ ░█░ █▀█ █░▀█ █▄█   █▄▀ █");
-            System.out.println("\n");
-            System.out.println("             █▀ █ █▀▄▀█ █▀█ █░░ █ █▀▀ █ ▀█▀ █▄█");
-            System.out.println("             ▄█ █ █░▀░█ █▀▀ █▄▄ █ █▄▄ █ ░█░ ░█░");
-            System.out.print("\nMasukkan [START] untuk memulai game Sim-Plicity\nMasukkan input lain untuk keluar dari program\n> ");
+            SimPlicity game = SimPlicity.getInstance();                                                              
+            System.out.println(" \n ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄       ▄▄                 ▄▄▄▄▄▄▄▄▄▄▄ ▄           ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄         ▄ ");
+            System.out.println(" ▐░░░░░░░░░░░▐░░░░░░░░░░░▐░░▌     ▐░░▌               ▐░░░░░░░░░░░▐░▌         ▐░░░░░░░░░░░▐░░░░░░░░░░░▐░░░░░░░░░░░▐░░░░░░░░░░░▐░▌       ▐░▌");
+            System.out.println(" ▐░█▀▀▀▀▀▀▀▀▀ ▀▀▀▀█░█▀▀▀▀▐░▌░▌   ▐░▐░▌               ▐░█▀▀▀▀▀▀▀█░▐░▌          ▀▀▀▀█░█▀▀▀▀▐░█▀▀▀▀▀▀▀▀▀ ▀▀▀▀█░█▀▀▀▀ ▀▀▀▀█░█▀▀▀▀▐░▌       ▐░▌");
+            System.out.println(" ▐░▌              ▐░▌    ▐░▌▐░▌ ▐░▌▐░▌               ▐░▌       ▐░▐░▌              ▐░▌    ▐░▌              ▐░▌         ▐░▌    ▐░▌       ▐░▌");
+            System.out.println(" ▐░▌              ▐░▌    ▐░▌▐░▌ ▐░▌▐░▌               ▐░▌       ▐░▐░▌              ▐░▌    ▐░▌              ▐░▌         ▐░▌    ▐░▌       ▐░▌");
+            System.out.println(" ▐░▌              ▐░▌    ▐░▌▐░▌ ▐░▌▐░▌               ▐░▌       ▐░▐░▌              ▐░▌    ▐░▌              ▐░▌         ▐░▌    ▐░▌       ▐░▌");
+            System.out.println(" ▐░█▄▄▄▄▄▄▄▄▄     ▐░▌    ▐░▌ ▐░▐░▌ ▐░▌  ▄▄▄▄▄▄▄▄▄▄▄  ▐░█▄▄▄▄▄▄▄█░▐░▌              ▐░▌    ▐░▌              ▐░▌         ▐░▌    ▐░█▄▄▄▄▄▄▄█░▌");
+            System.out.println(" ▐░░░░░░░░░░░▌    ▐░▌    ▐░▌  ▐░▌  ▐░▌  ░░░░░░░░░░░  ▐░░░░░░░░░░░▐░▌              ▐░▌    ▐░▌              ▐░▌         ▐░▌    ▐░░░░░░░░░░░▌");
+            System.out.println("  ▀▀▀▀▀▀▀▀▀█░▌    ▐░▌    ▐░▌   ▀   ▐░▌  ▀▀▀▀▀▀▀▀▀▀▀  ▐░█▀▀▀▀▀▀▀▀▀▐░▌              ▐░▌    ▐░▌              ▐░▌         ▐░▌     ▀▀▀▀█░█▀▀▀▀ ");
+            System.out.println("           ▐░▌    ▐░▌    ▐░▌       ▐░▌               ▐░▌         ▐░▌              ▐░▌    ▐░▌              ▐░▌         ▐░▌         ▐░▌     ");
+            System.out.println("  ▄▄▄▄▄▄▄▄▄█░▌▄▄▄▄█░█▄▄▄▄▐░▌       ▐░▌               ▐░▌         ▐░█▄▄▄▄▄▄▄▄▄ ▄▄▄▄█░█▄▄▄▄▐░█▄▄▄▄▄▄▄▄▄ ▄▄▄▄█░█▄▄▄▄     ▐░▌         ▐░▌    ");
+            System.out.println(" ▐░░░░░░░░░░░▐░░░░░░░░░░░▐░▌       ▐░▌               ▐░▌         ▐░░░░░░░░░░░▐░░░░░░░░░░░▐░░░░░░░░░░░▐░░░░░░░░░░░▌    ▐░▌         ▐░▌     ");
+            System.out.println("  ▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀ ▀         ▀                 ▀           ▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀      ▀           ▀   ");
+            System.out.print("\nSelamat datang di Sim-Plicity! :3\n\nMasukkan 'START' untuk memulai game Sim-Plicity\nMasukkan input lain untuk keluar dari program\n\n> ");
+
             String strInput = input.nextLine().trim();
 
             if (!strInput.toLowerCase().equals("start")){
@@ -438,7 +472,8 @@ public class SimPlicity implements ChangeDayListener{
             while (true){
                 game.checkGameOver();
                 game.displayMenu();
-                System.out.println("\nMasukkan angka dari 1-14: \n");
+                System.out.println("\nMasukkan angka dari 1-14: ");
+                System.out.print("> ");
                 if (input.hasNext()){
                     int intInput = input.nextInt();
                     input.nextLine();

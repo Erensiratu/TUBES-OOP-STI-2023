@@ -5,8 +5,8 @@ import org.w3c.dom.ls.LSInput;
 
 
 public class World {
-    final int WORLD_LENGTH = 64;
-    final int WORLD_WIDTH = 64;
+    final int WORLD_LENGTH = 65;
+    final int WORLD_WIDTH = 65;
     private ArrayList<House> listHouse;
     private ArrayList<Sim> listSim;
     private Timer clock;

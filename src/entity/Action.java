@@ -32,13 +32,11 @@ public class Action {
             }
         }
 
-        System.out.println(sim.getName()+" akan melakukan olahraga selama "+ input + " detik");
+        System.out.println("\n" + sim.getName()+ " sedang berolahraga selama "+ input + " detik");
 
         final int finalInput = input;
 
         Thread excerciseThread = new Thread(() -> {
-    
-            System.out.println(sim.getName() + " sedang berolahraga");
                 
             try {
                 Thread.sleep(finalInput * 1000);
@@ -50,7 +48,7 @@ public class Action {
             sim.getStatus().addMood(finalInput/20*10);
             sim.getStatus().decreaseHunger(finalInput/20*5);
 
-            System.out.println(sim.getName() + " telah selesai berolahraga");
+            System.out.println("\n" +sim.getName() + " telah selesai berolahraga");
         });
 
         // Memulai thread
@@ -67,7 +65,7 @@ public class Action {
 
         int input = 0;
         while (input < 1 || input > 10){
-            System.out.printf("\nMasukkan angka dari 1-10: ");
+            System.out.printf("Masukkan angka dari 1-10: ");
             input = scanner.nextInt();
 
             if (input < 1 || input > 10){
@@ -115,17 +113,17 @@ public class Action {
 
     public void giftItem() {
         if (!idle) {
-            System.out.println("Maaf, Sim sedang sibuk.");
+            System.out.println("\nMaaf, Sim sedang sibuk.");
             return;
         }
 
         if (sim.getInventory().getList().size() == 0){
-            System.out.println(sim.getName() + " tidak mempunyai barang di inventory-nya");
+            System.out.println("\n" + sim.getName() + " tidak mempunyai barang di inventory-nya");
             return;
         }
 
         if (sim.getWorld().getListSim().size() == 1){
-            System.out.println("Tidak ada sim lain di world ini");
+            System.out.println("\nTidak ada sim lain di world ini");
             return;
         }
 
@@ -230,17 +228,17 @@ public class Action {
 
     public void transferMoney() {
         if (!idle) {
-            System.out.println("Maaf, Sim sedang sibuk.");
+            System.out.println("\nMaaf, Sim sedang sibuk.");
             return;
         }
 
         if (sim.getStatus().getMoney() == 0){
-            System.out.println(sim.getName() + " tidak mempunyai uang");
+            System.out.println("\n" + sim.getName() + " tidak mempunyai uang");
             return;
         }
 
         if (sim.getWorld().getListSim().size() == 1){
-            System.out.println("Tidak ada sim lain di world ini");
+            System.out.println("\nTidak ada sim lain di world ini");
             return;
         }
 
@@ -307,11 +305,11 @@ public class Action {
 
     public void dayDream() {
         if (!idle) {
-            System.out.println("Maaf, Sim sedang sibuk.");
+            System.out.println("\nMaaf, Sim sedang sibuk.");
             return;
         }
         
-        System.out.print("Masukkan durasi berkhayal: ");
+        System.out.print("\nMasukkan durasi berkhayal: ");
         int durationInput = scanner.nextInt();
 
         scanner.nextLine();
@@ -322,7 +320,7 @@ public class Action {
             scanner.nextLine();
         } 
         int duration = durationInput;
-        System.out.println("\n\nBerkhayal selama " + duration + " detik...");
+        System.out.println("\nBerkhayal selama " + duration + " detik...");
         Thread dreamThread = new Thread( new Runnable() {
             public void run() {
                 idle = false;
@@ -347,18 +345,18 @@ public class Action {
 
     public void converse() {
         if (!idle) {
-            System.out.println("Maaf, Sim sedang sibuk.");
+            System.out.println("\nMaaf, Sim sedang sibuk.");
             return;
         }
         if (sim.getWorld().getListSim().size() == 1){
-            System.out.println("Tidak ada sim lain di world ini");
+            System.out.println("\nTidak ada sim lain di world ini");
             return;
         }
         Sim otherSim2 = null ;
         String otherSimName = "";
         boolean found = false;
         while (!found){
-            System.out.print("Masukkan nama sim: ");
+            System.out.print("\nMasukkan nama sim: ");
             otherSimName = scanner.nextLine().trim();
 
             if (otherSimName.toLowerCase().equals(sim.getName().toLowerCase())){
@@ -433,6 +431,7 @@ public class Action {
     }
 
     public void useItem() { 
+        System.out.println("");
         if (!idle) {
             System.out.println("Maaf, Sim sedang sibuk.");
             return;
@@ -446,12 +445,13 @@ public class Action {
         Useable item = (Useable) sim.getItem();
 
         idle = false;
-        System.out.println(sim.getName() + " menggunakan " + ((Item) item).getName() + "...");
+        System.out.println(sim.getName() + " menggunakan " + ((Item) item).getName() + "...\n");
 
         // Use the item
         item.use(sim);
 
         idle = true;
+        System.out.println("");
         System.out.println(sim.getName() + " selesai menggunakan " + ((Item) item).getName() + "...");
     }
 
@@ -460,23 +460,34 @@ public class Action {
         
         int quantity = -1;
         String itemName = "";
-        System.out.println("Silakan pilih kategori belanja:\n1 untuk Furnitur\n2 untuk Bahan Makanan\n3 untuk Batal\n");
+        System.out.println("\nSilakan pilih kategori belanja:\n1 untuk Furnitur\n2 untuk Bahan Makanan\n3 untuk Batal\n");
         
         int input = -1;
         while ((input < 1) || (input > 3)){
-            System.out.printf("\nMasukkan nomor: ");
+            System.out.printf("Masukkan nomor: ");
             input = scanner.nextInt();
             System.out.println();
             scanner.nextLine();
 
             if((input < 1) || (input > 3)){
-                System.out.println("Tolong masukkan input yang valid");
+                System.out.println("Tolong masukkan input yang valid\n");
             }
+        }
+        switch (input){
+            case 1:
+                System.out.println("Daftar Furnitur:\n1. Kasur Single\n2. Kasur Queen\n3. Kasur King\n4. Kompor Gas\n5. Kompor Listrik\n6. Kanvas\n7. Jam\n8. Shower\n9. Meja dan Kursi\n10. Toilet\n");
+                break;
+            case 2:
+                System.out.println("Daftar Bahan Makanan:\n1. Ayam\n2. Bayam\n3. Kacang\n4. Kentang\n5. Nasi\n6. Sapi\n7. Susu\n8. Wortel\n");
+                break;
+            case 3:
+                return;
+            default:
+                throw new IllegalArgumentException("Masukan salah: " + input);
         }
         while (item == null){
             switch (input){
                 case 1:
-                    System.out.println("Daftar Furnitur:\n1. Kasur Single\n2. Kasur Queen\n3. Kasur King\n4. Kompor Gas\n5. Kompor Listrik\n6. Kanvas\n7. Jam\n8. Shower\n9. Meja dan Kursi\n10. Toilet\n");
                     while (itemName.isEmpty()){
                         System.out.printf("Masukkan nama furnitur: ");
                         itemName = scanner.nextLine();
@@ -484,14 +495,12 @@ public class Action {
                     item = (Purchaseable) FurnitureFactory.createFurniture(itemName, 0);
 
                     if (item == null){
-                        System.out.println("\nNama item tidak valid, mohon ulangi masukkan");
+                        System.out.println("Nama item tidak valid, mohon ulangi masukkan");
                         System.out.printf("\nMasukkan nama furnitur: ");
                         itemName = scanner.nextLine();
-                        System.out.println();
                     }
                     break;
                 case 2:
-                    System.out.println("Daftar Bahan Makanan:\n1. Ayam\n2. Bayam\n3. Kacang\n4. Kentang\n5. Nasi\n6. Sapi\n7. Susu\n8. Wortel\n");
                     while (itemName.isEmpty()){
                         System.out.printf("Masukkan nama bahan makanan: ");
                         itemName = scanner.nextLine();
@@ -499,23 +508,21 @@ public class Action {
                     item = (Purchaseable) IngredientFactory.createIngredient(itemName, 0);
 
                     if (item == null){
-                        System.out.println("\nNama item tidak valid, mohon ulangi masukkan");
+                        System.out.println("Nama item tidak valid, mohon ulangi masukkan");
                         System.out.printf("\nMasukkan nama bahan makanan: ");
                         itemName = scanner.nextLine();
-                        System.out.println();
                     }
                     break;
                 case 3:
                     return;
                 default:
-                    throw new IllegalArgumentException("Invalid option: " + input);
+                    throw new IllegalArgumentException("Masukan salah: " + input);
             }
         }
         
         while (quantity <= 0){
-            System.out.printf("Masukkan jumlah barang: ");
+            System.out.printf("\nMasukkan jumlah barang: ");
             quantity = scanner.nextInt();
-            System.out.println();
         }
     
         Item finalItem = (Item) item;
