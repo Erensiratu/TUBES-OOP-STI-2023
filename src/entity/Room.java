@@ -49,18 +49,17 @@ public class Room {
         }
 
         if (location.getX() + objectWidth > WIDTH || location.getY() + objectLength > WIDTH) {
-            throw new RoomException("object is out of bounds");
+            throw new RoomException("objek di luar ruangan");
         }
 
         for (int i = location.getX(); i < location.getX() + objectWidth; i++) {
             for (int j = location.getY(); j < location.getY() + objectLength; j++) {
                 if (grid[i][j] != null) {
-                    throw new RoomException("Collision detected");
+                    throw new RoomException("objek bertabrakan");
                 }
             }
         }
 
-        // No collision
         for (int i = location.getX(); i < location.getX() + objectWidth; i++) {
             for (int j = location.getY(); j < location.getY() + objectLength; j++) {
                 grid[i][j] = object;
@@ -74,9 +73,9 @@ public class Room {
 
     private void addObject(Furniture object) throws RoomException {
         int x,y;
-        System.out.printf("\nMasukkan x: ");
+        System.out.printf("\nMasukkan koordinat X baru: ");
         x = scanner.nextInt();
-        System.out.printf("\nMasukkan y: ");
+        System.out.printf("\nMasukkan koordinat Y baru: ");
         y = scanner.nextInt();
 
         Point location = new Point(x, y);
@@ -91,18 +90,17 @@ public class Room {
         }
 
         if (location.getX() + objectWidth > WIDTH || location.getY() + objectLength > WIDTH) {
-            throw new RoomException("object is out of bounds");
+            throw new RoomException("objek di luar ruangan");
         }
 
         for (int i = location.getX(); i < location.getX() + objectWidth; i++) {
             for (int j = location.getY(); j < location.getY() + objectLength; j++) {
                 if (grid[i][j] != null) {
-                    throw new RoomException("Collision detected");
+                    throw new RoomException("objek bertabrakan");
                 }
             }
         }
 
-        // No collision
         for (int i = location.getX(); i < location.getX() + objectWidth; i++) {
             for (int j = location.getY(); j < location.getY() + objectLength; j++) {
                 grid[i][j] = object;
@@ -110,7 +108,7 @@ public class Room {
         }
 
         object.setLocation(location);
-        System.out.println(object.getName() + " berhasil diletakkan di ruangan");
+        System.out.println("\n" + object.getName() + " berhasil diletakkan di ruangan");
         objects.add(object);
     }
 
@@ -137,11 +135,11 @@ public class Room {
 
     public void editRoom(Sim sim) {
         printRoom();
-        System.out.printf("\nPilih aksi:\n1. Letakkan Objek\n2. Pindahkan Objek\n3. Ambil Objek\nNomor aksi: ");
+        System.out.printf("\nPilih aksi:\n1. Letakkan Objek\n2. Pindahkan Objek\n3. Ambil Objek\n\nNomor aksi: ");
         int x = scanner.nextInt();
         scanner.nextLine();
         while ((x < 1) || (x > 3)) {
-            System.out.printf("\n\nSilahkan ulangi input: ");
+            System.out.printf("\nSilahkan ulangi input: ");
             x = scanner.nextInt();
         }
     
@@ -163,7 +161,7 @@ public class Room {
     }
 
     private void addObjectAction(Sim sim) {
-        
+        System.out.println("");
         Furniture currentFurniture = sim.getInventory().chooseFurniture();
         if (currentFurniture != null) {
             try {

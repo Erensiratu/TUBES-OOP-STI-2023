@@ -55,7 +55,7 @@ public class InventoryManager {
     }
 
     public Furniture chooseFurniture(){
-        System.out.println("Furnitur yang ada di inventory");
+        System.out.println("Furnitur yang ada di inventory:");
         int count = 1;
         for (Item item : inventory){
             if (item instanceof Furniture){
@@ -65,7 +65,7 @@ public class InventoryManager {
             }
         }
         if (count == 1){
-            System.out.println("Tidak ada furnitur");
+            System.out.println("Tidak ada furnitur :<");
             return null;
 
         } else{
@@ -85,7 +85,7 @@ public class InventoryManager {
     }
 
     public void displayInventory(){
-        System.out.println("Isi inventory sim " + sim.getName());
+        System.out.println("\nIsi inventory " + sim.getName() + ":");
         for (Item item : inventory){
             System.out.println("> " + item.getName() + " : " + item.getQuantity() + " buah");
         }

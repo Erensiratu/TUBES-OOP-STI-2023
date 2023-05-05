@@ -28,7 +28,7 @@ public class Occupation implements ChangeDayListener {
     }
 
     public void changeProfession(){
-        System.out.println("1.Badut Sulap\n2. Koki\n3. Dokter\n4. Polisi\5. Programmer");
+        System.out.println("\n1. Badut Sulap\n2. Koki\n3. Dokter\n4. Polisi\n5. Programmer");
         int input = 0;
         while (input < 1 || input > 5){
             System.out.print("\nMasukkan angka 1-5: ");
@@ -63,7 +63,7 @@ public class Occupation implements ChangeDayListener {
             profession = newProfession;           
             daySinceChangeJob = 0;
         } else{
-            System.out.println(sim.getName() + " belum dapat mengganti pekerjaannya saat ini");
+            System.out.println("\n" + sim.getName() + " belum dapat mengganti pekerjaannya saat ini");
         }
     }
 
@@ -100,7 +100,7 @@ public class Occupation implements ChangeDayListener {
             input = scanner.nextInt();
 
             if ((input % 120 != 0) || (input <= 0) || (input > 240) || ((input > 120) && (shiftWorked == 1))){
-                System.out.println("\n\nDurasi kerja harus valid, dalam kelipatan 120, dan satu hari kerja hanya bisa maksimal 240 menit");
+                System.out.println("\nDurasi kerja harus valid, dalam kelipatan 120, dan satu hari kerja hanya bisa maksimal 240 detik");
             }
         }
 

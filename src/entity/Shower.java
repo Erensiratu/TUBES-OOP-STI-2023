@@ -12,7 +12,7 @@ public class Shower extends Furniture{
 
     public void use(Sim sim){
         if (!getVacancy()){
-            System.out.println("\n\nBenda sedang digunakan oleh sim lain");
+            System.out.println("\nBenda sedang digunakan oleh sim lain");
             return;
         }
         
@@ -21,7 +21,7 @@ public class Shower extends Furniture{
             
             sim.getAction().setIdle(false);
 
-            System.out.println(sim.getName() + " sedang mandi");
+            System.out.println("\n" + sim.getName() + " sedang mandi");
                 
             try {
                 Thread.sleep(120 * 1000);
@@ -35,7 +35,7 @@ public class Shower extends Furniture{
 
             sim.getAction().setIdle(true);
 
-            System.out.println(sim.getName() + " telah selesai mandi");
+            System.out.println("\n" + sim.getName() + " telah selesai mandi");
 
             setVacancy(true);
         });

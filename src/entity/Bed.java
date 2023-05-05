@@ -19,11 +19,11 @@ public abstract class Bed extends Furniture{
         // Meminta waktu tidur (dalam detik)
         int input = -1;
         while (input < 180) {
-            System.out.printf("Masukkan waktu tidur untuk sim\n Waktu tidur (dalam detik): ");
+            System.out.printf("Masukkan waktu tidur untuk sim\nWaktu tidur (dalam detik): ");
             input = scanner.nextInt();
 
             if (input < 180){
-                System.out.println("\n\nWaktu tidak boleh kurang dari 180 detik");
+                System.out.println("\nWaktu tidak boleh kurang dari 180 detik");
             }
         }
     
@@ -35,7 +35,7 @@ public abstract class Bed extends Furniture{
         Thread sleepThread = new Thread(() -> {
             sim.getAction().setIdle(false);
     
-            System.out.println(sim.getName() + " sedang tidur selama " + sleepTime + " detik");
+            System.out.println("\n" + sim.getName() + " sedang tidur selama " + sleepTime + " detik");
     
             try {
                 Thread.sleep(sleepTime * 1000);
@@ -51,7 +51,7 @@ public abstract class Bed extends Furniture{
     
             sim.getAction().setIdle(true);
     
-            System.out.println(sim.getName() + " telah bangun");
+            System.out.println("\n" + sim.getName() + " telah bangun");
         });
 
         // Memulai thread
