@@ -10,6 +10,7 @@ public class Occupation implements ChangeDayListener {
     int timesWorked;
     boolean excessTime;
     int daySinceChangeJob;
+    int shiftWorked;
 
     Scanner scanner = new Scanner(System.in);
 
@@ -17,6 +18,7 @@ public class Occupation implements ChangeDayListener {
         this.sim = sim;
         profession = getRandomProfession();
         timesWorked = 0;
+        shiftWorked = 0;
         daySinceChangeJob = 999;
         Sim.getCurrentWorld().getClock().addEventListener(this);
     }
@@ -59,6 +61,7 @@ public class Occupation implements ChangeDayListener {
         if ((timesWorked > 720) && (sim.getStatus().getMoney() < newProfession.getSalary()/2)){
             sim.getStatus().decreaseMoney(newProfession.getSalary()/2);
             profession = newProfession;           
+            daySinceChangeJob = 0;
         } else{
             System.out.println(sim.getName() + " belum dapat mengganti pekerjaannya saat ini");
         }
@@ -92,12 +95,12 @@ public class Occupation implements ChangeDayListener {
 
         int input = -1;
 
-        while ((input % 120 != 0) || (input <= 0)){
+        while ((input % 120 != 0) || (input <= 0) || (input > 240) || ((input > 120) && (shiftWorked == 1))){
             System.out.print("\nMasukkan durasi kerja dalam detik\nDurasi kerja: ");
             input = scanner.nextInt();
 
-            if ((input % 120 != 0) || (input <= 0)){
-                System.out.println("\n\nDurasi kerja harus dalam kelipatan 120 dan lebih dari 0");
+            if ((input % 120 != 0) || (input <= 0) || (input > 240) || ((input > 120) && (shiftWorked == 1))){
+                System.out.println("\n\nDurasi kerja harus valid, dalam kelipatan 120, dan satu hari kerja hanya bisa maksimal 240 menit");
             }
         }
 
@@ -114,19 +117,24 @@ public class Occupation implements ChangeDayListener {
 
             addTimesWorked(duration);
 
-            int totalDuration = duration;
-            if (duration % 240 != 0){
-                if (excessTime){
-                    totalDuration += 120;
-                    excessTime = false;
-                } else{
-                    excessTime = true;
-                }
+
+            if (duration == 120){
+                shiftWorked += 1;
+
+            } else //duration == 240
+            {
+                
+                shiftWorked += 2;
             }
+
+            if (shiftWorked >= 2){
+                sim.getStatus().addMoney(profession.getSalary());
+            }
+
 
             sim.getStatus().decreaseHunger(duration/30*10);
             sim.getStatus().decreaseMood(duration/30*10);
-            sim.getStatus().addMoney(profession.getSalary()*((totalDuration)/240));
+
             
             sim.getAction().setIdle(true);
             
@@ -143,9 +151,17 @@ public class Occupation implements ChangeDayListener {
 
     public void changeDayUpdate(){
         decrementDayCounter();
+        setShiftWorked(0);
     }
     public synchronized void decrementDayCounter(){
         daySinceChangeJob--;
+    }
+
+    public synchronized void setShiftWorked(int i){
+        shiftWorked = i;
+    }
+    public int getShiftWorked(){
+        return shiftWorked;
     }
 
     public boolean isUsed(){

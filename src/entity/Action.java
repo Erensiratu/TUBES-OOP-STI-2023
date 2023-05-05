@@ -425,11 +425,10 @@ public class Action {
             System.out.println("Maaf, Sim sedang sibuk.");
             return;
         }
-        if (sim.getHadWorkedToday()){
-            System.out.println("Maaf, Sim telah bekerja hari ini");
+        if (sim.getOcupation().getShiftWorked() >= 2){
+            System.out.println("Maaf, Sim telah bekerja dengan shift penuh hari ini");
             return;
         }
-        sim.setHadWorkedToday(true);
         sim.getOcupation().doWork();
     }
 

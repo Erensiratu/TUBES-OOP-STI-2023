@@ -19,7 +19,7 @@ public class Sim implements ChangeDayListener, TickListener {
     long timeSinceLastSupper;
     long timeSinceLastSleep;
     boolean hadShit;
-    boolean hadWorkedToday;
+
 
     public Sim(String name, World currentWorld, House currentHouse, Room currentRoom, Point currentLocation){
         this.name = name;
@@ -34,7 +34,7 @@ public class Sim implements ChangeDayListener, TickListener {
         currentHouse.setOwner(this);
         timeSinceLastSleep = currentWorld.getClock().getTime();
         timeSinceLastSupper = currentWorld.getClock().getTime();
-        hadWorkedToday = false;
+
         hadShit = true;
         Sim.getCurrentWorld().getClock().addSecEventListener(this);
     }
@@ -119,12 +119,7 @@ public class Sim implements ChangeDayListener, TickListener {
     public synchronized void setHadShit(boolean hadShit){
         this.hadShit = hadShit;
     }
-    public boolean getHadWorkedToday(){
-        return hadWorkedToday;
-    }
-    public synchronized void setHadWorkedToday(boolean hadWorkedToday){
-        this.hadWorkedToday = hadWorkedToday;
-    }
+
 
     public static World getCurrentWorld(){
         return currentWorld;
@@ -157,8 +152,9 @@ public class Sim implements ChangeDayListener, TickListener {
 
     }
 
+    @Deprecated
     public void changeDayUpdate(){
-        hadWorkedToday = false;
+        
     }
 
     public boolean isUsed(){
