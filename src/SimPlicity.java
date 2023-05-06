@@ -90,7 +90,7 @@ public class SimPlicity implements ChangeDayListener{
 
     public void addSim(){ // 1
         if (hasAddSim){
-            System.out.println("Hanya bisa menambahkan sim sekali tiap hari");
+            System.out.println("\nHanya bisa menambahkan sim sekali tiap hari");
             return;
         } else {
             hasAddSim = true;
@@ -195,7 +195,7 @@ public class SimPlicity implements ChangeDayListener{
     public void viewCurrentLocation(){ // 5
         System.out.println("\nLokasi sim di dunia: " + currentSim.getHouse().getName());
         System.out.println("\nLokasi sim di rumah: " + currentSim.getRoom().getName());
-        System.out.println("\nLokasi sim di ruangan:\nX: " + currentSim.getLocation().getX() + "\nY: " + currentSim.getLocation().getY());
+        System.out.println("\nLokasi sim di ruangan\nX: " + currentSim.getLocation().getX() + "\nY: " + currentSim.getLocation().getY());
         if (currentSim.getItem() == null){
             System.out.println("Sim sedang tidak berada di objek apapun, silahkan gunakan command Go To Object");
         } else {

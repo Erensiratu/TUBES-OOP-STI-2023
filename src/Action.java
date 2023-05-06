@@ -134,7 +134,7 @@ public class Action {
         int quantity = 0;
         boolean found = false;
         
-        System.out.println("Daftar sim lain di world ini: ");
+        System.out.println("\nDaftar sim lain di world ini: ");
         for (Sim otherSim : sim.getWorld().getListSim()){
             if (!otherSim.getName().equals(sim.getName())){
                 System.out.println("> " + otherSim.getName());
@@ -142,7 +142,7 @@ public class Action {
         }
         
         while (!found){
-            System.out.print("Masukkan nama penerima: ");
+            System.out.print("\nMasukkan nama penerima: ");
             receiverName = scanner.nextLine().trim();
 
             if (receiverName.toLowerCase().equals(sim.getName().toLowerCase())){
@@ -176,7 +176,7 @@ public class Action {
 
         found = false;
         while (!found){
-            System.out.print("\n\n\nMasukkan nama item yang ingin dihadiahkan: ");
+            System.out.print("\nMasukkan nama item yang ingin dihadiahkan: ");
             itemName = scanner.nextLine().trim();
 
             for (Item item : sim.getInventory().getList()){
@@ -185,7 +185,7 @@ public class Action {
                         quantity = 1;
                     }
                     while (quantity <= 0 || quantity > item.getQuantity()){
-                        System.out.print("\n\n\nMasukkan jumlah" + item.getName() + " yang ingin dihadiahkan: ");
+                        System.out.print("\n\nMasukkan jumlah" + item.getName() + " yang ingin dihadiahkan: ");
                         quantity = scanner.nextInt();
 
                         if (quantity <= 0){
@@ -223,7 +223,7 @@ public class Action {
 
         sim.getInventory().removeItem(gift, quantity);
 
-        System.out.println(sim.getName() + " menghadiahkan " + gift.getName() + " ke " + receiver.getName() + " sebanyak " + quantity + " buah");     
+        System.out.println("\n" + sim.getName() + " menghadiahkan " + gift.getName() + " ke " + receiver.getName() + " sebanyak " + quantity + " buah");     
     }
 
     public void transferMoney() {
@@ -247,7 +247,7 @@ public class Action {
         int quantity = 0;
         boolean found = false;
         
-        System.out.println("Daftar sim lain di world ini: ");
+        System.out.println("\nDaftar sim lain di world ini: ");
         for (Sim otherSim : sim.getWorld().getListSim()){
             if (!otherSim.getName().equals(sim.getName())){
                 System.out.println("> " + otherSim.getName());
