@@ -163,7 +163,7 @@ public class Action {
             }
 
             if (receiverName.isEmpty()){
-                System.out.println("\n\nMasukkan nama sim yang valid" );
+                System.out.println("\nMasukkan nama sim yang valid" );
             }
         }
 
@@ -255,7 +255,7 @@ public class Action {
         }
         
         while (!found){
-            System.out.print("Masukkan nama penerima: ");
+            System.out.print("\nMasukkan nama penerima: ");
             receiverName = scanner.nextLine().trim();
 
             if (receiverName.toLowerCase().equals(sim.getName().toLowerCase())){
@@ -272,7 +272,7 @@ public class Action {
             }
 
             if (!found){
-                System.out.println("\nTidak ada sim dengan nama " + receiverName);
+                System.out.println("\n\nTidak ada sim dengan nama " + receiverName);
             }
 
             if (receiverName.isEmpty()){
@@ -280,7 +280,7 @@ public class Action {
             }
         }
 
-        System.out.println("\nJumlah uang milik " + sim.getName() + " : " + sim.getStatus().getMoney());
+        System.out.println("\nJumlah uang milik " + sim.getName() + " : " + (int) sim.getStatus().getMoney());
 
         while (quantity <= 0 || quantity > sim.getStatus().getMoney()){
             System.out.print("\nMasukkan jumlah uang yang ingin dikirim: ");
@@ -439,6 +439,11 @@ public class Action {
 
         if (!((Furniture) sim.getItem()).getVacancy()){
             System.out.println("Maaf, benda sedang digunakan oleh sim lain.");
+            return;
+        }
+
+        if (sim.getItem() == null){
+            System.out.println("Sim sedang tidak berada di benda apapun");
             return;
         }
 

@@ -42,7 +42,17 @@ public class SimPlicity implements ChangeDayListener{
             exit();
         } else{
             if (!currentSimAlive){
-                changeSim();
+                if (currentWorld.getListSim().size() == 1){
+                    for (Sim sim : currentWorld.getListSim()) {
+                        if (sim.getStatus().isAlive()) {
+                            currentSim = sim;
+                            System.out.println("\nSim yang tersisa hanya " + currentSim.getName() + "\n\nSim yang dimainkan sekarang adalah "  + currentSim.getName());
+                            break;
+                        }
+                    }
+                } else {
+                    changeSim();
+                }
             }
         }
     }
@@ -89,12 +99,12 @@ public class SimPlicity implements ChangeDayListener{
     }
 
     public void addSim(){ // 1
-        if (hasAddSim){
-            System.out.println("\nHanya bisa menambahkan sim sekali tiap hari");
-            return;
-        } else {
-            hasAddSim = true;
-        }
+        // if (hasAddSim){
+        //     System.out.println("\nHanya bisa menambahkan sim sekali tiap hari");
+        //     return;
+        // } else {
+        //     hasAddSim = true;
+        // }
 
         Scanner nameScanner = new Scanner(System.in);
         String simName = "";
@@ -161,7 +171,7 @@ public class SimPlicity implements ChangeDayListener{
                     continue;
                 }
                 else if (simName.toLowerCase().equals(currentSim.getName().toLowerCase())){
-                    System.out.println(simName + " tidak bisa dipilih\n");
+                    System.out.println("\n" + simName + " tidak bisa dipilih");
                     continue;
                 }
                 for (Sim sim : currentWorld.getListSim()) {
