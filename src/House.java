@@ -25,16 +25,6 @@ public class House {
         this.location = location;
         this.rooms = new ArrayList<>();
         primaryRoom = new Room("Ruang Utama", new Point(0, 0));
-        try {
-            primaryRoom.addObject(new SingleBed(1), new Point(0, 0));
-            primaryRoom.addObject(new Toilet(1), new Point(5, 0));
-            primaryRoom.addObject(new GasStove(1), new Point(4, 5));
-            primaryRoom.addObject(new Clock(1), new Point(3, 0));
-            primaryRoom.addObject(new TableAndChair(1), new Point(1, 1));
-            primaryRoom.addObject(new Toilet(1), new Point(4, 0));
-        } catch (RoomException e) {
-            System.out.println(e.getMessage());
-        }
         rooms.add(primaryRoom);
     }
 

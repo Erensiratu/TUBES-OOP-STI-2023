@@ -88,7 +88,7 @@ public class InventoryManager {
         if(inventory.size() == 0){
             System.out.println(sim.getName() + " tidak memiliki apapun di inventory");
         } else{
-            System.out.println("Isi inventory sim " + sim.getName() + " :");
+            System.out.println("\nIsi inventory sim " + sim.getName() + ":");
             for (Item item : inventory){
                 System.out.println("> " + item.getName() + " : " + item.getQuantity() + " buah");
             }

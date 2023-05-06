@@ -37,6 +37,12 @@ public class Sim implements ChangeDayListener, TickListener {
 
         hadShit = true;
         Sim.getCurrentWorld().getClock().addSecEventListener(this);
+
+        this.inventory.addItem(SingleBed.getInstance(1));
+        this.inventory.addItem(Toilet.getInstance(1));
+        this.inventory.addItem(GasStove.getInstance(1));
+        this.inventory.addItem(Clock.getInstance(1));
+        this.inventory.addItem(TableAndChair.getInstance(1));
     }
 
     public static Sim getInstance(String name, World currentWorld, House currentHouse, Room currentRoom, Point currentLocation){
