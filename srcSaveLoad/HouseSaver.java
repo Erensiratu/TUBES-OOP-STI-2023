@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class HouseSaver implements Serializable{
     private Point location;
     private ArrayList<RoomSaver> rooms = new ArrayList<RoomSaver>();
-    private boolean upgrading;
+    private boolean upgrading ;
     RoomSaver primaryRoom;
 
     public Point getLocation() {

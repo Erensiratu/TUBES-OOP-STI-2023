@@ -8,8 +8,6 @@ public class House {
     Sim owner;
     private Point location;
     private List<Room> rooms;
-
-
     private boolean upgrading;
     Room primaryRoom;
     Scanner scanner = new Scanner(System.in);

@@ -481,7 +481,7 @@ public class SimPlicity implements ChangeDayListener{
 
 
             while (true){
-                game.checkGameOver();
+                
                 game.displayMenu();
                 System.out.println("\nMasukkan angka dari 1-15: ");
                 System.out.print("> ");
@@ -538,6 +538,7 @@ public class SimPlicity implements ChangeDayListener{
                             System.out.println("\n\nMasukkan angka yang valid, yaitu 1-14\n");
                     }
                 }
+                game.checkGameOver();
             }
     }
     public void changeDayUpdate(){
@@ -556,6 +557,7 @@ public class SimPlicity implements ChangeDayListener{
             
         } catch (Exception e) {
             System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -570,6 +572,7 @@ public class SimPlicity implements ChangeDayListener{
             currentWorld.getClock().startTime();
         } catch (Exception e){
             System.out.println(e);
+            e.printStackTrace();
         }
     }
 }

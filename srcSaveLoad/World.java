@@ -31,19 +31,25 @@ public class World {
 
 
 
+
+
     public synchronized static void init(WorldSaver w){
         if (instance == null){
+
             ArrayList<House> listHouse = new ArrayList<House>();
             ArrayList<Sim> listSim = new ArrayList<Sim>();
+
+            instance = new World(listHouse,listSim, w.getDay(), w.getTime());
+
             for(SimSaver i : w.getListSim()){
                 Sim j = new Sim(i);
                 listSim.add(j);
             }
             for(HouseSaver i : w.getListHouse()){
+                
                 House j = new House(i);
                 listHouse.add(j);
             }
-            instance = new World(listHouse,listSim, w.getDay(), w.getTime());
             for(PassiveThreadSaver p : w.getListPassiveThread()){
                 String[] args = p.getArg().split("\\s+");
                 switch (p.getType()){

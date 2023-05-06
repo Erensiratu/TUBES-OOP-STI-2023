@@ -56,8 +56,10 @@ public class SimSaver implements Serializable {
     public SimSaver(Sim sim){
         name = sim.getName();
         occupation = new OccupationSaver(sim.getOcupation());
+        currentHouse = new HouseSaver(sim.getHouse());
         currentLocation = sim.getLocation();
         currentRoom = new RoomSaver( sim.getRoom());
+        inventory = new InventoryManagerSaver(sim.getInventory());
         status = new StatusSaver( sim.getStatus());
         timeSinceLastSleep = sim.getTimeSinceLastSleep();
         timeSinceLastSupper = sim.getTimeSinceLastSupper();
