@@ -437,13 +437,14 @@ public class Action {
             return;
         }
 
-        if (!((Furniture) sim.getItem()).getVacancy()){
-            System.out.println("Maaf, benda sedang digunakan oleh sim lain.");
+        if (sim.getItem() == null){
+            System.out.println("Sim sedang tidak berada di benda apapun");
             return;
         }
 
-        if (sim.getItem() == null){
-            System.out.println("Sim sedang tidak berada di benda apapun");
+
+        if (!((Furniture) sim.getItem()).getVacancy()){
+            System.out.println("Maaf, benda sedang digunakan oleh sim lain.");
             return;
         }
 
