@@ -2,10 +2,10 @@
 
 int main() {
     // Compile 
-    system("javac -d test -cp test src/*.java");
+    system("javac -d bin -cp bin src/*.java");
 
     // Run 
-    system("java -cp test SimPlicity");
+    system("java -cp bin SimPlicity");
 
     // Pause
     system("pause");
