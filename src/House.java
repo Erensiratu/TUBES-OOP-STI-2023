@@ -43,7 +43,7 @@ public class House {
     }
     
     public String getName() {
-        return String.format(owner.getName() + "'s House");
+        return String.format("Rumah " + owner.getName());
     }
 
     public void setOwner(Sim sim){

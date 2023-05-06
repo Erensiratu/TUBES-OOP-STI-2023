@@ -138,7 +138,7 @@ public class Occupation implements ChangeDayListener {
             
             sim.getAction().setIdle(true);
             
-            System.out.println(sim.getName() + " selesai bekerja");
+            System.out.println("\n" + sim.getName() + " selesai bekerja");
         });
 
         workThread.start();

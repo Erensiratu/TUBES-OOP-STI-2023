@@ -33,22 +33,16 @@ public class SimPlicity implements ChangeDayListener{
                     }
                 }
                 simIterator.remove();
-                System.out.println(sim.getName() + " telah wafat");
+                System.out.println("\n" + sim.getName() + " telah wafat");
             }
         }
     
         if (currentWorld.getListSim().size() == 0){
-            System.out.println("Semua sim telah wafat\nGAME OVER");
+            System.out.println("\nSemua sim telah wafat\n\nGAME OVER");
             exit();
         } else{
             if (!currentSimAlive){
-                for (Sim sim : currentWorld.getListSim()){
-                    if (sim.getStatus().isAlive()){
-                        currentSim = sim;
-                        System.out.println("Sekarang memainkan sim " + sim.getName());
-                        return;
-                    }
-                }
+                changeSim();
             }
         }
     }
@@ -151,7 +145,7 @@ public class SimPlicity implements ChangeDayListener{
 
     public void changeSim(){ // 2
         if (currentWorld.getListSim().size() > 1){
-            System.out.println("Daftar sim lain di world ini: ");
+            System.out.println("\nDaftar sim lain di world ini: ");
             for (Sim otherSim : currentSim.getWorld().getListSim()){
                 if (!otherSim.getName().equals(currentSim.getName())){
                     System.out.println("> " + otherSim.getName());
@@ -160,35 +154,36 @@ public class SimPlicity implements ChangeDayListener{
             String simName = "";
             boolean found = false;
             while (!found){
-                System.out.print("\n\nMasukkan nama sim: ");
+                System.out.print("\nMasukkan nama sim: ");
                 simName = input.nextLine().trim();
                 if (simName.isEmpty()) {
                     System.out.println("Masukkan nama sim yang valid");
                     continue;
                 }
                 else if (simName.toLowerCase().equals(currentSim.getName().toLowerCase())){
-                    System.out.println(simName + " sedang dimainkan\n");
+                    System.out.println(simName + " tidak bisa dipilih\n");
                     continue;
                 }
                 for (Sim sim : currentWorld.getListSim()) {
                     if (sim.getName().toLowerCase().equals(simName.toLowerCase())) {
-                        System.out.println(sim.getName() + " menjadi sim yang dimainkan\n");
                         currentSim = sim;
                         found = true;
                         break;
                     }
                 }
                 if (!found){
-                    System.out.println("Tidak ada sim dengan nama " + simName);
+                    System.out.println("\nTidak ada sim dengan nama " + simName);
                 }
             }
+
+            System.out.println("\nSim yang dimainkan sekarang adalah " + currentSim.getName());
         } else {
             System.out.println("Tidak ada sim lain di dunia ini");
         }
     }
 
     public void viewSimInfo(){ // 3
-        System.out.println("\nNama Sim  : " + currentSim.getName());
+        System.out.println("\nNama Sim    : " + currentSim.getName());
         System.out.println("Pekerjaan   : " + currentSim.getOcupation().getProfession().getName());
         currentSim.getStatus().displayStatus();
     }
@@ -200,13 +195,9 @@ public class SimPlicity implements ChangeDayListener{
     public void viewCurrentLocation(){ // 5
         System.out.println("\nLokasi sim di ruangan:\nX: " + currentSim.getLocation().getX() + "\nY: " + currentSim.getLocation().getY());
         if (currentSim.getItem() == null){
-            System.out.println("Sim tidak sedang berada di objek manapun");
+            System.out.println("Sim sedang tidak berada di objek apapun, silahkan gunakan command Go To Object");
         } else {
-            if (currentSim.getItem() == null){
-                System.out.println("Sim sedang tidak berada di objek apapun, silahkan gunakan command Go To Object");
-            } else{
-                System.out.println("Sim sedang berada di objek " + currentSim.getItem().getName());
-            }
+            System.out.println("Sim sedang berada di objek " + currentSim.getItem().getName());
         }
     }
 
@@ -392,38 +383,47 @@ public class SimPlicity implements ChangeDayListener{
     }
     
     public void moveHouse(){ // 12
-
         if (!currentSim.getAction().isIdle()){
             System.out.println("\nSim sedang sibuk");
             return;
         }
         if (currentWorld.getListHouse().size() == 1){
-            System.out.println("\nHanya ada 1 rumah di world ini");
+            System.out.println("\nHanya ada 1 sim di world ini");
             return;
         }
+
+        System.out.println("\nDaftar sim lain di world ini: ");
+            for (Sim otherSim : currentSim.getWorld().getListSim()){
+                if (!otherSim.getName().equals(currentSim.getName())){
+                    System.out.println("> " + otherSim.getName());
+                }
+            }
         
         boolean valid = false;
         String visiteeString;
-        House visitee;
         while(!valid){
-            System.out.print("\n\nMasukkan nama rumah sim yang ingin dikunjungi: ");
+            System.out.print("\nMasukkan nama rumah sim yang ingin dikunjungi: ");
             visiteeString = input.nextLine().trim();
             if (visiteeString.isEmpty()) {
-                System.out.println("Masukkan nama rumah sim yang valid");
+                System.out.println("\nMasukkan nama sim yang valid");
                 continue;
             }
-            else if (visiteeString.toLowerCase().equals(currentSim.getHouse().getName().toLowerCase())){
-                System.out.println(currentSim.getName() + " sedang berada di "+ visiteeString +"\n");
+            else if ((visiteeString).toLowerCase().equals(currentSim.getHouse().getOwner().getName().toLowerCase())){
+                System.out.println("\n" + currentSim.getName() + " sedang berada di Rumah "+ visiteeString);
                 continue;
             }
             for (House house : currentWorld.getListHouse()){
-                if (visiteeString.toLowerCase().equals(house.getName().toLowerCase())){
+                if ((visiteeString).toLowerCase().equals(house.getOwner().getName().toLowerCase())){
                     currentSim.moveHouse(house);
                     currentSim.setLocation(new Point(0,0));
                     currentSim.setItem(null);
                     valid = true;
                     break;
                 }
+            }
+
+            if (!valid){
+                System.out.println("\nTidak ada sim dengan nama tersebut");
             }
         }
     }
@@ -445,7 +445,7 @@ public class SimPlicity implements ChangeDayListener{
 
     public static void main(String[] args) throws Exception {
             SimPlicity game = SimPlicity.getInstance();                                                              
-            System.out.println(" \n ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄       ▄▄                 ▄▄▄▄▄▄▄▄▄▄▄ ▄           ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄         ▄ ");
+            System.out.println(" \n  ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄       ▄▄                 ▄▄▄▄▄▄▄▄▄▄▄ ▄           ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄         ▄ ");
             System.out.println(" ▐░░░░░░░░░░░▐░░░░░░░░░░░▐░░▌     ▐░░▌               ▐░░░░░░░░░░░▐░▌         ▐░░░░░░░░░░░▐░░░░░░░░░░░▐░░░░░░░░░░░▐░░░░░░░░░░░▐░▌       ▐░▌");
             System.out.println(" ▐░█▀▀▀▀▀▀▀▀▀ ▀▀▀▀█░█▀▀▀▀▐░▌░▌   ▐░▐░▌               ▐░█▀▀▀▀▀▀▀█░▐░▌          ▀▀▀▀█░█▀▀▀▀▐░█▀▀▀▀▀▀▀▀▀ ▀▀▀▀█░█▀▀▀▀ ▀▀▀▀█░█▀▀▀▀▐░▌       ▐░▌");
             System.out.println(" ▐░▌              ▐░▌    ▐░▌▐░▌ ▐░▌▐░▌               ▐░▌       ▐░▐░▌              ▐░▌    ▐░▌              ▐░▌         ▐░▌    ▐░▌       ▐░▌");
