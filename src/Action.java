@@ -140,6 +140,8 @@ public class Action {
                 System.out.println("> " + otherSim.getName());
             }
         }
+
+        scanner.nextLine();
         
         while (!found){
             System.out.print("\nMasukkan nama penerima: ");
@@ -253,6 +255,8 @@ public class Action {
                 System.out.println("> " + otherSim.getName());
             }
         }
+
+        scanner.nextLine();
         
         while (!found){
             System.out.print("\nMasukkan nama penerima: ");
