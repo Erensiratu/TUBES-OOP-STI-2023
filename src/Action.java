@@ -259,7 +259,7 @@ public class Action {
             receiverName = scanner.nextLine().trim();
 
             if (receiverName.toLowerCase().equals(sim.getName().toLowerCase())){
-                System.out.println("\n\nTidak dapat memberikan uang ke diri sendiri");
+                System.out.println("\nTidak dapat memberikan uang ke diri sendiri");
                 continue;
             }
 
@@ -272,18 +272,18 @@ public class Action {
             }
 
             if (!found){
-                System.out.println("\n\nTidak ada sim dengan nama " + receiverName);
+                System.out.println("\nTidak ada sim dengan nama " + receiverName);
             }
 
             if (receiverName.isEmpty()){
-                System.out.println("\n\nMasukkan nama sim yang valid" );
+                System.out.println("\nMasukkan nama sim yang valid" );
             }
         }
 
-        System.out.println("\n\nJumlah uang milik " + sim.getName() + " : " + sim.getStatus().getMoney());
+        System.out.println("\nJumlah uang milik " + sim.getName() + " : " + sim.getStatus().getMoney());
 
         while (quantity <= 0 || quantity > sim.getStatus().getMoney()){
-            System.out.print("\n\n\nMasukkan jumlah uang yang ingin dikirim: ");
+            System.out.print("\nMasukkan jumlah uang yang ingin dikirim: ");
             quantity = scanner.nextInt();
 
             if (quantity <= 0){
@@ -300,7 +300,7 @@ public class Action {
         receiver.getStatus().addMoney(quantity);
         sim.getStatus().decreaseMoney(quantity);
 
-        System.out.println(sim.getName() + " mengirim uang sebanyak " + quantity + " ke " + receiver.getName());     
+        System.out.println("\n" + sim.getName() + " mengirim uang sebanyak " + quantity + " ke " + receiver.getName());     
     }
 
     public void dayDream() {
@@ -360,7 +360,7 @@ public class Action {
             otherSimName = scanner.nextLine().trim();
 
             if (otherSimName.toLowerCase().equals(sim.getName().toLowerCase())){
-                System.out.println("\n\nTidak dapat berbicara ke diri sendiri");
+                System.out.println("\nTidak dapat berbicara ke diri sendiri");
                 continue;
             }
 
@@ -377,7 +377,7 @@ public class Action {
             }
 
             if (otherSimName.isEmpty()){
-                System.out.println("\n\nMasukkan nama sim yang valid" );
+                System.out.println("\nMasukkan nama sim yang valid" );
             }
         }
         if (!((sim.getHouse().getName().equals(otherSim2.getHouse().getName())) && (sim.getHouse().getName().equals(otherSim2.getHouse().getName())))){
@@ -391,7 +391,7 @@ public class Action {
 
         // Simulate a conversation
         Sim otherSim = otherSim2;
-        System.out.println( sim.getName() +" mengobrol dengan " + otherSim.getName() + "...");
+        System.out.println("\n" + sim.getName() +" mengobrol dengan " + otherSim.getName() + "...");
         
         Thread converseThread = new Thread( new Runnable() {
             public void run() {
@@ -405,7 +405,7 @@ public class Action {
                 }
                 sim.getStatus().addMood(5);
                 otherSim.getStatus().addMood(5);
-                System.out.println("Selesai mengobrol!");
+                System.out.println("\nSelesai mengobrol!");
                 idle = true;
                 otherSim.getAction().setIdle(true);
             }
