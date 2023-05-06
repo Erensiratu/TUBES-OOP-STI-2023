@@ -355,7 +355,7 @@ public class Room {
         }
 
         if (count == 1){
-            System.out.println("\nidak ada furnitur");
+            System.out.println("\nTidak ada furnitur");
         }
     }
 

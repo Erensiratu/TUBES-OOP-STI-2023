@@ -221,6 +221,7 @@ public class SimPlicity implements ChangeDayListener{
         }
 
         boolean valid = false;  
+        System.out.println("\nBerikut daftar ruangan yang dimiliki.");
         currentSim.getHouse().displayRoom();
 
         while (!valid) {
