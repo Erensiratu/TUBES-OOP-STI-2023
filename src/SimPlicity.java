@@ -101,12 +101,12 @@ public class SimPlicity implements ChangeDayListener{
     }
 
     public void addSim(){ // 1
-        // if (hasAddSim){
-        //     System.out.println("\nHanya bisa menambahkan sim sekali tiap hari");
-        //     return;
-        // } else {
-        //     hasAddSim = true;
-        // }
+        if (hasAddSim){
+            System.out.println("\nHanya bisa menambahkan sim sekali tiap hari");
+            return;
+        } else {
+            hasAddSim = true;
+        }
 
         Scanner nameScanner = new Scanner(System.in);
         String simName = "";
