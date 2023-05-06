@@ -430,17 +430,12 @@ public class SimPlicity implements ChangeDayListener{
     }
 
     public void displayMenu(){
-        System.out.println("\n ▄▄       ▄▄ ▄▄▄▄▄▄▄▄▄▄▄ ▄▄        ▄ ▄         ▄ ");
-        System.out.println("▐░░▌     ▐░░▐░░░░░░░░░░░▐░░▌      ▐░▐░▌       ▐░▌");
-        System.out.println("▐░▌░▌   ▐░▐░▐░█▀▀▀▀▀▀▀▀▀▐░▌░▌     ▐░▐░▌       ▐░▌");
-        System.out.println("▐░▌▐░▌ ▐░▌▐░▐░▌         ▐░▌▐░▌    ▐░▐░▌       ▐░▌");
-        System.out.println("▐░▌ ▐░▐░▌ ▐░▐░█▄▄▄▄▄▄▄▄▄▐░▌ ▐░▌   ▐░▐░▌       ▐░▌");
-        System.out.println("▐░▌  ▐░▌  ▐░▐░░░░░░░░░░░▐░▌  ▐░▌  ▐░▐░▌       ▐░▌");
-        System.out.println("▐░▌   ▀   ▐░▐░█▀▀▀▀▀▀▀▀▀▐░▌   ▐░▌ ▐░▐░▌       ▐░▌");
-        System.out.println("▐░▌       ▐░▐░▌         ▐░▌    ▐░▌▐░▐░▌       ▐░▌");
-        System.out.println("▐░▌       ▐░▐░█▄▄▄▄▄▄▄▄▄▐░▌     ▐░▐░▐░█▄▄▄▄▄▄▄█░▌");
-        System.out.println("▐░▌       ▐░▐░░░░░░░░░░░▐░▌      ▐░░▐░░░░░░░░░░░▌");
-        System.out.println(" ▀         ▀ ▀▀▀▀▀▀▀▀▀▀▀ ▀        ▀▀ ▀▀▀▀▀▀▀▀▀▀▀ ");
+        System.out.println("\n");
+        System.out.println("██████████████████████████████");
+        System.out.println("█▄─▀█▀─▄█▄─▄▄─█▄─▀█▄─▄█▄─██─▄█");
+        System.out.println("██─█▄█─███─▄█▀██─█▄▀─███─██─██");
+        System.out.println("▀▄▄▄▀▄▄▄▀▄▄▄▄▄▀▄▄▄▀▀▄▄▀▀▄▄▄▄▀▀");
+
         System.out.println("\n1. Add Sim\n2. Change Sim\n3. View Sim Info\n4. Actions\n5. View Current Location\n6. Move Room\n7. Object List\n8. Go To Object\n9. View Inventory\n10. Edit Room\n11. Upgrade House\n12. Move House\n13. Help\n14. Exit");
     }
 
