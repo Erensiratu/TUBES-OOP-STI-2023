@@ -170,7 +170,7 @@ public class Sim implements ChangeDayListener, TickListener {
         long duration = (currentHouse.getLocation().getDistance(house.getLocation()))*1000;
         Thread moveThread = new Thread( () -> {
             action.setIdle(false);
-            System.out.println(name + " sedang berjalan ke ke "+ house.getName() + "\n");
+            System.out.println("\n" + name + " sedang berjalan ke "+ house.getName() + "\n");
             try {
                 Thread.sleep(duration);
             } catch (InterruptedException e) {

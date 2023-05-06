@@ -52,17 +52,17 @@ public class Room {
             throw new RoomException("objek di luar ruangan");
         }
 
-        for (int i = location.getX(); i < location.getX() + objectWidth; i++) {
-            for (int j = location.getY(); j < location.getY() + objectLength; j++) {
-                if (grid[i][j] != null) {
+        for (int j = location.getY(); j < location.getY() + objectLength; j++) {
+            for  (int i = location.getX(); i < location.getX() + objectWidth; i++){
+                if (grid[j][i] != null) {
                     throw new RoomException("objek bertabrakan");
                 }
             }
         }
 
-        for (int i = location.getX(); i < location.getX() + objectWidth; i++) {
-            for (int j = location.getY(); j < location.getY() + objectLength; j++) {
-                grid[i][j] = object;
+        for (int j = location.getY(); j < location.getY() + objectLength; j++) {
+            for  (int i = location.getX(); i < location.getX() + objectWidth; i++){
+                grid[j][i] = object;
             }
         }
 
@@ -72,14 +72,58 @@ public class Room {
     }
 
     private void addObject(Furniture object) throws RoomException {
-        int x,y;
+        System.out.printf("\nUkuran " + object.getName() + " adalah " + object.getLength() + "x" + object.getWidth() + " \n\nKonfigurasi:\n");
+        
+        if (object.isRotated()) {
+            for (int i = 0; i < object.getWidth(); i++) {
+                for (int j = 0; j < object.getLength(); j++) {
+                    System.out.print("[-]");
+                }
+                System.out.printf("\n");
+            }
+        } else {
+            for (int i = 0; i < object.getLength(); i++) {
+                for (int j = 0; j < object.getWidth(); j++) {
+                    System.out.print("[-]");
+                }
+                System.out.printf("\n");
+            }
+        }
+
+        System.out.printf("\nKetik Y untuk memutar furnitur, ketik apapun untuk lanjut dengan konfigurasi saat ini\n> ");
+        String rotate = scanner.nextLine().trim();
+        boolean isRotated = rotate.equalsIgnoreCase("Y");
+        object.setRotation(isRotated);
+
+        if (isRotated){
+            System.out.println("\nTampilan konfigurasi baru: ");
+
+            if (object.isRotated()) {
+                for (int i = 0; i < object.getWidth(); i++) {
+                    for (int j = 0; j < object.getLength(); j++) {
+                        System.out.print("[-]");
+                    }
+                    System.out.printf("\n");
+                }
+            } else {
+                for (int i = 0; i < object.getLength(); i++) {
+                    for (int j = 0; j < object.getWidth(); j++) {
+                        System.out.print("[-]");
+                    }
+                    System.out.printf("\n");
+                }
+            }
+        }
+
+        int x, y;
         System.out.printf("\nMasukkan koordinat X baru: ");
         x = scanner.nextInt();
         System.out.printf("\nMasukkan koordinat Y baru: ");
         y = scanner.nextInt();
-
+    
+        
         Point location = new Point(x, y);
-
+    
         int objectWidth, objectLength;
         if (object.isRotated()) {
             objectWidth = object.getLength();
@@ -88,25 +132,25 @@ public class Room {
             objectWidth = object.getWidth();
             objectLength = object.getLength();
         }
-
+    
         if (location.getX() + objectWidth > WIDTH || location.getY() + objectLength > WIDTH) {
             throw new RoomException("objek di luar ruangan");
         }
-
-        for (int i = location.getX(); i < location.getX() + objectWidth; i++) {
-            for (int j = location.getY(); j < location.getY() + objectLength; j++) {
-                if (grid[i][j] != null) {
+    
+        for (int j = location.getY(); j < location.getY() + objectLength; j++) {
+            for  (int i = location.getX(); i < location.getX() + objectWidth; i++){
+                if (grid[j][i] != null) {
                     throw new RoomException("objek bertabrakan");
                 }
             }
         }
 
-        for (int i = location.getX(); i < location.getX() + objectWidth; i++) {
-            for (int j = location.getY(); j < location.getY() + objectLength; j++) {
-                grid[i][j] = object;
+        for (int j = location.getY(); j < location.getY() + objectLength; j++) {
+            for  (int i = location.getX(); i < location.getX() + objectWidth; i++){
+                grid[j][i] = object;
             }
         }
-
+    
         object.setLocation(location);
         System.out.println("\n" + object.getName() + " berhasil diletakkan di ruangan");
         objects.add(object);
@@ -124,9 +168,9 @@ public class Room {
             objectLength = object.getLength();
         }
     
-        for (int i = location.getX(); i < location.getX() + objectWidth; i++) {
-            for (int j = location.getY(); j < location.getY() + objectLength; j++) {
-                grid[i][j] = null;
+        for (int j = location.getY(); j < location.getY() + objectLength; j++) {
+            for (int i = location.getX(); i < location.getX() + objectWidth; i++){
+                grid[j][i] = null;
             }
         }
         
@@ -328,7 +372,7 @@ public class Room {
 
     public void printRoom() {
         System.out.println("\nTampilan ruangan:");
-        System.out.println("Pada koordinat yang diberi tanda [-] berarti sudah ditempati oleh objek\n");
+        System.out.println("Pada koordinat yang diberi tanda [-] berarti sudah ditempati oleh objek\n ");
         for (int i = 0; i < WIDTH; i++) {
             System.out.print("  " + i);
         }

@@ -60,7 +60,9 @@ public abstract class Furniture extends Item implements Useable, Purchaseable{
     }
 
     public void setRotation(boolean rotation){
-        this.rotated = rotation;
+        if (rotation){
+            this.rotated = !this.rotated;
+        }
     }
 
     public void setVacancy(boolean vacant){
