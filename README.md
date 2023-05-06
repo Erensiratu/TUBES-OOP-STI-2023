@@ -7,6 +7,12 @@ Tugas besar ini disusun oleh:
 4. Priscilla A. N.   - 18221098
 5. Seren E S.        - 18221160
 
+## Letak Program
+
+Source code terletak di folder src
+
+Hasil kompilasi source code terletak di folder bin
+
 ## Cara Kompilasi Program
 
 1. Melalui SimPlicity.exe (Hanya untuk OS Windows)

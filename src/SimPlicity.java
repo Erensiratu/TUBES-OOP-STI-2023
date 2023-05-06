@@ -2,6 +2,8 @@
 
 import java.util.*;
 
+import javax.naming.BinaryRefAddr;
+
 public class SimPlicity implements ChangeDayListener{
     private Sim currentSim;
     private static World currentWorld;
@@ -99,25 +101,32 @@ public class SimPlicity implements ChangeDayListener{
     }
 
     public void addSim(){ // 1
-        if (hasAddSim){
-            System.out.println("\nHanya bisa menambahkan sim sekali tiap hari");
-            return;
-        } else {
-            hasAddSim = true;
-        }
+        // if (hasAddSim){
+        //     System.out.println("\nHanya bisa menambahkan sim sekali tiap hari");
+        //     return;
+        // } else {
+        //     hasAddSim = true;
+        // }
 
         Scanner nameScanner = new Scanner(System.in);
         String simName = "";
-        while (simName.isEmpty()) {
+        boolean nameValid = false;
+        while (!nameValid) {
             System.out.printf("\nMasukkan nama sim: ");
             simName = nameScanner.nextLine().trim();
+
+            nameValid = true;
+
             if (simName.isEmpty()){
-                System.out.println("\n\nSilahkan masukkan nama yang benar\n");
+                System.out.println("\nSilahkan masukkan nama yang benar");
+                nameValid = false;
             }
+            
             for (Sim sim : currentWorld.getListSim()){
                 if (sim.getName().toLowerCase().equals(simName.toLowerCase())) {
-                    System.out.println(sim.getName() + " telah diambil, silahkan pilih nama yang lain\n");
-                    continue;
+                    System.out.println("\n" + sim.getName() + " telah diambil, silahkan pilih nama yang lain");
+                    nameValid = false;
+                    break;
                 }
             }
         }
