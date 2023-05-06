@@ -551,11 +551,11 @@ public class SimPlicity implements ChangeDayListener{
     public void save(){
         try {
             WorldSaver saver = new WorldSaver(currentWorld);
-
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("save.dat")));
             oos.writeObject(saver);
+            
         } catch (Exception e) {
-            System.out.println("Save Exception!!");
+            System.out.println(e);
         }
     }
 
@@ -569,7 +569,7 @@ public class SimPlicity implements ChangeDayListener{
             currentSim = currentWorld.getListSim().get(0);
             currentWorld.getClock().startTime();
         } catch (Exception e){
-            System.out.println("Load Exception!!");
+            System.out.println(e);
         }
     }
 }

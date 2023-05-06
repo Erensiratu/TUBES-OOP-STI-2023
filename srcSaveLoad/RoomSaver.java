@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class RoomSaver implements Serializable{
     private String name;
     private Point locationRoom;
-    private ArrayList<FurnitureSaver> objects;
+    private ArrayList<FurnitureSaver> objects = new  ArrayList<FurnitureSaver>();
 
     public String getName() {
         return name;

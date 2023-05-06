@@ -3,8 +3,8 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 public class WorldSaver implements Serializable {
-    private ArrayList<HouseSaver> listHouse;
-    private ArrayList<SimSaver> listSim;
+    private ArrayList<HouseSaver> listHouse = new ArrayList<HouseSaver>();
+    private ArrayList<SimSaver> listSim = new ArrayList<SimSaver>();
     private long time;
     private int day;
     private ArrayList<PassiveThreadSaver> listPassiveThread = new ArrayList<PassiveThreadSaver>();
